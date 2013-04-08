@@ -3,7 +3,9 @@ var path = location.pathname ? location.pathname : 'defalut';
 var main = document.getElementById('main-content');
 var xmlhttp;
 
-loadXMLDoc('/'+path);
+var url = location.protocol + '//' + location.hostname + '/md/' + path;
+
+loadXMLDoc(url);
 
 function loadXMLDoc(url){
 	xmlhttp=null;
