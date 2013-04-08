@@ -1,4 +1,4 @@
-var path = location.pathname ? location.pathname : 'defalut';
+var path = ('/' == location.pathname) ? location.pathname : '/defalut';
 
 var main = document.getElementById('main-content');
 var xmlhttp;
