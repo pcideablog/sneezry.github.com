@@ -1,8 +1,9 @@
-var fname = location.search ? location.search.substr(1) : (location.hash ? location.hash.substr(1) : 'defalut');
+var path = location.pathname ? location.pathname : 'defalut';
+
 var main = document.getElementById('main-content');
 var xmlhttp;
 
-loadXMLDoc(fname)
+loadXMLDoc('/'+path);
 
 function loadXMLDoc(url){
 	xmlhttp=null;
