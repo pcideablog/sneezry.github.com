@@ -1,6 +1,7 @@
 var path = ('/' != location.pathname) ? location.pathname : '/defalut';
 
 var main = document.getElementById('content');
+var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
 var url = location.protocol + '//' + location.hostname + '/md' + path;
@@ -30,6 +31,9 @@ function state_Change(){
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
 			main.innerHTML = converter.makeHtml(xmlhttp.responseText);
+			if(dis){
+				dis.style.display = 'block';
+			}
 		}
 		else if(xmlhttp.status==404) {
 			main.innerHTML = '<img src="/images/404.jpg" />';
