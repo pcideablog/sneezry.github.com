@@ -1,4 +1,4 @@
-var path = ('/' != location.pathname) ? location.pathname : '/defalut';
+var path = location.pathname;
 
 var main = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
