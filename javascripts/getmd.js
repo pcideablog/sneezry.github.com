@@ -32,7 +32,7 @@ function state_Change(){
 			main.innerHTML = converter.makeHtml(xmlhttp.responseText);
 		}
 		else if(xmlhttp.status==404) {
-			main.innerHTML = '404';
+			main.innerHTML = '<img src="/images/404.jpg" />';
 		}
 		else {
 			main.innerHTML = 'We meet a problem.';
