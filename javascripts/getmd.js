@@ -1,6 +1,6 @@
 var path = ('/' != location.pathname) ? location.pathname : '/defalut';
 
-var main = document.getElementById('main-content');
+var main = document.getElementById('content');
 var xmlhttp;
 
 var url = location.protocol + '//' + location.hostname + '/md' + path;
