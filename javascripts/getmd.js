@@ -9,6 +9,7 @@ main();
 
 function main(){
 	if(path){
+		content.innerHTML = 'loading...';
 		showpost(path);
 	}
 	else{
