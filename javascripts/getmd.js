@@ -4,13 +4,21 @@ var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
+var disqus_url;
+var disqus_shortname = 'sneezry';
 
 main();
 
 function main(){
 	if(path){
+		disqus_url = 'http://page.lizhe.org'+path;
 		content.innerHTML = 'loading...';
 		showpost(path);
+		(function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
 	}
 	else{
 		var el = document.createElement('script');
@@ -71,6 +79,11 @@ function showlist(list){
 }
 
 window.onpopstate = function(event){
+	if(location.hash.substr(1,1) != '!'){
+		window.history.pushState(null, '', '/#!'+path);
+		return;
+	}
+	document.getElementById('disqus_thread').innerHTML = ''
 	path = location.hash.substr(2);
 	main();
 }
