@@ -1,5 +1,6 @@
 var path = location.hash.substr(1);
 
+var converter = new Showdown.converter();
 var main = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
