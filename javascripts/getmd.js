@@ -5,13 +5,15 @@ var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 var disqus_url;
+
 var disqus_shortname = 'sneezry';
+var hostbase = 'http://page.lizhe.org';
 
 main();
 
 function main(){
 	if(path){
-		disqus_url = 'http://page.lizhe.org'+path;
+		disqus_url = hostbase + path;
 		content.innerHTML = 'loading...';
 		showpost(path);
 		(function() {
