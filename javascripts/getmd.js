@@ -1,14 +1,19 @@
-var path = location.pathname;
+var path = location.hash.substr(1);
 
 var main = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
-var url = location.protocol + '//' + location.hostname + '/md' + path;
-
-document.title = path.substr(1) + ' - Sneezry';
-
-loadXMLDoc(url);
+if(path){
+	var url = location.protocol + '//' + location.hostname + '/md' + path;
+	document.title = path.substr(1) + ' - Sneezry';
+	loadXMLDoc(url);
+}
+else{
+	var el = document.createElement('script');
+	el.src = 'https://api.github.com/repos/sneezry/sneezry.github.com/contents/md?callback=showlist';
+	document.getElementsByTagName('head')[0].appendChild(el);
+}
 
 function loadXMLDoc(url){
 	xmlhttp=null;
@@ -44,4 +49,12 @@ function state_Change(){
 			main.innerHTML = 'We meet a problem.';
 		}
 	}
+}
+
+function showlist(list){
+	var txt = "";
+	for(var i = 0; i < list.data.length; i++){
+		txt += "## [" + list.data[i].name + "](/" + list.data[i].name + ")\n\n";
+	}
+	main.innerHTML = converter.makeHtml(txt);
 }
