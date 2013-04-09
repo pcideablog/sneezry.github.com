@@ -70,8 +70,6 @@ function showlist(list){
 }
 
 window.onpopstate = function(event){
-	if(event && event.state){
-		path = location.hash.substr(2);
-		main();
-	}
+	path = location.hash.substr(2);
+	main();
 }
