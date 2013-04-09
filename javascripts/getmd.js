@@ -64,3 +64,10 @@ function showlist(list){
 	}
 	main.innerHTML = converter.makeHtml(txt);
 }
+
+window.onpopstate = function(event){
+	if(event && event.state){
+		document.title = event.state.title;
+		document.body.innerHTML = event.state.html;
+	}
+}
