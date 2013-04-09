@@ -83,7 +83,8 @@ window.onpopstate = function(event){
 		window.history.pushState(null, '', '/#!'+path);
 		return;
 	}
-	document.getElementById('disqus_thread').innerHTML = '';
+	dis.style.display = 'none';
+	dis.innerHTML = '';
 	path = location.hash.substr(2);
 	main();
 }
