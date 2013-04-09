@@ -1,7 +1,7 @@
 var path = location.hash.substr(2);
 
 var converter = new Showdown.converter();
-var main = document.getElementById('content');
+var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
@@ -40,16 +40,16 @@ function state_Change(){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
-			main.innerHTML = converter.makeHtml(xmlhttp.responseText);
+			content.innerHTML = converter.makeHtml(xmlhttp.responseText);
 			if(dis){
 				dis.style.display = 'block';
 			}
 		}
 		else if(xmlhttp.status==404) {
-			main.innerHTML = '<img src="/images/404.jpg" />';
+			content.innerHTML = '<img src="/images/404.jpg" />';
 		}
 		else {
-			main.innerHTML = 'We meet a problem.';
+			content.innerHTML = 'We meet a problem.';
 		}
 	}
 }
@@ -66,7 +66,7 @@ function showlist(list){
 	for(var i = list.data.length; i > 0; i--){
 		txt += '<h2><a href="/' + list.data[i-1].name.replace(/-/g, '/') + '" onclick="showpost(\'/' + list.data[i-1].name.replace(/-/g, '/') + '\'); return false;">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
 	}
-	main.innerHTML = converter.makeHtml(txt);
+	content.innerHTML = converter.makeHtml(txt);
 }
 
 window.onpopstate = function(event){
