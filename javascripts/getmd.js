@@ -6,9 +6,7 @@ var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
 if(path){
-	window.history.pushState({title: path.substr(1) + ' - Sneezry', url: path}, path.substr(1) + ' - Sneezry', path);
-	var url = location.protocol + '//' + location.hostname + '/md' + path;
-	loadXMLDoc(url);
+	showpost(path);
 }
 else{
 	var el = document.createElement('script');
@@ -52,10 +50,17 @@ function state_Change(){
 	}
 }
 
+function showpost(path){
+	window.history.pushState({title: path.substr(1) + ' - Sneezry', url: path}, path.substr(1) + ' - Sneezry', path);
+	var url = location.protocol + '//' + location.hostname + '/md' + path;
+	document.title = path.substr(1) + ' - Sneezry';
+	loadXMLDoc(url);
+}
+
 function showlist(list){
-	var txt = "";
+	var txt = '';
 	for(var i = 0; i < list.data.length; i++){
-		txt += "## [" + list.data[i].name + "](/" + list.data[i].name + ")\n\n";
+		txt += '<h2><a href="/' + list.data[i].name + '" onclick="showpost(\'/' + list.data[i].name + '\'); return false;">' + list.data[i].name + '</a></h2>';
 	}
 	main.innerHTML = converter.makeHtml(txt);
 }
