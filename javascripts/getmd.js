@@ -79,11 +79,11 @@ function showlist(list){
 }
 
 window.onpopstate = function(event){
-	if(location.hash.substr(1,1) != '!'){
+	if(location.hash && location.hash.substr(1,1) != '!'){
 		window.history.pushState(null, '', '/#!'+path);
 		return;
 	}
-	document.getElementById('disqus_thread').innerHTML = ''
+	document.getElementById('disqus_thread').innerHTML = '';
 	path = location.hash.substr(2);
 	main();
 }
