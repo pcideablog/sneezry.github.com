@@ -6,9 +6,8 @@ var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
 if(path){
-	console.log(path);
+	window.history.pushState({title: path.substr(1) + ' - Sneezry', url: path}, path.substr(1) + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md' + path;
-	document.title = path.substr(1) + ' - Sneezry';
 	loadXMLDoc(url);
 }
 else{
