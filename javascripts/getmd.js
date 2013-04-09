@@ -1,4 +1,4 @@
-var path = location.hash.substr(1);
+var path = location.hash.substr(2);
 
 var converter = new Showdown.converter();
 var main = document.getElementById('content');

@@ -1,2 +1,2 @@
 var path = location.pathname;
-location.href = '/#' + path;
+location.href = '/#!' + path;
