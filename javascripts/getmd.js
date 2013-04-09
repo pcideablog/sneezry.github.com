@@ -5,13 +5,17 @@ var main = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
-if(path){
-	showpost(path);
-}
-else{
-	var el = document.createElement('script');
-	el.src = 'https://api.github.com/repos/sneezry/sneezry.github.com/contents/md?callback=showlist';
-	document.getElementsByTagName('head')[0].appendChild(el);
+main();
+
+function main(){
+	if(path){
+		showpost(path);
+	}
+	else{
+		var el = document.createElement('script');
+		el.src = 'https://api.github.com/repos/sneezry/sneezry.github.com/contents/md?callback=showlist';
+		document.getElementsByTagName('head')[0].appendChild(el);
+	}
 }
 
 function loadXMLDoc(url){
@@ -67,7 +71,7 @@ function showlist(list){
 
 window.onpopstate = function(event){
 	if(event && event.state){
-		document.title = event.state.title;
-		document.body.innerHTML = event.state.html;
+		path = location.hash.substr(2);
+		main();
 	}
 }
