@@ -59,8 +59,8 @@ function showpost(path){
 
 function showlist(list){
 	var txt = '';
-	for(var i = 0; i < list.data.length; i++){
-		txt += '<h2><a href="/' + list.data[i].name + '" onclick="showpost(\'/' + list.data[i].name + '\'); return false;">' + list.data[i].name + '</a></h2>';
+	for(var i = list.data.length; i > 0; i--){
+		txt += '<h2><a href="/' + list.data[i-1].name.replace(/-/g, '/') + '" onclick="showpost(\'/' + list.data[i-1].name + '\'); return false;">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
 	}
 	main.innerHTML = converter.makeHtml(txt);
 }
