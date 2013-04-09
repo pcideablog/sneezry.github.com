@@ -5,6 +5,7 @@ var dis = document.getElementById('disqus_thread');
 var xmlhttp;
 
 if(path){
+	console.log(path);
 	var url = location.protocol + '//' + location.hostname + '/md' + path;
 	document.title = path.substr(1) + ' - Sneezry';
 	loadXMLDoc(url);
