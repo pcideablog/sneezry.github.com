@@ -51,16 +51,16 @@ function state_Change(){
 }
 
 function showpost(path){
-	window.history.pushState({title: path.substr(2) + ' - Sneezry', url: path}, path.substr(2) + ' - Sneezry', path);
+	window.history.pushState({title: path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', url: path}, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
-	document.title = path.substr(2) + ' - Sneezry';
+	document.title = path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry';
 	loadXMLDoc(url);
 }
 
 function showlist(list){
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
-		txt += '<h2><a href="/' + list.data[i-1].name.replace(/-/g, '/') + '" onclick="showpost(\'/' + list.data[i-1].name + '\'); return false;">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
+		txt += '<h2><a href="/' + list.data[i-1].name.replace(/-/g, '/') + '" onclick="showpost(\'/' + list.data[i-1].name.replace(/-/g, '/') + '\'); return false;">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
 	}
 	main.innerHTML = converter.makeHtml(txt);
 }
