@@ -1,6 +1,5 @@
 var path = decodeURIComponent(location.hash.substr(2));
-window.history.pushState(null, '', '/#!'+path);
-
+if(path){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
