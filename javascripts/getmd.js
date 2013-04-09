@@ -55,7 +55,7 @@ function state_Change(){
 }
 
 function showpost(path){
-	window.history.pushState({title: path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', url: path}, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
+	//window.history.pushState(null, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
 	document.title = path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry';
 	loadXMLDoc(url);
