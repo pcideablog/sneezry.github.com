@@ -242,6 +242,53 @@ form {
   
 }
 
+.gotop {
+  position: fixed;
+  bottom: 100px;
+  margin-left: 800px;
+  height: 60px;
+  width: 60px;
+  border: black 10px solid;
+  padding: 5px 10px;
+  -webkit-border-radius: 30px;
+  -moz-border-radius: 30px;
+  border-radius: 30px;
+  opacity: 0.5;
+}
+
+.gotop:hover {
+  opacity: 0.75;
+}
+
+.topleft {
+  -webkit-transform: skew(0,-45deg);
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  left: 0;
+  top: 10px;
+  background: black;
+}
+
+.topright {
+  -webkit-transform: skew(0,45deg);
+  width: 20px;
+  height: 10px;
+  position: absolute;
+  left: 20px;
+  top: 10px;
+  background: black;
+}
+
+.topbody {
+  width: 10px;
+  height: 40px;
+  position: absolute;
+  left: 15px;
+  top: 10px;
+  background: black;
+}
+
 
 /* GENERAL ELEMENT TYPE STYLES */
 
