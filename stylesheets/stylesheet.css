@@ -261,7 +261,10 @@ form {
 }
 
 .topleft {
+  transform: skew(0,-45deg);
   -webkit-transform: skew(0,-45deg);
+  -moz-transform: skew(0,-45deg);
+  -o-transform: skew(0,-45deg);
   width: 20px;
   height: 10px;
   position: absolute;
@@ -271,7 +274,10 @@ form {
 }
 
 .topright {
+  transform: skew(0,45deg);
   -webkit-transform: skew(0,45deg);
+  -moz-transform: skew(0,45deg);
+  -o-transform: skew(0,45deg);
   width: 20px;
   height: 10px;
   position: absolute;
