@@ -3,6 +3,7 @@ if(path){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
+var loading = document.getElementById('loading');
 var xmlhttp;
 var disqus_url;
 
@@ -14,9 +15,9 @@ var repos = 'sneezry.github.com';
 main();
 
 function main(){
+	loading.style.display = 'block';
 	if(path){
 		disqus_url = hostbase + path;
-		content.innerHTML = 'loading...';
 		showpost(path);
 		(function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -51,6 +52,7 @@ function loadXMLDoc(url){
 
 function state_Change(){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
+		loading.style.display = 'none';
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
 			content.innerHTML = converter.makeHtml(xmlhttp.responseText);
