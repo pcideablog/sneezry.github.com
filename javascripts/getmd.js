@@ -1,5 +1,6 @@
 var path = decodeURIComponent(location.hash.substr(2));
-if(path){window.history.pushState(null, '', '/#!'+path);}
+if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
+else if(path){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
@@ -94,5 +95,6 @@ window.onpopstate = function(event){
 	dis.style.display = 'none';
 	dis.innerHTML = '';
 	path = location.hash.substr(2);
+	if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
 	main();
 }
