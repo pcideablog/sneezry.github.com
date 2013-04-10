@@ -151,9 +151,15 @@ header a.button {
 
 header span.searchbar {
   position: absolute;
-  width: 200px;
-  right: 0;
-  bottom: 0;
+  width: 300px;
+  right: 10px;
+  top: 90px;
+}
+
+.cse .gsc-control-cse, .gsc-control-cse {
+  border: none!important;
+  padding: 0!important;
+  background-color: transparent!important;
 }
 
 aside a.button {
