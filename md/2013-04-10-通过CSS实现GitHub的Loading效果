@@ -79,11 +79,6 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 		-webkit-animation-delay: 0.15s;
 	}
 
-	.loading[index="1"] {
-		animation-delay: 0.15s;
-		-webkit-animation-delay: 0.15s;
-	}
-
 	.loading[index="2"] {
 		animation-delay: 0.3s;
 		-webkit-animation-delay: 0.3s;
