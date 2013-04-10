@@ -148,6 +148,14 @@ header a.button {
   top: 0;
   background: transparent url(../images/github-button.png) 0 0 no-repeat;
 }
+
+header span.searchbar {
+  position: absolute;
+  width: 200px;
+  right: 0;
+  bottom: 0;
+}
+
 aside a.button {
   width: 138px;
   padding-left: 64px;
