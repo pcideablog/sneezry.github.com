@@ -245,13 +245,13 @@ form {
 .gotop {
   position: fixed;
   bottom: 100px;
-  margin-left: 800px;
+  margin-left: 815px;
   height: 60px;
   width: 60px;
   border: black 10px solid;
-  -webkit-border-radius: 30px;
-  -moz-border-radius: 30px;
-  border-radius: 30px;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
   opacity: 0.5;
 }
 
@@ -261,6 +261,9 @@ form {
 
 .gotopinner {
   margin: 5px 10px;
+  height: 50px;
+  width: 40px;
+  position: relative;
 }
 
 .topleft {
