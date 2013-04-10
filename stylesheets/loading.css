@@ -1,36 +1,68 @@
 @keyframes loading {
 	0% {
 		left: 0;
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
 	}
 	100% {
 		left: 100%;
+		opacity: 0;
 	}
 }
 
 @-webkit-keyframes loading {
 	0% {
 		left: 0;
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
 	}
 	100% {
 		left: 100%;
+		opacity: 0;
 	}
 }
 
 @-moz-keyframes loading {
 	0% {
 		left: 0;
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
 	}
 	100% {
 		left: 100%;
+		opacity: 0;
 	}
 }
 
 @-o-keyframes loading {
 	0% {
 		left: 0;
+		opacity: 0;
+	}
+	5% {
+		opacity: 1;
+	}
+	95% {
+		opacity: 1;
 	}
 	100% {
 		left: 100%;
+		opacity: 0;
 	}
 }
 
@@ -39,6 +71,7 @@
 	height: 5px;
 	background: #2879d0;
 	position: absolute;
+	opacity: 0;
 	animation: loading 2s;
 	-moz-animation: loading 2s;
 	-webkit-animation: loading 2s;
