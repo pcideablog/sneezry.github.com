@@ -249,7 +249,6 @@ form {
   height: 60px;
   width: 60px;
   border: black 10px solid;
-  padding: 5px 10px;
   -webkit-border-radius: 30px;
   -moz-border-radius: 30px;
   border-radius: 30px;
@@ -258,6 +257,10 @@ form {
 
 .gotop:hover {
   opacity: 0.75;
+}
+
+.gotopinner {
+  margin: 5px 10px;
 }
 
 .topleft {
