@@ -4,75 +4,65 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 
 下面我们开始创建动画实例。CSS中可以用`@keyframes`创建动画，但不同浏览器需要有自己的伪类，Chrome和Safari需要使用`@-webkit-keyframes`，Firefox需要使用`@-moz-keyframes`，Opera需要使用`@-o-keyframes`，为了叙述方便，代码只给出`@keyframes`，但你自己实现时应该补全`-webkit-frames`、`@-moz-frames`和`-o-keyframes`。
 
-```
-@keyframes loading {
-  0% {
-		left: 0;
-		opacity: 0;
+	@keyframes loading {
+		0% {
+			left: 0;
+			opacity: 0;
+		}
+		5% {
+			opacity: 1;
+		}
+		95% {
+			opacity: 1;
+		}
+		100% {
+			left: 100%;
+			opacity: 0;
+		}
 	}
-	5% {
-		opacity: 1;
-	}
-	95% {
-		opacity: 1;
-	}
-	100% {
-		left: 100%;
-		opacity: 0;
-	}
-}
-```
 
 上述代码定义了loading这个动画起始位置为距左侧0%，透明度为0，动画播放到5%时透明度增加到1，这是一个淡入的效果，再之后95%添加了一个关键帧（使用过Flash的同学很好理解吧 :P ），之后100%的时候位置距左侧100%，透明度为0，即完成滑动动画，同时淡出。
 
 搞定了动画之后，就可以将动画结合到其他选择器上了。比如我们结合到className为loading的选择器上
 
-```
-.loading {
-	animation: loading 2s;
-}
-```
+	.loading {
+		animation: loading 2s;
+	}
 
 上例代码表示`.loading`选择器使用loading动画，同时动画整个播放过程消耗2s，即两秒。需要注意的是对于`animation`同样不同浏览器有自己特定的伪类，分别是`-webkit-animation`、`-moz-animation`和`-o-animation`。
 
 但是我们要设计出来的动画是变速的，而默认是匀速的，这就要用到`animation-timing-function`这个属性。`animation-timing-function`提供了几个预设的方案，分别是`linear`、`ease`、`ease-in`、`ease-out`和`ease-in-out`，对于我们的目标，这几个预设方案都不行，那么我们就需要用到自定义的值。自定义值的格式为`cubic-bezier(x1,y1,x2,y2)`。其中x1、y1确定一个点，x2、y2确定另一个点，这两个点要求限定在(0,0)、(0,1)、(1,1)和(1,0)确定的矩形区域内，连接(0,0)和(x1,y1)得到一个线段，再连接(1,1)和(x2,y2)得到另一个线段，利用这两个线段作为把柄就可以确定出一条曲线，与photoshop中的钢笔工具用法相同。曲线的斜率即为相应位置的动画播放速度。如果你对上述内容还是一头雾水，那么你可以到[这个网站](http://cubic-bezier.com/)在线通过直观的可视化操作获得自定义的值。这里我们选择`cubic-bezier(0.1,0.48,0.9,0.52)`。于是代码就变成了
 
-```
-.loading {
-	animation: loading 5s;
-	animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
-}
-```
+	.loading {
+		animation: loading 5s;
+		animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
+	}
 
 再有就是播放循环次数这个属性`animation-iteration-count`，特定次数直接用数字做值，如果是无限循环就使用`infinite`，加上循环属性就变成了
 
-```
-.loading {
-	animation: loading 5s;
-	animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
-	animation-iteration-count: infinite;
-}
-```
+	.loading {
+		animation: loading 5s;
+		animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
+		animation-iteration-count: infinite;
+	}
 
 再加上宽度、高度、背景颜色及多浏览器的伪类等属性，最终的代码是
 
-```
-.loading {
-	width: 5px;
-	height: 5px;
-	background: #2879d0;
-	position: absolute;
-	animation: loading 5s;
-	opacity: 0;
-	-moz-animation: loading 5s;
-	-webkit-animation: loading 5s;
-	-o-animation: loading 5s;
-	animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
-	-webkit-animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
-	animation-iteration-count: infinite;
-	-webkit-animation-iteration-count: infinite;
-}
-```
+	.loading {
+		width: 5px;
+		height: 5px;
+		background: #2879d0;
+		position: absolute;
+		animation: loading 5s;
+		opacity: 0;
+		-moz-animation: loading 5s;
+		-webkit-animation: loading 5s;
+		-o-animation: loading 5s;
+		animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
+		-webkit-animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
+		animation-iteration-count: infinite;
+		-webkit-animation-iteration-count: infinite;
+	}
 
 其中`animation-timing-function`和`animation-iteration-count`对于Firefox和Opera浏览器支持W3C标准，不需要另写伪类。
 
@@ -84,42 +74,38 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 
 但这只是一个方块，为了让多个方块同时显示，我们在创建多个元素的同时还要让其有个时间差才能错开显示，于是我们需要再涉及一个`animation-delay`，这个属性对于Firefox和Opera也不需要专门的伪类。这样我们就可以通过CSS选择器添加几个其他的样式表，如
 
-```
-.loading[index="1"] {
-	animation-delay: 0.15s;
-	-webkit-animation-delay: 0.15s;
-}
+	.loading[index="1"] {
+		animation-delay: 0.15s;
+		-webkit-animation-delay: 0.15s;
+	}
 
-.loading[index="1"] {
-	animation-delay: 0.15s;
-	-webkit-animation-delay: 0.15s;
-}
+	.loading[index="1"] {
+		animation-delay: 0.15s;
+		-webkit-animation-delay: 0.15s;
+	}
 
-.loading[index="2"] {
-	animation-delay: 0.3s;
-	-webkit-animation-delay: 0.3s;
-}
+	.loading[index="2"] {
+		animation-delay: 0.3s;
+		-webkit-animation-delay: 0.3s;
+	}
 
-.loading[index="3"] {
-	animation-delay: 0.45s;
-	-webkit-animation-delay: 0.45s;
-}
+	.loading[index="3"] {
+		animation-delay: 0.45s;
+		-webkit-animation-delay: 0.45s;
+	}
 
-.loading[index="4"] {
-	animation-delay: 0.6s;
-	-webkit-animation-delay: 0.6s;
-}
-```
+	.loading[index="4"] {
+		animation-delay: 0.6s;
+		-webkit-animation-delay: 0.6s;
+	}
 
 同时html代码改为
 
-```
-<div class="loading"></div>
-<div class="loading" index="1"></div>
-<div class="loading" index="2"></div>
-<div class="loading" index="3"></div>
-<div class="loading" index="4"></div>
-```
+	<div class="loading"></div>
+	<div class="loading" index="1"></div>
+	<div class="loading" index="2"></div>
+	<div class="loading" index="3"></div>
+	<div class="loading" index="4"></div>
 
 最终的效果如下所示
 
