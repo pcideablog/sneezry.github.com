@@ -81,6 +81,7 @@ function showlist(list){
 	for(var i = list.data.length; i > 0; i--){
 		txt += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
 	}
+	loading.style.display = 'none';
 	content.innerHTML = converter.makeHtml(txt);
 }
 

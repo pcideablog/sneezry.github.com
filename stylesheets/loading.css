@@ -39,10 +39,10 @@
 	height: 5px;
 	background: #2879d0;
 	position: absolute;
-	animation: loading 3s;
-	-moz-animation: loading 3s;
-	-webkit-animation: loading 3s;
-	-o-animation: loading 3s;
+	animation: loading 2s;
+	-moz-animation: loading 2s;
+	-webkit-animation: loading 2s;
+	-o-animation: loading 2s;
 	animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
 	-webkit-animation-timing-function: cubic-bezier(0.1, 0.48, 0.9, 0.52);
 	animation-iteration-count: infinite;
