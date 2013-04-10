@@ -103,6 +103,7 @@ header h2 {
 #main-content {
   width: 690px;
   float: left;
+  position: relative;
 }
 
 #main-content img {
