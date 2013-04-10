@@ -15,6 +15,7 @@ var repos = 'sneezry.github.com';
 main();
 
 function main(){
+	content.innerHTML = '';
 	loading.style.display = 'block';
 	if(path){
 		disqus_url = hostbase + path;
