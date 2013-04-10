@@ -2,7 +2,7 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 
 首先CSS中实现位置移动有多种方法，为了简单，我直接选择了改变left的方法。为了使`left`属性生效，我们需要将方块的`position`属性改为`absolute`，同时改变其父系`position`改为`relative`。
 
-下面我们开始创建动画实例。CSS中可以用`@keyframes`创建动画，但不同浏览器需要有自己的伪类，Chrome和Safari需要使用`@-webkit-keyframes`，Firefox需要使用`@-moz-keyframes`，Opera需要使用`@-o-keyframes`，为了叙述方便，代码只给出`@keyframes`，但你自己实现时应该补全`-webkit-frames`、`@-moz-frames`和`-o-keyframes`。
+下面我们开始创建动画实例。CSS中可以用`@keyframes`创建动画，但不同浏览器需要有自己的伪类，Chrome和Safari需要使用`@-webkit-keyframes`，Firefox需要使用`@-moz-keyframes`，Opera需要使用`@-o-keyframes`，为了叙述方便，代码只给出`@keyframes`，但你自己实现时应该补全`@-webkit-frames`、`@-moz-frames`和`@-o-keyframes`。
 
 	@keyframes loading {
 		0% {
