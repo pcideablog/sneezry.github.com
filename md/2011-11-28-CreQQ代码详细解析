@@ -1,0 +1,439 @@
+2011-11-28-CreQQ代码详细解析
+<p><strong>请移步 </strong><a href="http://lizhe.org/q1i" target="_blank"><strong>http://lizhe.org/q1i</strong></a><strong> 查看最新基于Chrome平台的QQ客户端。</strong><br></p><p>我想一定会有很多像我一样的人，想写出一款CreQQ类似的程序，无论是出于个人爱好还是技术研究的目的。在我准备写CreQQ这款程序的时候我也翻遍了整个互联网（当然有点夸张），都没有找到比较优秀的资源，所以，在我写出了这款基本还能用的程序之后，决定将我所努力得到的东西分享给大家。<br>写此类插件最难的莫过于协议，腾讯的协议一直很封闭，虽然有人已经通过抓包的方法摸清了Web QQ的协议，但愿意拿出来和大家共享的却不多，能把自己写好的程序拿出来并帮助大家进行分析的更是没有，这也更加激励我把这篇日志写完，当然我最终的目的就是希望那些和曾经的我一样在Google上苦苦寻找答案的人省些力气，不要因为找不到资料而泄气。<br>那么好了，言归正传，我们现在就开始窥探下CreQQ的秘密吧！请注意，CreQQ是用JavaScript语言编写的，对于JavaScript不是很熟悉的同学看起代码来可能会有些困难，不过我会用尽量详细的语言帮助大家进行分析的。<br>CreQQ的源码大家可以通过<a title="https://clients2.google.com/service/update2/crx?response=redirect&x=id%3Dehgdacjejmbklleccjegbbaklhhoedlh%26uc" href="https://clients2.google.com/service/update2/crx?response=redirect&x=id%3Dehgdacjejmbklleccjegbbaklhhoedlh%26uc">https://clients2.google.com/service/update2/crx?response=redirect&x=id%3Dehgdacjejmbklleccjegbbaklhhoedlh%26uc</a>下载（请不要使用Chrome浏览器，否则您无法得到文件，而会被直接安装）。您会得到一个后缀名为.crx的文件，将crx改为zip，之后解压缩即可得到CreQQ的源码。<br>其中background.html是我们今天要讲解的问题，其他的文件我们可以不去看。<br>涉及到WebQQ协议的部分，第一个执行的函数是check()函数。<br></p><pre>function check(){
+    localStorage.webqqdetails = "正在获取验证码……";
+    chkbk();
+    chrome.browserAction.setBadgeBackgroundColor({"color":[30,144,255,255]});
+    chrome.browserAction.setBadgeText({"text":"..."});
+    islogin = 1;
+    u = localStorage.webqqu;
+    pw = localStorage.webqqp;
+    if(u && pw){
+        var url = "http://ptlogin2.qq.com/check?appid=1003903&uin="+u+"&r="+Math.random();
+        var el = document.createElement("script");
+        el.setAttribute('src',url);
+        document.body.appendChild(el);
+    }
+    else{
+        u = localStorage.webqqu;
+        pw = localStorage.webqqp;
+        setTimeout(check, 1000);
+    }
+}</pre><p><br>上面就是check函数的全部源码。此函数的核心功能就是得到u和pw这两个变量后，动态创建一个src为“http://ptlogin2.qq.com/check?appid=1003903&uin=<strong>u</strong>&r=随机数”这样的一个script标签。通过引用前述的url后，腾讯服务器会返回诸如 ptui_checkVC('0','!6SG'); 的响应，其中第一个参数可能是0也可能是1，如果是0表示不用验证，第二个参数，即!6SG就是验证码，如果第一个参数是1，代表需要进行验证，并且第二个参数是验证码相关信息，这个判断过程我们是通过ptui_checkVC()函数处理的。<br></p><pre>function ptui_checkVC(c, vc){
+    localStorage.webqqdetails = "正在获取验证状态……";
+    if("0" == c){
+        vi = 0;
+        v = vc;
+        l();
+    }
+    else{
+        vi = 1;
+        chrome.browserAction.setBadgeText({"text":"v"});
+        localStorage.webqqi = "http://captcha.qq.com/getimage?aid=1002101&r="+Math.random()+"&uin="+u+"&vc_type="+vc;
+        getcaps();
+    }
+}</pre><p><br>上面即为ptui_checkVC函数的全部源码。当上部调用的url返回的第一个参数为0时，我们进入下一步，调用l()函数，否则显示图片“http://captcha.qq.com/getimage?aid=1002101&r=随机数&uin=u&vc_type=验证码相关信息”。并将用户输入的验证码备用。<br></p><pre>function l(){
+    localStorage.webqqdetails = "正在登录到腾讯服务器……";
+    chrome.browserAction.setBadgeText({"text":"..."});
+    if(vi){
+        v = localStorage.webqqs;
+        localStorage.webqqs = "";
+    }
+    var p = md5(pw + v.toUpperCase());
+    if(Number(localStorage.webqqsettings.split(";")[0])){
+        chrome.browserAction.setIcon({path:(Number(localStorage.webqqsettings.split(";")[7])?"gmail":"qq") + "_hd.png"});
+    }
+    else{
+        chrome.browserAction.setIcon({path:(Number(localStorage.webqqsettings.split(";")[7])?"gmail":"qq") + "_on.png"});
+    }
+    var url = "http://ptlogin2.qq.com/login?"+(Number(localStorage.webqqsettings.split(";")[0])?"":"h=1&")+"u="+u+"&p="+p+"&verifycode="+v+"&webqq_type=1&remember_uin=1&aid=1002101&u1=http%3A%2F%2Fw.qq.com%2Fmain.shtml%3F816&h=1&ptredirect=1&ptlang=2052&from_ui=1&pttype=1&dumy=&fp=loginerroralert&action=5-37-424199&mibao_css=";
+    var el = document.createElement("script");
+    el.setAttribute('src',url);
+    document.body.appendChild(el);
+}</pre><p><br>上面的就是l()函数的全部源码。核心作用是调用“http://ptlogin2.qq.com/login?u=<strong>u</strong>&p=<strong>p</strong>&verifycode=<strong>v</strong>&webqq_type=1&remember_uin=1&aid=1002101&u1=http%3A%2F%2Fw.qq.com%2Fmain.shtml%3F816&h=1&ptredirect=1&ptlang=2052&from_ui=1&pttype=1&dumy=&fp=loginerroralert&action=5-37-424199&mibao_css=”。其中u是用户名，p是用户密码明码经过md5加密后的密码pw全大写与验证码全大写后进行拼接得到的字符串再次进行md5加密后得到的。v是验证码。如果是在线登录，需要在上面的url后添加&h=1，如果没有这个参数将是隐身登录。<br>如果腾讯服务器接受登录，将返回诸如 ptuiCB('0','0','http://w.qq.com/main.shtml?816','1','登录成功！'); 的响应，表示登录成功，否则会在第五个参数提示错误信息。<br>下面我们就将开始拉取数据了。首先我们开始获取cookies，我们分别需要获取到ptwebqq、skey和uin这三个cookies。虽然在用户登录时已经输入了帐号，但是如果用户输入的是邮箱地址，我们需要通过uin这个cookies获取用户对应的QQ号码。并将uin作为u的值。<br>获取完cookies后我们就要开始获取web_session。向 http://web-proxya.qq.com/conn_s POST数据，数据为“ u;22;0;00000000;skey;ptwebqq;0; ”，服务器返回一长串以分号相隔的数据，而五个数据即为web_session，将其保存好，后面会用到。<br>然后我们开始获取分组信息。向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;3c;0;web_session;1;”。服务器返回诸如“545251277;3c;0;09;0;My Friends;1;middle school;2;high school;3;SNAIL Society;4;Same School;5;net & nyt;6;university;7;秘书部;8;Ppl can C me;”的响应，第一个数据是用户QQ帐号，第四个数据是用户QQ帐号好友的分组数目，从第五个开始，是序号和组名。需要注意的是，如果用户只有一个“我的好友”分组，第四个数字将是0。<br>之后我们开始获取好友信息。向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;58;0;web_session;s;”，其中u为用户QQ号码，s为从哪个好友开始获取，因为一次获取不全，需要多次获取。CreQQ此处相应的函数为getfriends()函数，其完整源码如下所示。<br></p><pre>function getfriends(s,l,m){
+    localStorage.webqqdetails = "正在获取好友信息……";
+    var xhr = new XMLHttpRequest();
+    content = u+";58;0;"+web_session+";"+s+";";
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var gtmp = xhr.responseText.split(";");
+        var j=l;
+        var k=m;
+        for(i=4; i<gtmp.length-1; i+=4){
+            if("0" == gtmp[i+1]){
+                friends[j]=gtmp[i];
+                fgroup[j] = (Number(gtmp[i+2])&60)>>2;
+                j++;
+            }
+            else{
+                qun[k]=[];
+                qun[k].id=gtmp[i];
+                qun[k].qn="";
+                qun[k].nm="";
+                k++;
+            }
+        }
+        localStorage.webqqlog += "3] "+xhr.responseText+"<br />";
+        if(0==Number(gtmp[3]))
+            step = 3;
+        else
+            getfriends(Number(gtmp[3]),j,k);
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>服务器返回诸如“545251277;58;0;739650251;1686331;0;4;20;4366143;0;0;20;5081492;0;20;20;6029847;0;33;20;……”的响应，其中第四个数据为下一次从哪个好友开始获取，从第五个数据开始，每四个数据为一组，每组数据中，第一个如果是QQ好友就为好友QQ号码，如果是群就为群id（注意不是群号）；第二个数据，为0代表是好友，为1代表是群；第三个数据是好友所在分组序号，不过这个序号不是真正的分组序号，需要与60按位与，之后右移两位，即原始数据若为n，计算后的数据应该是(n&60)>>2。<br>之后我们就可以获取在线好友了，向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;26;0;web_session;0;0;”，服务器返回诸如“545251277;81;1;521050918;10;545251277;81;2;545044875;10;……”的响应，每五个数据为一组，需要注意的是，不是每个数据都一定是在线好友信息，我们需要对每组数据的第二个数据进行判断，只有是81时才代表此数据是好友在线信息。其中第四个数据就是在线好友的QQ号码。<br>此功能CreQQ使用getonline()函数实现，此函数完整代码如下。<br></p><pre>function getonline(){
+    localStorage.webqqdetails = "正在获取在线好友信息……";
+    var xhr = new XMLHttpRequest();
+    content = u+";26;0;"+web_session+";0;0;";
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var gtmp = xhr.responseText.split(";");
+        var j=0;
+        var i;
+        for(i=0; i<gtmp.length-1; i+=5){
+            if(gtmp[1] == "81"){
+                online[j] = gtmp[i+3];
+                j++;
+            }
+        }
+        localStorage.webqqlog += "4] "+xhr.responseText+"<br />";
+        step = 4;
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>接下来我们开始获取好友昵称。继续向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;26;0;web_session;0;0;”，请注意，这里POST的数据没有错误，确实和获取在线好友时POST的数据完全一样。和获取QQ好友时一样，服务器一次可能无法将所有信息传递完，此时需要进行多次请求。服务器返回诸如“545251277;26;0;50;1686331;297;21;0;逆袭(*□д`*;1;4366143;381;25;0;▓小·魚;0;5081492;663;2;0;地狱战狂;0;6029847;0;22;0;长空√铁翼;0;……”的响应，其中第4个数据代表下次从第几个好友开始请求，如果为0则表示获取完毕。从第五个数据开始，每6个数据为一组，每组中第一个数据为好友QQ号码，第五个数据为好友昵称。<br>这里需要注意的是，腾讯服务器会将每个数据都发送两边，可能是考虑到保证信息传递成功率吧。CreQQ完成此功能的函数是getfriendsinfo()，其完整源码如下所示。<br></p><pre>function getfriendsinfo(s,l){
+    localStorage.webqqdetails = "正在获取好友昵称……";
+    var xhr = new XMLHttpRequest();
+    content = u+";26;0;"+web_session+";"+s+";0;";
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var gtmp = xhr.responseText.split(";");
+        var j=l;
+        var i;
+        for(i=4; i<gtmp.length-1; i+=6){
+            nickqq[j] = gtmp[i];
+            nickname[j] = gtmp[i+4];
+            j++;
+        }
+        localStorage.webqqlog += "5] "+xhr.responseText+"<br />";
+        if(0==Number(gtmp[3]))
+            step = 5;
+        else
+            getfriendsinfo(Number(gtmp[3]),j);
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>在获取完好友昵称后，我们需要获取用户对好友标注的注释，向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;3e;0;web_session;4;s;”其中s为下一次从哪里开始获取，当然还是因为服务器不能一次将所有信息返回。服务器返回如下响应“545251277;3e;0;4;1;5081492;0;XD同学;26990152;0;魔方;80554933;0;陈伯洋;81263051;0;索老师;117163304;0;雒唯;……”其中第五个数据表示下一次从哪里开始获取，如果为0则表示获取完毕。从第6个数据开始，每3个为一组，第一个数据为好友QQ号码，第三个为好友昵称。<br>CreQQ通过getmark()函数完成上述过程，其完整代码如下。<br></p><pre>function getmark(s,l){
+    localStorage.webqqdetails = "正在获取好友备注……";
+    var xhr = new XMLHttpRequest();
+    content = u+";3e;0;"+web_session+";4;"+s+";";
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var gtmp = xhr.responseText.split(";");
+        if("3e"==gtmp[1]){
+               var j=l;
+               var i;
+               for(i=5; i<gtmp.length-1; i+=3){
+                markname[j] = gtmp[i+2];
+                markqq[j] = gtmp[i];
+                j++;
+            }
+            localStorage.webqqlog += "6] "+xhr.responseText+"<br />";
+            if(0==Number(gtmp[4])){
+                step = 6;
+            }
+            else{
+                getmark(s+1,j);
+            }
+        }
+        else{
+            getmark(0,0);
+        }
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>接下来我们开始获取群信息。向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;30;0;web_session;72;q;0;”，其中q为群id，这个信息我们在获取好友信息时已经获取到，服务器返回诸如“545251277;30;0;72;2144613258;64613258;1;0;545251277;Snail活动计划;1月27日中午12点新千里烤肉不见不散（百度被pass了~）。聚会带好学生证，看电影凭学生证有优惠。;Sorry, this group is disallowed to be joined.;0;1851747632;87491030;20;0;0;117163304;20;0;1;124415910;20;0;0;174053188;20;0;0;273214505;20;0;0;290017418;20;0;0;304480723;20;0;0;331737201;20;0;0;378539454;20;0;0;408359572;20;0;0;493390039;20;0;0;545251277;20;0;0;740074342;20;0;1;741389790;20;0;1;805957574;20;0;0;1033471702;20;0;0;1364088792;20;0;0;1851747632;20;0;0;”的响应，其中第六个数据为群号，第10个数据为群名，第9个数据为创建者QQ号，第11个数据为群公告，第12个数据为群介绍，从第15个数据开始，每4个为一组，第一个为成员QQ号码。需要注意的是，服务器返回的响应有时和我们请求的数据不符，即我们请求的是id为A的群信息，而服务器返回的确实B的信息，因为这样，我们需要对信息进行验证。<br>CreQQ使用getquninfo()和quninfo()两个函数完成上述过程，完整代码如下。<br></p><pre>function getquninfo(){
+    localStorage.webqqdetails = "正在获取群信息……";
+    var k;
+    for(k=0;k<qun.length;k++){
+        quninfo(qun[k].id,k);
+    }
+    step = 7;
+}
+function quninfo(q,k){
+    if(qun[k].qn){
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    content = u+";30;0;"+web_session+";72;"+q+";0;";
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+        var gtmp = xhr.responseText.split(";");
+        if(gtmp[1]==30 && gtmp[4]==q){
+            qun[k].qn = gtmp[5];
+              qun[k].nm = gtmp[9];
+              localStorage.webqqlog += "7] "+k+" - "+qun[k].qn+" - "+qun[k].nm+"<br />";
+              localStorage.webqqqun += qun[k].id+";"+encodeURIComponent(qun[k].qn)+";"+qun[k].nm+";;";
+          }
+          else{
+              var i;
+              for(i=0;i<qun.length;i++){
+                  if(qun[i].id==gtmp[4] && !qun[i].qn){
+                      qun[i].qn = gtmp[5];
+                      qun[i].nm = gtmp[9];
+                      localStorage.webqqlog += "7] "+i+" - "+qun[i].qn+" - "+qun[i].nm+"<br />";
+                      localStorage.webqqqun += qun[i].id+";"+encodeURIComponent(qun[i].qn)+";"+qun[i].nm+";;";
+                  }
+              }
+              if(!qun[k].qn){
+                  quninfo(q,k);
+              }
+          }
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>至此，全部数据我们拉取完毕，接下来CreQQ对数据进行了格式化，即将数据转换为JSON格式，CreQQ转换的格式为：<br></p><pre>[{"groupid":groupid,"groupname":groupname,"friends":[{"name":name,"qq":qq,"online":"1/0"},……]},……]</pre><p><br>将数据格式化完毕后，我们开始向腾讯服务器发送“心跳包”，一方面及时得到最新消息和上下线状态，一方面告诉服务器用户在线，不要断开连接。<br>“心跳包”的发送方法为向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;00;msgid;web_session;”，其中msgid为指令序号，从第一个指令开始为1，依次增加。服务器返回数据格式较多，所有我们分开讨论。如果返回的数据第二个数据为01，表示用户掉线；如果第二个数据为81，表示用户上下线状态，其中第5个数据是10表示上线，否则表示下线，第4个数据是相关好友QQ号码。如果第二个数据为17，且第4个数据不是10000，且第6个数据不是30，那么其为新消息，如果第4个数据是10000，且第6个数据是30表示用户异地登录，被迫下线。如果服务器返回数据为新消息，则如果第6个数据为09，表示好友消息，否则表示群消息。其中第3个数据为消息验证信息A，第5个数据为消息验证信息B，第8个数据为信息内容，第4个为发送信息的好友QQ号码，如果是群则是群id，如果是好友消息，第9个数据是消息发送时间，如果是群消息，第14个数据为消息发送时间。如果是好友消息，第10个数据是消息验证信息C，如果是群消息，第15个数据是消息验证信息C，消息验证信息我们在反馈服务器信息时要用到。<br>当我们受到消息后需要告知服务器接收成功，即我们需要发送反馈信息。反馈信息的发送方法为向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;17;a;web_session;b;u;c;e;d;”，其中a为消息验证信息A，b为发送信息的QQ号或群id，c为验证信息B，d为验证信息C，如果是好友消息，e为1，如果是群消息，e为3。<br>至此“心跳包”结束，CreQQ对此处的编写使用了大量篇幅，分别使用了pulld()函数发送“心跳包”、setst()函数更改好友在线状态、callbackm()函数发送信息接收反馈信息。这三个函数的完整代码如下。<br></p><pre>function pulld(){
+    if(localStorage.webqqb){
+        localStorage.webqqb = "";
+        localStorage.webqqbr = "true";
+        logout();
+        return;
+    }
+    else{
+        var xhr = new XMLHttpRequest();
+        content = u+";00;"+msgid+";"+web_session+";";
+        msgid++;
+        xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+        xhr.onreadystatechange = function() {
+          if (xhr.readyState == 4) {
+              if(xhr.responseText){
+                var gtmpp = xhr.responseText.split(u+";");
+                var i;
+                for(i=1;i<gtmpp.length;i++){
+                    var gtmp = gtmpp[i].split(";");
+                    if(gtmp[0]=="01"){
+                        chrome.browserAction.setBadgeBackgroundColor({"color":[128,128,128,255]});
+                            chrome.browserAction.setBadgeText({"text":"Off"});
+                            chrome.browserAction.setIcon({path:(Number(localStorage.webqqsettings.split(";")[7])?"gmail":"qq") + "_off.png"});
+                            chrome.browserAction.setTitle({title:"CreQQ"});
+                            //alert("由于网络原因，您已离线，请稍后重新登录。");
+                            localStorage.webqqrelog = "true";
+                            localStorage.webqqbr = "true";
+                            window.location.reload();
+                        return;
+                    }
+                    else if(gtmp[0]=="17"){
+                        if("10000"==gtmp[2] && "30"==gtmp[4]){
+                            chrome.browserAction.setBadgeBackgroundColor({"color":[128,128,128,255]});
+                                chrome.browserAction.setBadgeText({"text":"Off"});
+                                chrome.browserAction.setIcon({path:(Number(localStorage.webqqsettings.split(";")[7])?"gmail":"qq") + "_off.png"});
+                                chrome.browserAction.setTitle({title:"CreQQ"});
+                            alert("您的帐号在另一地点登录，您被迫下线。\n\n如果这不是您本人的操作，那么您的密码很可能已经泄漏。建议您修改密码。");
+                            localStorage.webqqbr = "true";
+                            window.location.reload();
+                            return;
+                        }
+                        var rep = 0;
+                        var msg = gtmp[6];
+                        var qq = gtmp[2];
+                        var qr = (gtmp[4]=="09"?1:3);
+                        var qe = (gtmp[4]=="09"?gtmp[8]:gtmp[13]);
+                        callbackm(gtmp[1],gtmp[2],gtmp[3],qe,qr);
+                        var g = localStorage.webqqg.split(";");
+                        var j;
+                        for(j=0; j<g.length-1; j++){
+                            if(g[j] == gtmp[1]){
+                                rep = 1;
+                                break;
+                            }
+                        }
+                        if(!rep){
+                            if(gtmp[4]=="09"){
+                                if(!Number(localStorage.webqqsettings.split(";")[5])){
+                                    document.getElementById('mr').play();
+                                }
+                                var tim = gtmp[7];
+                                var a = qq+";"+encodeURIComponent(msg)+";"+tim+";;";
+                                var h = qq+";0;"+encodeURIComponent(msg)+";"+tim+";;";
+                                localStorage.webqqc += a;
+                                localStorage.webqqh += h;
+                                if(localStorage.webqqsettings.split(";")[2] && !Number(localStorage.webqqsettings.split(";")[0])){
+                                    var t = new Date();
+                                    var msgt = localStorage.webqqsettings.split(";")[2].split("%25r");
+                                    var msgtt = msgt[0];
+                                    var k;
+                                    for(k=1; k<msgt.length; k++){
+                                        msgtt += msg + msgt[k];
+                                    }
+                                    tim = Math.floor(t.getTime()/1000);
+                                    h = qq+";1;"+msgtt+";"+tim+";;";
+                                        localStorage.webqqh += h;
+                                        ssmsg(qq,msgtt);
+                                }
+                            }
+                            else{
+                                showqunm("q"+qq,gtmp[9],msg,gtmp[12]);
+                                /* var tim = gtmp[12]; var a = "{\"qq\":\"q"+qq+"\",\"msg\":\""+gtmp[9]+": "+encodeURIComponent(msg)+"\",\"tim\":\""+tim+"\"};"; var h = "{\"qq\":\"q"+qq+"\",\"u\":\"0\",\"msg\":\""+gtmp[9]+": "+encodeURIComponent(msg)+"\",\"tim\":\""+tim+"\"};"; */
+                            }
+                            localStorage.webqqg += gtmp[1] + ";";
+                            freshbadge();
+                        }
+                    }
+                    else if(gtmp[0]=="81"){
+                        if(gtmp[3]=="10"){
+                            setst(gtmp[2],1);
+                        }
+                        else{
+                            setst(gtmp[2],0);
+                        }
+                    }
+                }
+            }
+            setTimeout(pulld, 2000);
+          }
+        }
+        xhr.send(content);
+    }
+}
+function callbackm(a,b,c,d,e){
+    var xhr = new XMLHttpRequest();
+    content = u+";17;"+a+";"+web_session+";"+b+";"+u+";"+c+";"+e+";"+d+";";
+    msgid++;
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    /* xhr.onreadystatechange = function() { if (xhr.readyState == 4) { alert(1); } } */
+    xhr.send(content);
+}</pre><p><br>上述代码中的pull()函数调用了showqunm()函数，此函数的作用是获取群消息的发送者昵称。这部分函数比较简单，我就不做详细分析了，大家看一下代码就能看懂。此函数的完整代码如下。<br></p><pre>function showqunm(qq,sq,msg,tim){
+    var i;
+    var sqp = sqa.split(";;");
+    for(i=0; i<sqp.length-1; i++){
+        var sqpp = sqp[i].split(";");
+        if(sqpp[0]==sq){
+            if(Number(localStorage.webqqsettings.split(";")[1])){
+                if(!Number(localStorage.webqqsettings.split(";")[5])){
+                document.getElementById('mr').play();
+            }
+                var a = qq+";"+sqpp[1]+": "+encodeURIComponent(msg)+";"+tim+";;";
+                localStorage.webqqc += a;
+            }
+            var h = qq+";0;"+sqpp[1]+": "+encodeURIComponent(msg)+";"+tim+";;";
+            localStorage.webqqh += h;
+            return;
+        }
+    }
+    var xhr = new XMLHttpRequest();
+    content = u+";0126;"+msgid+";"+web_session+";0;1;"+sq+";";
+    msgid++;
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    xhr.onreadystatechange = function() {
+      if (xhr.readyState == 4) {
+          var gtmp = xhr.responseText.split(";");
+          if(gtmp[1]=="0126" && gtmp[4]==sq){
+              sqa += sq+";"+gtmp[6]+";;";
+              if(Number(localStorage.webqqsettings.split(";")[1])){
+                    var a = qq+";"+gtmp[6]+": "+encodeURIComponent(msg)+";"+tim+";;";
+                    localStorage.webqqc += a;
+                }
+                var h = "q"+qq+";0;"+gtmp[6]+": "+encodeURIComponent(msg)+";"+tim+";;";
+                localStorage.webqqh += h;
+            }
+            else
+            {
+                setTimeout(function(){showqunm(qq,sq,msg,tim)},500);
+            }
+      }
+    }
+    xhr.send(content);
+}</pre><p><br>对于发送消息，指令分为两种：一种是向好友发消息，指令为“u;30;msgid;web_session;0a;qq;msg;”；第二种是向群发消息，指令为“u;16;msgid;web_session;qq;0b;606;msg;”，其中qq为群id。同样是将此指令POST到 http://web-proxya.qq.com/conn_s 中去。指令很简单，相信大家也都知道各参数的含义，需要注意的是msg发送前需要进行url编码，即utf8编码。<br>CreQQ使用ssmsg()函数发送消息，其源码如下。<br></p><pre>function ssmsg(qq,msg){
+    if("100" == qq){
+        creqqfeedback(msg);
+        return;
+    }
+    if("101" == qq){
+        pubweibo(msg);
+        return;
+    }
+    if("102" == qq){
+        pubrenren(msg);
+        return;
+    }
+    var xhr = new XMLHttpRequest();
+    if("q" == qq.substr(0,1)){
+        qq = qq.substr(1);
+        content = u+";30;"+msgid+";"+web_session+";0a;"+qq+";"+msg+";";
+    }
+    else{
+        content = u+";16;"+msgid+";"+web_session+";"+qq+";0b;606;"+msg+";";
+    }
+    xhr.open("POST", "http://web-proxya.qq.com/conn_s", true);
+    /* xhr.onreadystatechange = function() { if (xhr.readyState == 4) { freshbadge(); } } */
+    xhr.send(content);
+}</pre><p><br>关于CreQQ中的main()函数，我们在之前讲的这些过程都是由main()函数来调用的，因为在JavaScript中通过XMLHttpRequest请求数据时，不会阻塞下面的代码运行，即我们不能通过return的方法将请求得到的服务器响应通过函数值返回，这样我们就不得不让每一部的相关函数运行结束后将状态告知main()函数，之后main()函数再进行下一步的操作。这种解决思路对于学电子的同学应该不会陌生，因为这就是硬件设计语言Verilog中的状态机，我也是从我们的课本中找到了这个思路。main()函数的源码如下，它是通过step和lstep这两个全局变量判断运行状态的。<br></p><pre>function main(){
+    if(step == lstep){
+        return;
+    }
+    else{
+        switch(step){
+            case -1:{
+                getcookie();
+                lstep = -1;
+                break;
+            }
+            case 0:{
+                getwebsession();
+                lstep = 0;
+                break;
+            }
+            case 1:{
+                getgroup();
+                lstep = 1;
+                break;
+            }
+            case 2:{
+                getfriends(0,0,0);
+                lstep = 2;
+                break;
+            }
+            case 3:{
+                getonline();
+                lstep = 3;
+                break;
+            }
+            case 4:{
+                getfriendsinfo(0,0);
+                lstep = 4;
+                break;
+            }
+            case 5:{
+                getmark(0,0);
+                lstep = 5;
+                break;
+            }
+            case 6:{
+                getquninfo();
+                lstep = 6;
+                break;
+            }
+            case 7:{
+                getlistinfo();
+                lstep = 7;
+                clearInterval(ml);
+                freshbadge();
+                pulld();
+                //setInterval(getsmsg, 5000);
+                if(Number(localStorage.webqqsettings.split(";")[0])){
+                    chrome.browserAction.setTitle({title:u+"(隐身)"});
+                }
+                else{
+                    chrome.browserAction.setTitle({title:u+"(在线)"});
+                }
+                localStorage.webqqbr = "";
+                break;
+            }
+        }
+    }
+}</pre><p><br>零零散散说了这么多，希望大家能原谅我这么差的表达能力。如果大家想继续深入了解Web QQ的协议（迷你版），可以通过<a href="http://www.google.com.hk/url?sa=t&rct=j&q=webqq%E5%8D%8F%E8%AE%AE&source=web&cd=1&ved=0CCkQFjAA&url=http%3A%2F%2Fblog.csdn.net%2Fyjh4866%2Farticle%2Fdetails%2F5820699&ei=_cnTTonoLs6eiAf-k9zeDg&usg=AFQjCNG9TFgaG4pEh7oiMdZEiuFlq9Or4Q&sig2=w3KN5IyTBgel13Eg36fwMA">这个地址</a>进行学习，我开始也是从这个博客学习的，不过由于这个讲的是老版本的协议，所有个别地方会有些出入，不过讲得要比我好得多。最后要向大家推荐下Windows Live Writer，真的很好用，哈哈。没有详细讲解源码的程序不能算是真正的开源程序，大家说是不是啊 :D</p>
+
