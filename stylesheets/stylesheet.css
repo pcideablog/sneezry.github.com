@@ -144,7 +144,10 @@ a.button small {
   font-size: 11px;
 }
 #sidebar a.button {
-  background: transparent url(../images/github-button.png) 0 0 no-repeat;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+  background: #2879d0 url(../images/github-button.png) 0 0 no-repeat;
 }
 
 header span.searchbar {
