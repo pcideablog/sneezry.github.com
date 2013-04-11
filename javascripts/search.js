@@ -1,6 +1,13 @@
 var listTotal;
 var currentTotal = 0;
 
+function doSearch(q){
+	if(q){
+		window.history.pushState(null, '', '/#!/'+q);
+		search(q);
+	}
+}
+
 function search(q){
 	if(!q){
 		home();

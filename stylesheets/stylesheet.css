@@ -177,6 +177,7 @@ header span.searchbar {
   -webkit-border-radius: 4px;
   -moz-border-radius: 4px;
   border-radius: 4px;
+  background: url(../images/search-icon.png) no-repeat left center;
 }
 
 .cse .gsc-control-cse, .gsc-control-cse {
