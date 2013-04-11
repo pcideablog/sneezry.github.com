@@ -61,7 +61,7 @@ function state_Change(){
 		backhome.style.display = 'block';
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
-			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">' + pdate + '</div>';;
+			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';;
 			if(dis){
 				dis.style.display = 'block';
 			}
