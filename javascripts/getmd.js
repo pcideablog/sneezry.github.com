@@ -40,7 +40,6 @@ function main(){
 function home(){
 	path = '';
 	window.history.pushState(null, '', '/');
-	main();
 }
 
 function loadXMLDoc(url){
