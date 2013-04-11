@@ -1,3 +1,3 @@
-2011-03-19-Chrome自动填表插件——Mnem
+
 哼哼，我保持了我一贯的造词风格——Mnem来自Mnemosyne这个词。Mnemosyne貌似是记忆女神，嘿嘿，所以Mnem就是帮你记着你曾经提交的表单都写了些什么，并且在你以后进入表单后自动填上。话说自动填表功能的插件有很多，那么Mnem的特点是什么呢？一句话：简洁。我就是喜欢简洁的东西，你从我博客的布局上就能看出来。下面我简单介绍下Mnem。<br>Mnem没有密码验证机制，这样你每次进入表单后不必输入繁琐的密码后才能自动填充表单；Mnem是将你的数据保存在你自己的电脑上，而不是传到第三方服务器替你保管。当然，这样的简洁设计是以安全性为代价的，所有的表单数据均以没有经过任何处理的明码形式保存在本地，包括密码数据，如果你要用Mnem保存你重要的账户信息（比如Gmail用户名和密码），那我不得不警告你还是别了。<br>Mnem在发现新表单后，用户第一次提交表单时会询问用户是否要用Mnem记录，点击确定后保存，否则不保存，并且以后不再询问。在任何时候按三下“K”键打开Mnem管理项，其中“Clear Local Data”清除本地数据，这样Mnem保存的与此网站相关的数据将被清除，但不影响其他页面数据；“Show Local Data”显示保存于本地与此网站相关的数据。<br>最后献上Mnem的下载地址：<a href="http://commondatastorage.googleapis.com/chromeex/Mnem.crx">http://commondatastorage.googleapis.com/chromeex/Mnem.crx</a><br>保持了我一贯的发布在Google Storage上的风格，因为……我没钱在官方注册Developer~ T_T<br>然后还是那些话：刚做出来的，没经过太多测试，传说中的Beta，而非Stable，所以还请各位小白鼠多多反馈Bug和改进意见。<br>还有，感谢那些一直支持我的人！
 

@@ -1,3 +1,3 @@
-2011-07-01-给你一个无限滚动式的Google搜索
+
 期末考试终于结束了，我也终于可以安心写一些博文了，撒花庆祝中……自从必应图片搜索“抄袭”了推特的页面无限滚动后，谷歌图片搜索也有样学样。于是乎有人就问了，为啥谷歌搜索不也整个无限滚动呢，记得梅姐说过<a href="http://www.guao.hk/posts/marissa-mayer-on-why-google-doesnt-have-infinite-scroll-for-search.html" target="_blank">这样没意义</a>，但我怎么觉得这样挺方便的呢……于是乎我就搞了个<a href="https://chrome.google.com/webstore/detail/mdbmphibmlglombjopjkkdlahmkiileb">Google Unlimited Search</a>来“帮助”谷歌实现这个功能。话说悲催的是刚刚准备发布，就发现又跟别人撞车了，看来大家的需求很一致啊，哈哈。不过对比了下，我写的这个比他的简单，占用资源少，除了将谷歌无限滚动化以外没有添加任何杂七杂八的东西。大家如果对这个插件有什么建议，可以直接在下面给我留言，我会根据情况对插件进行改进的 :)
 

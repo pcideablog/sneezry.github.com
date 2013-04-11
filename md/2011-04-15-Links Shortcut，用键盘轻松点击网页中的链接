@@ -1,3 +1,3 @@
-2011-04-15-Links Shortcut，用键盘轻松点击网页中的链接
+
 不知道大家是否遭遇过鼠标失灵或没有鼠标的窘境，此时浏览网页时，要想点击网页中的链接要么调用键盘鼠，要么狂按Tab（什么？按过头了？重按！），要么……笔记本确实还有触摸板，嗯嗯。是不是被这些鼠标的代替输入设备搞得快疯掉了？反正我是有这样的悲惨经历，于是乎就有了这个<a href="http://chrome.sneezry.com/Links_Shortcut.crx">Links Shortcut</a>插件（当然依旧是Chrome插件，我估计是离不开谷歌产品二次开发了……）。<br><img src="http://m3.img.libdd.com/farm5/164/445B8E0C50A4F77C4EF6E691B93A6EA4_500_394.jpg"><br>安装完插件发现了没有，所有链接右上方都出现了一个字母，按键盘上相应按键就可以模拟鼠标点击相应链接。当然A-Z最多只能代表26个链接，有些页面包含超过26个链接，使用键盘的左、右方向键可以给前、后的链接添加快捷键。在鼠标焦点在输入框中时，为防止冲突，Links Shortcut自动禁用，如果此时想使用Links Shortcut需要按一下Tab键将焦点移除输入框（一些搜索引擎，比如谷歌，在你打开页面时会自动将焦点锁定到搜索框中，此时Links Shortcut就是自动禁用的）。<br>或许这是一个比较鸡肋的插件，不过当你真的像我一样遭遇了鼠标disabled的窘境，这个插件倒是能给你带来很多方便。<br><strong><span>UPDATE1:</span></strong> Links Shortcut对字母标号插入做了改进，以防止插件对网页原排版造成影响。<br><strong><span>UPDATE2:</span></strong> Links Shortcut对系统按键进行了屏蔽，如当您按下ctirl+A时不会再跳转到A链接，而会正常进行全选操作<br><span><strong>UPDATE3:</strong></span> Links Shortcut使用了等宽字体，使样式更加美观
 
