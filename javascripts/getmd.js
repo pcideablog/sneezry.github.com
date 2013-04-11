@@ -50,7 +50,7 @@ function home(){
 }
 
 function loadXMLDoc(url){
-	var xmlhttp=null;
+	xmlhttp=null;
 	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
 		xmlhttp=new XMLHttpRequest();
 	}
@@ -64,7 +64,7 @@ function loadXMLDoc(url){
 	}
 }
 
-function state_Change(xmlhttp){
+function state_Change(){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
 		loading.style.display = 'none';
 		backhome.style.display = 'block';
