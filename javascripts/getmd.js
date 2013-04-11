@@ -50,7 +50,7 @@ function home(){
 }
 
 function loadXMLDoc(url){
-	xmlhttp=null;
+	var xmlhttp=null;
 	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
 		xmlhttp=new XMLHttpRequest();
 	}
@@ -58,29 +58,27 @@ function loadXMLDoc(url){
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	if (xmlhttp!=null){
-		xmlhttp.onreadystatechange=state_Change;
-		xmlhttp.open("GET",url,true);
-		xmlhttp.send(null);
-	}
-}
-
-function state_Change(){
-	if (xmlhttp.readyState==4){// 4 = "loaded"
-		loading.style.display = 'none';
-		backhome.style.display = 'block';
-		if (xmlhttp.status==200){// 200 = "OK"
-			var converter = new Showdown.converter();
-			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';
-			if(dis){
-				dis.style.display = 'block';
+		xmlhttp.onreadystatechange = function (){
+			if (xmlhttp.readyState==4){// 4 = "loaded"
+				loading.style.display = 'none';
+				backhome.style.display = 'block';
+				if (xmlhttp.status==200){// 200 = "OK"
+					var converter = new Showdown.converter();
+					content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';
+					if(dis){
+						dis.style.display = 'block';
+					}
+				}
+				else if(xmlhttp.status==404) {
+					content.innerHTML = '<img src="/images/404.jpg" />';
+				}
+				else {
+					content.innerHTML = '<h2>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</h2>';
+				}
 			}
 		}
-		else if(xmlhttp.status==404) {
-			content.innerHTML = '<img src="/images/404.jpg" />';
-		}
-		else {
-			content.innerHTML = '<h2>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</h2>';
-		}
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send(null);
 	}
 }
 
