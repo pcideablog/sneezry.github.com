@@ -110,6 +110,11 @@ header h2 {
   max-width: 100%;
 }
 
+.date {
+  color: gray;
+  text-align: right;
+}
+
 aside#sidebar {
   width: 200px;
   padding-left: 20px;
@@ -298,6 +303,71 @@ form {
   position: absolute;
   left: 15px;
   top: 10px;
+  background: black;
+}
+
+#backhome {
+  height: 65px;
+  margin-top: -30px;
+  margin-bottom: 10px;
+  overflow: hidden;
+}
+
+.backhome {
+  position: relative;
+  top: -15px;
+  height: 60px;
+  width: 60px;
+  border: black 10px solid;
+  -webkit-border-radius: 40px;
+  -moz-border-radius: 40px;
+  border-radius: 40px;
+  opacity: 0.5;
+}
+
+.backhome:hover {
+  opacity: 0.75;
+}
+
+.backhomeinner {
+  margin: 10px 5px;
+  height: 40px;
+  width: 50px;
+  position: relative;
+}
+
+.backleft {
+  transform: skew(-45deg,0);
+  -webkit-transform: skew(-45deg,0);
+  -moz-transform: skew(-45deg,0);
+  -o-transform: skew(-45deg,0);
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  left: 10px;
+  top: 0;
+  background: black;
+}
+
+.backright {
+  transform: skew(45deg,0);
+  -webkit-transform: skew(45deg,0);
+  -moz-transform: skew(45deg,0);
+  -o-transform: skew(45deg,0);
+  width: 10px;
+  height: 20px;
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  background: black;
+}
+
+.backbody {
+  width: 40px;
+  height: 10px;
+  position: absolute;
+  left: 10px;
+  top: 15px;
   background: black;
 }
 

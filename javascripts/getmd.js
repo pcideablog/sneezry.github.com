@@ -58,7 +58,7 @@ function state_Change(){
 		loading.style.display = 'none';
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
-			content.innerHTML = converter.makeHtml(xmlhttp.responseText);
+			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">' + pdate + '</div>';;
 			if(dis){
 				dis.style.display = 'block';
 			}
@@ -75,7 +75,8 @@ function state_Change(){
 function showpost(path){
 	//window.history.pushState(null, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
-	document.title = path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Hooloo';
+	document.title = path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry';
+	pdate = path.substr(1).split('/')[0]+'-'+path.substr(1).split('/')[1]+'-'+path.substr(1).split('/')[2];
 	loadXMLDoc(url);
 }
 
