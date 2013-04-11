@@ -20,7 +20,6 @@ function main(){
 	content.innerHTML = '';
 	loading.style.display = 'block';
 	if(path){
-		backhome.style.display = 'block';
 		disqus_url = hostbase + path;
 		showpost(path);
 		(function() {
@@ -59,6 +58,7 @@ function loadXMLDoc(url){
 function state_Change(){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
 		loading.style.display = 'none';
+		backhome.style.display = 'block';
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
 			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">' + pdate + '</div>';;
