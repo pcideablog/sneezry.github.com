@@ -1,3 +1,6 @@
+var listTotal;
+var currentTotal = 0;
+
 function search(q){
 	if(!q){
 		home();
@@ -16,6 +19,7 @@ function search(q){
 }
 
 function searchlist(list){
+	listTotal = list.data.length;
 	for(var i = 0; i < list.data.length; i++){
 		if(list.data[i-1].name.indexOf(kw) != -1){
 			content.innerHTML += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
@@ -44,12 +48,16 @@ function searchLoadXMLDoc(url, pname){
 
 function searchState_Change(){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
+		currentTotal++;
 		loading.style.display = 'none';
 		backhome.style.display = 'block';
 		if (xmlhttp.status==200){// 200 = "OK"
 			if(xmlhttp.responseText.indexOf(kw) != -1){
 				content.innerHTML += '<h2><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></h2>';
 			}
+		}
+		if(currentTotal == listTotal){
+			loading.style.display = 'none';
 		}
 	}
 }
