@@ -24,6 +24,7 @@ function main(){
 		search(path.split('/')[1]);
 	}
 	else if(path){
+		console.log(path.split('/')[1])
 		disqus_url = hostbase + path;
 		showpost(path);
 		(function() {
