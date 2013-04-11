@@ -3,7 +3,7 @@ var currentTotal = 0;
 
 function doSearch(q){
 	if(q){
-		window.history.pushState(null, '', '/#!/'+q);
+		window.history.pushState(null, '', '/#!/search/'+q);
 		search(q);
 	}
 }
