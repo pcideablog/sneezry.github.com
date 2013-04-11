@@ -40,11 +40,7 @@ function main(){
 function home(){
 	path = '';
 	window.history.pushState(null, '', '/');
-	backhome.style.display = 'none';
-	document.title = 'Sneezry';
-	var el = document.createElement('script');
-	el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';
-	document.getElementsByTagName('head')[0].appendChild(el);
+	main();
 }
 
 function loadXMLDoc(url){
