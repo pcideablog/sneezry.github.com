@@ -92,7 +92,7 @@ function showlist(list){
 	content.innerHTML = converter.makeHtml(txt);
 }
 
-window.onpopstate = function(event){
+window.onhashchange = function(){
 	if(location.hash && location.hash.substr(1,1) != '!'){
 		window.history.pushState(null, '', '/#!'+path);
 		return;
