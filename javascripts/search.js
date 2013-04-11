@@ -41,24 +41,22 @@ function searchLoadXMLDoc(url, pname){
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	if (xmlhttp!=null){
-		xmlhttp.onreadystatechange=searchState_Change;
-		xmlhttp.open("GET",url,true);
-		xmlhttp.send(null);
-	}
-}
-
-function searchState_Change(xmlhttp){
-	if (xmlhttp.readyState==4){// 4 = "loaded"
-		currentTotal++;
-		loading.style.display = 'none';
-		backhome.style.display = 'block';
-		if (xmlhttp.status==200){// 200 = "OK"
-			if(xmlhttp.responseText.indexOf(kw) != -1){
-				content.innerHTML += '<h2><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></h2>';
+		xmlhttp.onreadystatechange = function (){
+			if (xmlhttp.readyState==4){// 4 = "loaded"
+				currentTotal++;
+				loading.style.display = 'none';
+				backhome.style.display = 'block';
+				if (xmlhttp.status==200){// 200 = "OK"
+					if(xmlhttp.responseText.indexOf(kw) != -1){
+						content.innerHTML += '<h2><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></h2>';
+					}
+				}
+				if(currentTotal == listTotal){
+					loading.style.display = 'none';
+				}
 			}
 		}
-		if(currentTotal == listTotal){
-			loading.style.display = 'none';
-		}
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send(null);
 	}
 }
