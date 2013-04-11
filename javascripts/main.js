@@ -30,9 +30,3 @@ function goToTop(acceleration, time) {
 		window.setTimeout(invokeFunction, time);
 	}
 }
-
-function home(){
-	window.history.pushState(null, '', '/');
-	path = '';
-	main();
-}
