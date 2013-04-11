@@ -67,7 +67,7 @@ function state_Change(){
 			content.innerHTML = '<img src="/images/404.jpg" />';
 		}
 		else {
-			content.innerHTML = '<h2>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').<h2>';
+			content.innerHTML = '<h2>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</h2>';
 		}
 	}
 }
