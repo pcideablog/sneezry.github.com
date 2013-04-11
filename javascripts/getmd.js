@@ -8,6 +8,7 @@ var loading = document.getElementById('loading');
 var backhome = document.getElementById('backhome');
 var xmlhttp;
 var disqus_url;
+var kw;
 
 var disqus_shortname = 'sneezry';
 var hostbase = 'http://page.lizhe.org';
@@ -19,7 +20,10 @@ main();
 function main(){
 	content.innerHTML = '';
 	loading.style.display = 'block';
-	if(path){
+	if(path.split('/')[0] == 'search'){
+		search(path.split('/')[1]);
+	}
+	else if(path){
 		disqus_url = hostbase + path;
 		showpost(path);
 		(function() {
@@ -58,9 +62,6 @@ function loadXMLDoc(url){
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
 	}
-	else{
-		alert("Your browser does not support XMLHTTP.");
-	}
 }
 
 function state_Change(){
@@ -69,7 +70,7 @@ function state_Change(){
 		backhome.style.display = 'block';
 		if (xmlhttp.status==200){// 200 = "OK"
 			var converter = new Showdown.converter();
-			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';;
+			content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';
 			if(dis){
 				dis.style.display = 'block';
 			}
