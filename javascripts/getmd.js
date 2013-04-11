@@ -20,7 +20,7 @@ main();
 function main(){
 	content.innerHTML = '';
 	loading.style.display = 'block';
-	if(path.split('/')[0] == 'search'){
+	if(path.split('/')[1] == 'search'){
 		search(path.split('/')[1]);
 	}
 	else if(path){
