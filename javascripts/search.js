@@ -23,6 +23,7 @@ function searchlist(list){
 	for(var i = list.data.length; i > 0; i--){
 		if(list.data[i-1].name.indexOf(kw) != -1){
 			content.innerHTML += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
+			currentTotal++;
 		}
 		else{
 			var url = location.protocol + '//' + location.hostname + '/md/' + list.data[i-1].name;
