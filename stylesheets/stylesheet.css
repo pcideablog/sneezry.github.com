@@ -147,7 +147,7 @@ a.button small {
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
-  background: #2879d0 url(../images/github-button.png) 0 0 no-repeat;
+  background: #2879d0 url(../images/github-button.png) center no-repeat;
 }
 
 header span.searchbar {
@@ -170,7 +170,7 @@ header span.searchbar {
 }
 
 aside a.button {
-  width: 138px;
+  width: 140px;
   padding-left: 64px;
   display: block;
   background: transparent url(../images/download-button.png) 0 0 no-repeat;
