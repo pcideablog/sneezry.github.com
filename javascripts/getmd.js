@@ -21,8 +21,7 @@ function main(){
 	content.innerHTML = '';
 	loading.style.display = 'block';
 	if(path.split('/')[1] == 'search'){
-		console.log(path.split('/')[1])
-		search(path.split('/')[1]);
+		search(path.split('/')[2]);
 	}
 	else if(path){
 		disqus_url = hostbase + path;

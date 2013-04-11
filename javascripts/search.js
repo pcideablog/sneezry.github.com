@@ -25,7 +25,7 @@ function searchlist(list){
 			content.innerHTML += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
 		}
 		else{
-			var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
+			var url = location.protocol + '//' + location.hostname + '/md/' + list.data[i-1].name;
 			searchLoadXMLDoc(url, list.data[i-1].name);
 		}
 	}
