@@ -5,6 +5,7 @@ var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
 var loading = document.getElementById('loading');
+var backhome = document.getElementById('backhome');
 var xmlhttp;
 var disqus_url;
 
@@ -19,6 +20,7 @@ function main(){
 	content.innerHTML = '';
 	loading.style.display = 'block';
 	if(path){
+		backhome.style.display = 'block';
 		disqus_url = hostbase + path;
 		showpost(path);
 		(function() {
@@ -28,6 +30,7 @@ function main(){
         })();
 	}
 	else{
+		backhome.style.display = 'none';
 		document.title = 'Sneezry';
 		var el = document.createElement('script');
 		el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';

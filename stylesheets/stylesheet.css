@@ -311,6 +311,7 @@ form {
   margin-top: -30px;
   margin-bottom: 10px;
   overflow: hidden;
+  display: none;
 }
 
 .backhome {
