@@ -159,9 +159,20 @@ a.button small {
 
 header span.searchbar {
   position: absolute;
-  width: 300px;
+  padding: 10px;
+  background: gray;
   right: 10px;
   top: 70px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
+}
+
+#searchbar {
+  height: 30px;
+  line-height: 30px;
+  width: 270px;
+  font-size: 16px;
 }
 
 .cse .gsc-control-cse, .gsc-control-cse {
