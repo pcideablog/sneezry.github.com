@@ -39,6 +39,8 @@ function main(){
 
 function home(){
 	path = '';
+	dis.style.display = 'none';
+	dis.innerHTML = '';
 	window.history.pushState(null, '', '/');
 	main();
 }
