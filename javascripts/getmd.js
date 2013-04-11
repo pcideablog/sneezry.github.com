@@ -65,7 +65,7 @@ function loadXMLDoc(url){
 	}
 }
 
-function state_Change(){
+function state_Change(xmlhttp){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
 		loading.style.display = 'none';
 		backhome.style.display = 'block';

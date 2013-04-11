@@ -46,7 +46,7 @@ function searchLoadXMLDoc(url, pname){
 	}
 }
 
-function searchState_Change(){
+function searchState_Change(xmlhttp){
 	if (xmlhttp.readyState==4){// 4 = "loaded"
 		currentTotal++;
 		loading.style.display = 'none';
