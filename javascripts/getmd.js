@@ -51,7 +51,7 @@ function home(){
 }
 
 function loadXMLDoc(url){
-	xmlhttp=null;
+	var xmlhttp=null;
 	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
 		xmlhttp=new XMLHttpRequest();
 	}

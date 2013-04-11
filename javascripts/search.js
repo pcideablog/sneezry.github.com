@@ -32,7 +32,7 @@ function searchlist(list){
 }
 
 function searchLoadXMLDoc(url, pname){
-	xmlhttp=null;
+	var xmlhttp=null;
 	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
 		xmlhttp=new XMLHttpRequest();
 	}
