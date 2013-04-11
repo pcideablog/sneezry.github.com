@@ -33,4 +33,6 @@ function goToTop(acceleration, time) {
 
 function home(){
 	window.history.pushState(null, '', '/');
+	path = '';
+	main();
 }
