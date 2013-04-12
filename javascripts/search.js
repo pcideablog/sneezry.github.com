@@ -1,5 +1,6 @@
 var listTotal;
 var currentTotal = 0;
+var searchResult = false;
 
 function doSearch(q){
 	if(q){
@@ -28,8 +29,9 @@ function search(q){
 function searchlist(list){
 	listTotal = list.data.length;
 	for(var i = list.data.length; i > 0; i--){
-		if(list.data[i-1].name.indexOf(kw) != -1){
+		if(list.data[i-1].name.toLowerCase().indexOf(kw.toLowerCase()) != -1){
 			content.innerHTML += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
+			searchResult = true;
 			currentTotal++;
 		}
 		else{
@@ -54,12 +56,17 @@ function searchLoadXMLDoc(url, pname){
 				loading.style.display = 'none';
 				backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
-					if(xmlhttp.responseText.indexOf(kw) != -1){
+					if(xmlhttp.responseText.toLowerCase().indexOf(kw.toLowerCase()) != -1){
 						content.innerHTML += '<h2><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></h2>';
+						searchResult = true;
 					}
 				}
 				if(currentTotal == listTotal){
 					loading.style.display = 'none';
+					if(!searchResult){
+						content.innerHTML = '<blockquote>No Results.</blockquote>';
+					}
+					searchResult = false;
 				}
 			}
 		}
