@@ -99,15 +99,18 @@ function cache(){
 
 function docache(list){
 	postList = list;
-	var xmlhttp=null;
-	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
-		xmlhttp=new XMLHttpRequest();
-	}
-	else if (window.ActiveXObject){// code for IE6, IE5
-		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
-	}
-	if (xmlhttp!=null){
-		xmlhttp.open("GET",url,true);
-		xmlhttp.send(null);
+	for(var i = list.data.length; i > 0; i--){
+		var url = location.protocol + '//' + location.hostname + '/md/' + list.data[i-1].name;
+		var xmlhttp=null;
+		if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
+			xmlhttp=new XMLHttpRequest();
+		}
+		else if (window.ActiveXObject){// code for IE6, IE5
+			xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		if (xmlhttp!=null){
+			xmlhttp.open("GET",url,true);
+			xmlhttp.send(null);
+		}
 	}
 }
