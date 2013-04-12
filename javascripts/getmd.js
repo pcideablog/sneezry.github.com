@@ -11,7 +11,7 @@ var disqus_url;
 var kw;
 
 var disqus_shortname = 'sneezry';
-var hostbase = 'http://page.lizhe.org';
+var hostbase = 'http://sneezry.com';
 var githubname = 'sneezry';
 var repos = 'sneezry.github.com';
 
