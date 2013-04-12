@@ -9,6 +9,7 @@ var backhome = document.getElementById('backhome');
 var xmlhttp;
 var disqus_url;
 var kw;
+var postList;
 
 var disqus_shortname = 'sneezry';
 var hostbase = 'http://sneezry.com';
@@ -35,9 +36,14 @@ function main(){
 	else{
 		backhome.style.display = 'none';
 		document.title = 'Sneezry';
-		var el = document.createElement('script');
-		el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';
-		document.getElementsByTagName('head')[0].appendChild(el);
+		if(postList){
+			showlist(postList);
+		}
+		else{
+			var el = document.createElement('script');
+			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';
+			document.getElementsByTagName('head')[0].appendChild(el);
+		}
 	}
 }
 
@@ -91,6 +97,7 @@ function showpost(path){
 }
 
 function showlist(list){
+	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
 		txt += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';

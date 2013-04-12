@@ -21,13 +21,19 @@ function search(q){
 		dis.innerHTML = '';
 		document.title = 'Search:' + q + ' - Sneezry';
 		kw = q;
-		var el = document.createElement('script');
-		el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=searchlist';
-		document.getElementsByTagName('head')[0].appendChild(el);
+		if(postList){
+			searchlist(postList);
+		}
+		else{
+			var el = document.createElement('script');
+			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=searchlist';
+			document.getElementsByTagName('head')[0].appendChild(el);
+		}
 	}
 }
 
 function searchlist(list){
+	postList = list;
 	listTotal = list.data.length;
 	currentTotal = 0;
 	for(var i = list.data.length; i > 0; i--){
@@ -80,13 +86,19 @@ function searchLoadXMLDoc(url, pname){
 function cache(){
 	if(!isCache){
 		isCache = true;
-		var el = document.createElement('script');
-		el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=docache';
-		document.getElementsByTagName('head')[0].appendChild(el);
+		if(postList){
+			docache(postList);
+		}
+		else{
+			var el = document.createElement('script');
+			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=docache';
+			document.getElementsByTagName('head')[0].appendChild(el);
+		}
 	}
 }
 
 function docache(list){
+	postList = list;
 	var xmlhttp=null;
 	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
 		xmlhttp=new XMLHttpRequest();
