@@ -1,6 +1,7 @@
 var listTotal;
 var currentTotal = 0;
 var searchResult = false;
+var isCache = false;
 
 function doSearch(q){
 	if(q){
@@ -71,6 +72,29 @@ function searchLoadXMLDoc(url, pname){
 				}
 			}
 		}
+		xmlhttp.open("GET",url,true);
+		xmlhttp.send(null);
+	}
+}
+
+function cache(){
+	if(!isCache){
+		isCache = true;
+		var el = document.createElement('script');
+		el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=docache';
+		document.getElementsByTagName('head')[0].appendChild(el);
+	}
+}
+
+function docache(list){
+	var xmlhttp=null;
+	if (window.XMLHttpRequest){// code for IE7, Firefox, Opera, etc.
+		xmlhttp=new XMLHttpRequest();
+	}
+	else if (window.ActiveXObject){// code for IE6, IE5
+		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	if (xmlhttp!=null){
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
 	}
