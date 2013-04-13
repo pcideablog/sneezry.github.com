@@ -124,6 +124,7 @@ aside#sidebar {
   float: right;
   position: relative;
   background: transparent url(../images/sidebar-bg.png) 0 0 no-repeat;
+  z-index: 10;
   font-size: 12px;
   line-height: 1.3;
 }
