@@ -123,7 +123,7 @@ aside#sidebar {
   min-height: 504px;
   float: right;
   position: relative;
-  background: transparent url(../images/sidebar-bg.jpg) 0 0 no-repeat;
+  background: transparent url(../images/sidebar-bg.png) 0 0 no-repeat;
   font-size: 12px;
   line-height: 1.3;
 }
