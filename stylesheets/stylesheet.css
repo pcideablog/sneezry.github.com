@@ -134,6 +134,10 @@ aside#sidebar p.repo-owner a {
   font-weight: bold;
 }
 
+aside#sidebar img {
+  margin-bottom: 20px;
+}
+
 #downloads {
   margin-bottom: 40px;
 }
