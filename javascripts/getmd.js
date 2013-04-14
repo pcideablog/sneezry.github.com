@@ -79,7 +79,7 @@ function loadXMLDoc(url){
 					content.innerHTML = '<img src="/images/404.jpg" />';
 				}
 				else {
-					content.innerHTML = '<h2>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</h2>';
+					content.innerHTML = '<blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote>';
 				}
 			}
 		}
@@ -100,7 +100,7 @@ function showlist(list){
 	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
-		txt += '<h2><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></h2>';
+		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = converter.makeHtml(txt);

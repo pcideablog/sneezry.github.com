@@ -89,6 +89,12 @@ header h2 {
   letter-spacing: 0;
 }
 
+postlist {
+  font-size: 18px;
+  display: block;
+  font-family: 'Raleway', sans-serif;
+}
+
 .inner {
   position: relative;
   width: 940px;
@@ -620,6 +626,9 @@ footer a:hover {
   header a.button small {
     font-size: 13px;
     display: inline;
+  }
+  header span.searchbar {
+    display: none;
   }
   #main-content,
   aside#sidebar {
