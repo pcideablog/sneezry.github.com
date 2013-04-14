@@ -572,6 +572,9 @@ footer a:hover {
   header h2 {
     font-size: 30px;
   }
+  .gotop {
+    margin-left: 615px;
+  }
   #main-content {
     width: 490px;
   }
@@ -629,6 +632,9 @@ footer a:hover {
     display: inline;
   }
   header span.searchbar {
+    display: none;
+  }
+  .gotop {
     display: none;
   }
   #main-content,
