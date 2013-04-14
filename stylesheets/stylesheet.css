@@ -93,6 +93,7 @@ postlist {
   font-size: 18px;
   display: block;
   font-family: 'Raleway', sans-serif;
+  padding: 5px 0;
 }
 
 .inner {
