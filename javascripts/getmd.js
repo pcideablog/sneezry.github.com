@@ -76,9 +76,11 @@ function loadXMLDoc(url){
 					}
 				}
 				else if(xmlhttp.status==404) {
+					document.title = 'Not Fount - Sneezry';
 					content.innerHTML = '<img src="/images/404.jpg" />';
 				}
 				else {
+					document.title = 'Technology Problem - Sneezry';
 					content.innerHTML = '<blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote>';
 				}
 			}
