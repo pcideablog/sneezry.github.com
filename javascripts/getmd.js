@@ -102,7 +102,7 @@ function showlist(list){
 	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
-		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1] + '</a></postlist>';
+		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = converter.makeHtml(txt);
