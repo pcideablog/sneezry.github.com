@@ -47,7 +47,9 @@
 		[?termName S_termName]
 			终端及网络名，值为字符串或符号，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，如果终端和/或网络不存在则自动创建终端，名称为S_termName指定的值，若同时指定S_netName和S_termName的值，则两者的值必须相同，如果一个终端已经有名称，则其所属的网络也必须有相同的名称，若网络名与终端名不符，则函数抛错，若将形状接入网络和终端，此参数必选，如果不想指定此参数的值请忽略或指定为nil
 		[?termIOType S_termIOType]
+			终端的方向类型（I/O类型），值为字符串或者符号，如果没有指定S_termName则被忽略，如果S_termName指定的终端名已经存在，则此终端的方向类型必须与S_termIOType指定的值相同，否则函数抛错，有效值为input，output, inputOutput，switch和jumper，默认值为inputOutput
 		[?pin g_pin]
+			所生成的形状是否是引脚，值为布尔型，只能为t或nil，如果指定g_pin而没有指定S_netName或S_termName除nil以外的值，所有连接参数都将被忽略而不给出错误提示，如果不想指定此参数，则忽略它或指定nil，所生成的形状将不是引脚，同时所有包含pin的参数都将被忽略，默认值为nil
 		[?pinAccessDir tl_pinAccessDir]
 		[?pinLabel g_pinLabel]
 		[?pinLabelHeight n_pinLabelHeight]
