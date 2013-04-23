@@ -1,106 +1,106 @@
-	rodCreatePath(
-		[?name S_name]
-			`路径名（path name），值为字符串或符号，字符串用双引号包含，符号前加单引号，默认值为path<n>`
-		?layer txl_pinLabelLayer
-			`主路径层的材料，值为字符串、数字或者字符串-用途对，如?layer "metal1"、?layer 45、?layer list("metal1" "drawing")`
-		[?width n_width]
-			`主路径宽度，值为正整数或浮点数，如果未指定，自动到技术文档调用minWidth，如果minWidth亦未定义则抛错`
-		[?pts l_pts]
-			`用于定义主路径中心线点的列表，先指定第一段的起点和终点，然后继续指定后面几段的终点，至少定义两个不重叠的点，不能创建自相交的路径，重叠及共线的点会被忽略，但不会抛错`
-		[?justification S_justification]
-			`主路径对点列的偏移方向，点列取中心线、左边缘或右边缘（路径的边缘，而不是收尾），偏移相对于路径方向，有效取值为center、left和right，默认值为center`
-		[?offset n_offset]
-			`主路径对点列的偏移量，值为有符号的整数或浮点数，正数使主路径在点列左侧，负数在右侧，默认值为0`
-		[?endType S_endType]
-			`主路径两端的类型，值为字符串或符号，有效值为flush、offset、octagon和variable，默认值为flush`
-		[?beginExt n_beginExt]
-			`主路径起始端相对起始点延伸或缩减的距离，值为0、正整数或浮点数，若S_endType的值不是variable则此参数会被忽略，默认值为0`
-		[?endExt n_endExt]
-			`主路径终端相对终点延伸或缩减的距离，值为0、正整数或浮点数，若S_endType的值不是variable则此参数会被忽略，默认值为0`
-		[?choppable g_choppable]
-			`主路径是否可被分割，值为布尔型，t或nil，如果路径包含子部分，而且主路径可被分割，则所有子路径和子矩形都必须可分割，如果主路径不可分割，则子部分或子矩形可被分割性没有要求`
-		[?cvId d_cvId]
-			`所创建ROD路径所在cellview的数据库ID，如果rodCreatePath在pcDefinePCell或tcCreateDeviceClass函数中被调用，则默认值分别为pcCellView和tcCellView，否则必须指定一个值，无默认值`
-		[?fromObj Rl_fromObj]
-			`ROD已命名的对象或对象列表，以这些对象作为源以创建新的ROD路径，源对象可以是instance，rectangle，polygon，path，line，dot，label和text-display对象，必须指定Rl_fromObj或l_pts中一个的值，如果两者都被指定，则系统忽略l_pts，无默认值`
-		[?size txf_size]
-			`边界与主路径中心线的距离，值为有符号的整数、浮点数或SKILL表达式，如果有多个源对象，txf_size为边界与所有源对象和主路径中心线的距离，正数使路径比边界长，负数则比边界短，如果值为SKILL表达式，则表达式的值必须是带有符号的整数或浮点数，只有新建polygon时SKILL表达式才会被计算，如果给出Rl_fromObj，txf_size默认值为0.0，如果只给出txf_size而未给出Rl_fromObj，则系统抛错，默认值为0.0`
-		[?startHandle l_startHandle]
-			`生成路径的起始点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0`
-		[?endHandle l_endHandle]
-			`生成路径的终点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0`
-		[?prop l_prop]
-			`自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil`
-		[ _ROD Connectivity Arguments_ ]
-		[?offsetSubPath l_offsetSubpathArgs...]
-			`偏移子路径，值为包含一个或多个列表的列表，每个列表中包含偏移子路径的参数`
-		[?encSubPath l_encSubpathArgs...]
-		[?subRect l_subrectArgs...]
-	) ; end rodCreatePath
-	=> R_rodObj | nil
-		; ROD Connectivity Arguments
-		[?netName S_netName]
-		[?termName S_termName]
-		[?termIOType S_termIOType]
-		[?pin g_pin]
-		[?pinAccessDir tl_pinAccessDir]
-		[?pinLabel g_pinLabel]
-		[?pinLabelHeight n_pinLabelHeight]
-		[?pinLabelLayer txl_pinLabelLayer]
-		[?pinLabelFont S_pinLabelFont]
-		[?pinLabelDrafting g_pinLabelDrafting]
-		[?pinLabelOrient S_pinLabelOrient]
-		[?pinLabelOffsetPoint l_pinLabelOffsetPoint]
-		[?pinLabelJust S_pinLabelJust]
-		[?pinLabelRefHandle S_pinLabelRefHandle]
-		; end of ROD Connectivity Arguments
-		;l_offsetSubpathArgs Offset Subpath Arguments
+rodCreatePath(
+	[?name S_name]
+		>路径名（path name），值为字符串或符号，字符串用双引号包含，符号前加单引号，默认值为path<n>
+	?layer txl_pinLabelLayer
+		>主路径层的材料，值为字符串、数字或者字符串-用途对，如?layer "metal1"、?layer 45、?layer list("metal1" "drawing")
+	[?width n_width]
+		>主路径宽度，值为正整数或浮点数，如果未指定，自动到技术文档调用minWidth，如果minWidth亦未定义则抛错
+	[?pts l_pts]
+		>用于定义主路径中心线点的列表，先指定第一段的起点和终点，然后继续指定后面几段的终点，至少定义两个不重叠的点，不能创建自相交的路径，重叠及共线的点会被忽略，但不会抛错
+	[?justification S_justification]
+		>主路径对点列的偏移方向，点列取中心线、左边缘或右边缘（路径的边缘，而不是收尾），偏移相对于路径方向，有效取值为center、left和right，默认值为center
+	[?offset n_offset]
+		>主路径对点列的偏移量，值为有符号的整数或浮点数，正数使主路径在点列左侧，负数在右侧，默认值为0
+	[?endType S_endType]
+		>主路径两端的类型，值为字符串或符号，有效值为flush、offset、octagon和variable，默认值为flush
+	[?beginExt n_beginExt]
+		>主路径起始端相对起始点延伸或缩减的距离，值为0、正整数或浮点数，若S_endType的值不是variable则此参数会被忽略，默认值为0
+	[?endExt n_endExt]
+		>主路径终端相对终点延伸或缩减的距离，值为0、正整数或浮点数，若S_endType的值不是variable则此参数会被忽略，默认值为0
+	[?choppable g_choppable]
+		>主路径是否可被分割，值为布尔型，t或nil，如果路径包含子部分，而且主路径可被分割，则所有子路径和子矩形都必须可分割，如果主路径不可分割，则子部分或子矩形可被分割性没有要求
+	[?cvId d_cvId]
+		>所创建ROD路径所在cellview的数据库ID，如果rodCreatePath在pcDefinePCell或tcCreateDeviceClass函数中被调用，则默认值分别为pcCellView和tcCellView，否则必须指定一个值，无默认值
+	[?fromObj Rl_fromObj]
+		>ROD已命名的对象或对象列表，以这些对象作为源以创建新的ROD路径，源对象可以是instance，rectangle，polygon，path，line，dot，label和text-display对象，必须指定Rl_fromObj或l_pts中一个的值，如果两者都被指定，则系统忽略l_pts，无默认值
+	[?size txf_size]
+		>边界与主路径中心线的距离，值为有符号的整数、浮点数或SKILL表达式，如果有多个源对象，txf_size为边界与所有源对象和主路径中心线的距离，正数使路径比边界长，负数则比边界短，如果值为SKILL表达式，则表达式的值必须是带有符号的整数或浮点数，只有新建polygon时SKILL表达式才会被计算，如果给出Rl_fromObj，txf_size默认值为0.0，如果只给出txf_size而未给出Rl_fromObj，则系统抛错，默认值为0.0
+	[?startHandle l_startHandle]
+		>生成路径的起始点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0
+	[?endHandle l_endHandle]
+		>生成路径的终点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0
+	[?prop l_prop]
+		>自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
+	[ _ROD Connectivity Arguments_ ]
+	[?offsetSubPath l_offsetSubpathArgs...]
+		>偏移子路径，值为包含一个或多个列表的列表，每个列表中包含偏移子路径
+	[?encSubPath l_encSubpathArgs...]
+	[?subRect l_subrectArgs...]
+) ; end rodCreatePath
+=> R_rodObj | nil
+	; ROD Connectivity Arguments
+	[?netName S_netName]
+	[?termName S_termName]
+	[?termIOType S_termIOType]
+	[?pin g_pin]
+	[?pinAccessDir tl_pinAccessDir]
+	[?pinLabel g_pinLabel]
+	[?pinLabelHeight n_pinLabelHeight]
+	[?pinLabelLayer txl_pinLabelLayer]
+	[?pinLabelFont S_pinLabelFont]
+	[?pinLabelDrafting g_pinLabelDrafting]
+	[?pinLabelOrient S_pinLabelOrient]
+	[?pinLabelOffsetPoint l_pinLabelOffsetPoint]
+	[?pinLabelJust S_pinLabelJust]
+	[?pinLabelRefHandle S_pinLabelRefHandle]
+	; end of ROD Connectivity Arguments
+	;l_offsetSubpathArgs Offset Subpath Arguments
+	list(
 		list(
-			list(
+		?layer txl_layer
+		[?width n_width]
+		[?sep n_sep]
+		[?justification S_justification]
+		[?beginOffset n_beginOffset]
+		[?endOffset n_endOffset]
+		[?choppable g_choppable]
+		[?prop l_prop]
+		;Repeat ROD Connectivity Arguments here
+		) ;End of first offset subpath list
+		...
+	) ;End of offset subpath lists
+	
+	;End of l_offsetSubpathArgs
+	;l_encSubpathArgs Enclosure Subpath Arguments
+	list(
+		list(
 			?layer txl_layer
-			[?width n_width]
-			[?sep n_sep]
-			[?justification S_justification]
+			[?enclosure n_enclosure]
 			[?beginOffset n_beginOffset]
 			[?endOffset n_endOffset]
 			[?choppable g_choppable]
 			[?prop l_prop]
 			;Repeat ROD Connectivity Arguments here
-			) ;End of first offset subpath list
+			) ;End of first enclosure subpath list
 			...
-		) ;End of offset subpath lists
-		
-		;End of l_offsetSubpathArgs
-		;l_encSubpathArgs Enclosure Subpath Arguments
+		) ;End of enclosure subpath lists
+	;End of l_encSubpathArgs
+	;l_subrectArgs Subrectangle Arguments
+	list(
 		list(
-			list(
-				?layer txl_layer
-				[?enclosure n_enclosure]
-				[?beginOffset n_beginOffset]
-				[?endOffset n_endOffset]
-				[?choppable g_choppable]
-				[?prop l_prop]
-				;Repeat ROD Connectivity Arguments here
-				) ;End of first enclosure subpath list
-				...
-			) ;End of enclosure subpath lists
-		;End of l_encSubpathArgs
-		;l_subrectArgs Subrectangle Arguments
-		list(
-			list(
-				?layer txl_layer
-				[?width n_width]
-				[?length n_length]
-				[?gap S_gap]
-				[?sep n_sep]
-				[?justification S_justification]
-				[?beginOffset n_beginOffset]
-				[?endOffset n_endOffset]
-				[?space n_space]
-				[?choppable g_choppable]
-				[?prop l_prop]
-				;Repeat ROD Connectivity Arguments here
-				) ;End of first subrectangle list
-				...
-			) ;End of subrectangle lists
-		;End of l_subrectArgs
+			?layer txl_layer
+			[?width n_width]
+			[?length n_length]
+			[?gap S_gap]
+			[?sep n_sep]
+			[?justification S_justification]
+			[?beginOffset n_beginOffset]
+			[?endOffset n_endOffset]
+			[?space n_space]
+			[?choppable g_choppable]
+			[?prop l_prop]
+			;Repeat ROD Connectivity Arguments here
+			) ;End of first subrectangle list
+			...
+		) ;End of subrectangle lists
+	;End of l_subrectArgs
