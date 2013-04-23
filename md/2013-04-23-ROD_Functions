@@ -31,16 +31,21 @@
 			生成路径的终点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0
 		[?prop l_prop]
 			自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
-		[ _ROD Connectivity Arguments_ ]
+		[ *ROD Connectivity Arguments* ]
 		[?offsetSubPath l_offsetSubpathArgs...]
-			偏移子路径，值为包含一个或多个列表的列表，每个列表中包含偏移子路径
+			偏移子路径，值为包含一个或多个列表的列表，每个列表中包含偏移子路径的参数
 		[?encSubPath l_encSubpathArgs...]
+			附着子路径（蛋疼的翻译，但是没太明白这个子路径是怎么回事），值为一个或多个列表的列表，附着子路径根据主路径中心线创建，每个列表中包含附着子路径的参数
 		[?subRect l_subrectArgs...]
+			子矩形，值为一个或多个列表的列表，子矩形根据主路径中心线创建，每个列表中包含子矩形的参数
 	) ; end rodCreatePath
 	=> R_rodObj | nil
+			所创建的ROD对象的ID，此对象可能是一个单一的层也可能是多个ROD路径的组合，如果创建过程中出错则返回nil
 		; ROD Connectivity Arguments
 		[?netName S_netName]
+			网络名，值为字符串或符号，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，如果网络不存在则自动创建网络，网络名为S_netName指定的值，若将形状联入网络，此参数必选，如果不想指定此参数的值请忽略或指定为nil
 		[?termName S_termName]
+			终端及网络名，值为字符串或符号，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，如果终端和/或网络不存在则自动创建终端，名称为S_termName指定的值，若同时指定S_netName和S_termName的值，则两者的值必须相同，如果一个终端已经有名称，则其所属的网络也必须有相同的名称，若网络名与终端名不符，则函数抛错，若将形状接入网络和终端，此参数必选，如果不想指定此参数的值请忽略或指定为nil
 		[?termIOType S_termIOType]
 		[?pin g_pin]
 		[?pinAccessDir tl_pinAccessDir]
