@@ -31,7 +31,7 @@
 			生成路径的终点，值为字符串或符号，如start<n>，有效值为start<n>、mid<n>、end<n>、startLast、midLast和endLast，默认值为start0
 		[?prop l_prop]
 			自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
-		[ *ROD Connectivity Arguments* ]
+		[ROD Connectivity Arguments]
 		[?offsetSubPath l_offsetSubpathArgs...]
 			偏移子路径，值为包含一个或多个列表的列表，每个列表中包含偏移子路径的参数
 		[?encSubPath l_encSubpathArgs...]
@@ -74,15 +74,23 @@
 		;l_offsetSubpathArgs Offset Subpath Arguments
 		list(
 			list(
-			?layer txl_layer
-			[?width n_width]
-			[?sep n_sep]
-			[?justification S_justification]
-			[?beginOffset n_beginOffset]
-			[?endOffset n_endOffset]
-			[?choppable g_choppable]
-			[?prop l_prop]
-			;Repeat ROD Connectivity Arguments here
+				?layer txl_layer
+					子路径层或层-用途对，值为字符串、整数或列表，字符串用双引号包含，不要用符号，使用主路径中txl_layer参数定义的格式中的一种，需要指定一个层，默认值为drawing
+				[?width n_width]
+					偏移子路径宽度，值为正整数或浮点数，如果未指定，自动到技术文档调用minWidth，如果minWidth亦未定义则抛错
+				[?sep n_sep]
+					子路径与主路径中心线或边缘的间隔，值为有符号的整数或浮点数，具体参照取决于S_justification，默认值为0
+				[?justification S_justification]
+					主路径与子路径间隔参照部分，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，当值为left，间隔为子路径右边界与主路径左边界的距离，当值为center，间隔为子路径与主路径的中心线的距离，当值为right，间隔为子路径左边界与主路径右边界的距离。
+				[?beginOffset n_beginOffset]
+					子路径起始端相对于主路径起始端的偏移量，值为有符号的整数和浮点数，正数使子路径起始端延伸出主路径，负数则缩进于主路径
+				[?endOffset n_endOffset]
+					子路径终端相对于主路径终端的偏移量，值为有符号的整数和浮点数，正数使子路径终端延伸出主路径，负数则缩进于主路径
+				[?choppable g_choppable]
+					子路径是否可被分割，值为布尔型，有效值为t或nil，如果主路径可被分割，则所有子路径必须都可被分割，如果主路径不可分割，则子路径可以分割也可以不分割
+				[?prop l_prop]
+					自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
+				;Repeat ROD Connectivity Arguments here
 			) ;End of first offset subpath list
 			...
 		) ;End of offset subpath lists
