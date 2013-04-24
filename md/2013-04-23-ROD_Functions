@@ -51,15 +51,25 @@
 		[?pin g_pin]
 			所生成的形状是否是引脚，值为布尔型，只能为t或nil，如果指定g_pin而没有指定S_netName或S_termName除nil以外的值，所有连接参数都将被忽略而不给出错误提示，如果不想指定此参数，则忽略它或指定nil，所生成的形状将不是引脚，同时所有包含pin的参数都将被忽略，默认值为nil
 		[?pinAccessDir tl_pinAccessDir]
+			引脚接入方向，值为字符串或列表，字符串用双引号包含，不要用符号，有效值为top、bottom、left、right、any、none及包含以上值的列表，默认值为any
 		[?pinLabel g_pinLabel]
+			是否在引脚上显示文字，值为布尔型，只能为t或nil，若值为t，则创建一个值为S_termName的文字对象，并根据其他引脚标记参数将其摆放在引脚附近，若值为nil，则不会创建标签，且所有包含pinLabel的参数都将被忽略，默认值为nil
 		[?pinLabelHeight n_pinLabelHeight]
+			引脚文字标签垂直高度，值为正整数或浮点数，默认值为1
 		[?pinLabelLayer txl_pinLabelLayer]
+			文字标签所在的层或层-用途对，值为字符串、整数或列表，字符串用双引号包含，不要使用符号，若只指定层，则用途默认使用l_layer定义的值，默认值为l_layer指定的值
 		[?pinLabelFont S_pinLabelFont]
+			文字标签的字体，值为euroStyle、gothic、math、roman、script、stick和swedish，默认值为stick
 		[?pinLabelDrafting g_pinLabelDrafting]
+			引脚文字标签是否允许被旋转超过90度，值为布尔型，只能为t或nil，可以通过S_pinLabelOrient和layout编辑器更改标签角度，若值为t，可旋转角度小于等于90度，若为nil，旋转角度可以超过90度，默认值为t
 		[?pinLabelOrient S_pinLabelOrient]
+			引脚文字标签的方向，值为字符串或符号，有效值为0、R0、90、R90、180、R180、270、R270、MY、sideways、MYR90、sideways & 90、MX、upsideDown、MXR90和sideways & 270，默认值为R0
 		[?pinLabelOffsetPoint l_pinLabelOffsetPoint]
+			引脚文字标签偏移量，值为列表，标签起始点由S_pinLabelJust指定，形状操作点由S_pinLabelRefHandle指定，默认值为0:0
 		[?pinLabelJust S_pinLabelJust]
+			引脚文字标签起始点，值为字符串或符号，有效值为upperLeft、uL、upperCenter、uC、upperRight、uR、centerLeft、cL、centerCenter、cC、centerRight、cR、lowerLeft、lL、lowerCenter、lC、lowerRight和lR，默认值为centerCenter
 		[?pinLabelRefHandle S_pinLabelRefHandle]
+			引脚文字标签形状操作点，值为字符串或符号，可以指定边框或分段操作点名称，边框有效值为upperLeft、uL、upperCenter、uC、upperRight、uR、centerLeft、cL、centerCenter、cC、centerRight、cR、lowerLeft、lL、lowerCenter、lC、lowerRight和lR，分段有效值为start0、startLast、start<n>、mid0、midLast、mid<n>、end0、endLast和end<n>，ROD路径分段有效值为start0、startLast、start<n>、startLeft0、startLeftLast、startLeft<n>、startRight0、startRightLast、startRight<n>、mid0、midLast、mid<n>、midLeft0、midLeftLast、midLeft<n>、midRight0、midRightLast、midRight<n>、end0、endLast、end<n>、endLeft0、endLeftLast、endLeft<n>、endRight0、endRightLast和endRight<n>，默认值为边框centerCenter
 		; end of ROD Connectivity Arguments
 		;l_offsetSubpathArgs Offset Subpath Arguments
 		list(
