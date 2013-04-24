@@ -81,13 +81,13 @@
 				[?sep n_sep]
 					子路径与主路径中心线或边缘的间隔，值为有符号的整数或浮点数，具体参照取决于S_justification，默认值为0
 				[?justification S_justification]
-					主路径与子路径间隔参照部分，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，当值为left，间隔为子路径右边界与主路径左边界的距离，当值为center，间隔为子路径与主路径的中心线的距离，当值为right，间隔为子路径左边界与主路径右边界的距离。
+					主路径与子路径间隔参照部分，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，当值为left，间隔为子路径右边界与主路径左边界的距离，当值为center，间隔为子路径与主路径的中心线的距离，当值为right，间隔为子路径左边界与主路径右边界的距离，默认值为center
 				[?beginOffset n_beginOffset]
-					子路径起始端相对于主路径起始端的偏移量，值为有符号的整数和浮点数，正数使子路径起始端延伸出主路径，负数则缩进于主路径
+					子路径起始端相对于主路径起始端的偏移量，值为有符号的整数和浮点数，正数使子路径起始端延伸出主路径，负数则缩进于主路径，默认值为n_endOffset或0
 				[?endOffset n_endOffset]
-					子路径终端相对于主路径终端的偏移量，值为有符号的整数和浮点数，正数使子路径终端延伸出主路径，负数则缩进于主路径
+					子路径终端相对于主路径终端的偏移量，值为有符号的整数和浮点数，正数使子路径终端延伸出主路径，负数则缩进于主路径，默认值为n_beginOffset或0
 				[?choppable g_choppable]
-					子路径是否可被分割，值为布尔型，有效值为t或nil，如果主路径可被分割，则所有子路径必须都可被分割，如果主路径不可分割，则子路径可以分割也可以不分割
+					子路径是否可被分割，值为布尔型，有效值为t或nil，如果主路径可被分割，则所有子路径必须都可被分割，如果主路径不可分割，则子路径可以分割也可以不分割，默认值为t
 				[?prop l_prop]
 					自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
 				;Repeat ROD Connectivity Arguments here
@@ -100,11 +100,17 @@
 		list(
 			list(
 				?layer txl_layer
+					附着子路径层或层-用途对，值为字符串、整数或列表，字符串用双引号包含，不要用符号，使用主路径中txl_layer参数定义的格式中的一种，需要指定一个层，默认值为drawing
 				[?enclosure n_enclosure]
+					子路径外围与主路径的间隙，值为有符号的整数或浮点数，子路径的宽度系统将按照width = (n_width of master path) - (2 * n_enclosure)计算，如果不指定此参数，系统将在技术文件中调用minEnclosure，若minEnclosure未定义，则rodCreatePath函数抛错，默认值为minEnclosure
 				[?beginOffset n_beginOffset]
+					附着子路径起始端相对于主路径起始端的偏移量，值为有符号的整数和浮点数，正数使子路径起始端延伸出主路径，负数则缩进于主路径，默认值为n_endOffset或0
 				[?endOffset n_endOffset]
+					附着子路径终端相对于主路径终端的偏移量，值为有符号的整数和浮点数，正数使子路径终端延伸出主路径，负数则缩进于主路径，默认值为n_beginOffset或0
 				[?choppable g_choppable]
+					附着子路径是否可被分割，值为布尔型，有效值为t或nil，如果主路径可被分割，则所有子路径必须都可被分割，如果主路径不可分割，则子路径可以分割也可以不分割，默认值为t
 				[?prop l_prop]
+					自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
 				;Repeat ROD Connectivity Arguments here
 				) ;End of first enclosure subpath list
 				...
@@ -114,16 +120,27 @@
 		list(
 			list(
 				?layer txl_layer
+					子矩形层或层-用途对，值为字符串、整数或列表，字符串用双引号包含，不要用符号，使用主路径中txl_layer参数定义的格式中的一种，需要指定一个层，默认值为drawing
 				[?width n_width]
+					子矩形宽度，值为正整数或浮点数，矩形宽度为与主路径宽度平行方向的尺寸，如果未指定，系统使用n_length的值，如果n_length也未指定，系统使用技术文件中的minWidth，如果minWidth亦未指定，rodCreatePath函数抛错并返回nil，默认值为n_length或minWidth
 				[?length n_length]
+					子矩形长度，值为正整数或浮点数，矩形长度为与主路径中心线平行方向的尺寸，如果未指定，系统使用n_width的值，如果n_width也未指定，系统使用技术文件中的minWidth，如果minWidth亦未指定，rodCreatePath函数抛错并返回nil，默认值为n_width或minWidth
 				[?gap S_gap]
+					各段放置子矩形的方法，值为字符串或符号，字符串用双引号包含，符号前加单引号，ROD将符号转为字符串，系统总是先使用n_space作为子矩阵的间距，之后计算可以放置子矩阵的最大数量，n_beginOffset和endOffset所需要的空间也会被考虑进去，当值为distribute时系统将尽量根据mfgGridResolution的值以网格间距的倍数均匀摆放子矩形，任何剩余的空间都会放在最后一个子矩形的后面，若值为distribute且只有一个子矩形，则系统将此矩形摆放在中间，如果值为minimum，系统按照n_space的间隔摆放子矩形，直至没有空间以摆放下一个，之后将其余空间放在最后一个矩形后面，有效值为distribute和minimum，默认值为distribute
 				[?sep n_sep]
+					子矩形与主路径中心线或边缘的间隔，值为有符号的整数或浮点数，具体参照取决于S_justification，默认值为0
 				[?justification S_justification]
+					主路径与子矩形间隔参照部分，字符串用双引号包含，符号前加单引号，ROD将符号转换为字符串，当值为left，间隔为子矩形右边界与主路径左边界的距离，当值为center，间隔为子矩形与主路径的中心线的距离，当值为right，间隔为子矩形左边界与主路径右边界的距离，默认值为center
 				[?beginOffset n_beginOffset]
+					第一个子矩形相对于主路径起始端的偏移量，值为有符号的整数和浮点数，正数使第一个子矩形延伸出主路径，负数则缩进于主路径，默认值为n_endOffset或0
 				[?endOffset n_endOffset]
+					最后一个子矩形相对于主路径终端的偏移量，值为有符号的整数和浮点数，正数使最后一个子矩形延伸出主路径，负数则缩进于主路径，默认值为n_beginOffset或0
 				[?space n_space]
+					两个相邻子矩形的间隙，值为正整数或浮点数，如果未指定系统调用技术文件中的minSpacing，如果minSpacing未定义，则rodCreatePath函数返回nil并抛错，默认值为minSpacing
 				[?choppable g_choppable]
+					子矩形是否可被分割，值为布尔型，有效值为t或nil，如果主路径可被分割，则所有子矩形必须都可被分割，如果主路径不可分割，则子矩形可以分割也可以不分割，默认值为t
 				[?prop l_prop]
+					自定义属性，值为列表或列表的列表，列表中包含属性名及属性值，如果属性名是字符串需要用双引号包含，如果属性是布尔型，则属性值只能是t或nil，默认值为nil
 				;Repeat ROD Connectivity Arguments here
 				) ;End of first subrectangle list
 				...
