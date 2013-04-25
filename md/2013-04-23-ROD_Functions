@@ -1,3 +1,33 @@
+	rodAssignHandleToParameter(
+		?parameter S_parameter
+			手柄所附着的参数，值为字符串或符号，
+		?rodObj R_rodObj
+			所创建手柄所在的ROD对象，此函数必须指定一个值，无默认值
+		?handleName Sl_handleName
+		[?displayName S_displayName]
+		[?displayExpression S_displayExpression]
+		[?stretchDir S_stretchDir]
+		[?stretchType S_stretchType]
+		[?moveOrigin g_moveOrigin]
+		[?updateIncrement f_updateIncrement]
+		[?userData g_userData]
+		[?userFunction Sl_userFunction]
+	) ; end rodAssignHandleToParameter
+	=> t | nil
+
+	rodCreateHandle(
+		[?name S_name]
+			手柄名，值为字符串或符号，字符串用双引号包含，符号加单引号，ROD将符号转为字符串，不要使用user或system定义的手柄名（user-defined system-defined），比如可以使用myPoint，但不要使用centerCenter，如果未指定，则系统指定为handle<n>，<n>从0开始，默认值为handle<n>
+		?type S_type
+			储存在handle中的数据类型，值为字符串或符号，有效值为Boolean、floating point、integer、point, string或SKILL表达式，此参数必须指定一个值，无默认值
+		?value g_value
+			handle的指定值，值的类型要与g_value指定的类型相符，若S_type为boolean，则g_value只能为t或nil，若S_type为string，则g_value可以为字符串也可以为符号，此参数必须指定一个值，无默认值
+		?rodObj R_rodObj
+			所创建手柄所在的ROD对象，此函数必须指定一个值，无默认值
+	) ; end rodCreateHandle
+	=> t | nil
+		创建成功是返回t，否则返回nil
+
 	rodCreatePath(
 		[?name S_name]
 			路径名（path name），值为字符串或符号，字符串用双引号包含，符号前加单引号，默认值为path<n>
@@ -181,7 +211,7 @@
 	=> R_rodObj | nil
 		所创建的ROD对象的ID，此对象可能是一个单一的层也可能是多个ROD路径的组合，如果创建过程中出错则返回nil
 
-	rodCreateRect(
+	rodCreateRect(			//214
 		[?name S_name]
 		?layer txl_layer
 		[?width n_width]
