@@ -4,14 +4,23 @@
 		?rodObj R_rodObj
 			所创建手柄所在的ROD对象，此函数必须指定一个值，无默认值
 		?handleName Sl_handleName
+			手柄名，值为字符串、符号或列表，如果不指定或指定的手柄名不是R_rodObj中的点，则抛错，无默认值
 		[?displayName S_displayName]
+			显示于手柄旁的文字，值为字符串或符号，如参数名或表达式，如果同时指定了S_displayExpression的值，则系统原样输出S_displayName的值，并用“=”连接其与S_displayExpression的计算值，如果未指定S_displayExpression的值，则系统作为表达式计算S_displayName的值，并将其原样输出后用“=”连接其计算值，若表达式解析失败，系统用Eval not successful代替计算值，如果未指定，则不现实任何文字，无默认值
 		[?displayExpression S_displayExpression]
+			系统计算S_displayExpression的值，如果未指定S_displayName的值则直接将计算后的值显示在手柄旁，否则见S_displayName中的说明，无默认值
 		[?stretchDir S_stretchDir]
+			手柄的操作方向，值为字符串或符号，有效值为x、X、y和Y，默认值为x
 		[?stretchType S_stretchType]
+			手柄拉伸参照类型，值为字符串或符号，有效值为relative和absolute，如果为relative则拉伸相对于对象中心，否则相对于手柄作用点，对于absolute类型，向坐标轴正方向拉伸增加尺寸，对于relative类型，向远离对象中心拉伸增加尺寸，默认值为relative
 		[?moveOrigin g_moveOrigin]
+			原始点在拉伸过程中是否可被移动，值为布尔型，有效值为t和nil，如果值为t则可被移动，否则不可被移动，默认值为nil
 		[?updateIncrement f_updateIncrement]
+			拉伸过程中更新对象的时间，值为浮点数，如果指定的值为赋值，则系统调用layout编辑器环境中udpatePcellIncrement的值，默认值为udpatePcellIncrement
 		[?userData g_userData]
+			用户数据，将作为r_defstruct的一部分传递给Sl_userFunction指定的函数
 		[?userFunction Sl_userFunction]
+			用户定义函数，值为字符串、符号或匿名函数，用户定义函数用于计算拉伸后的参数，不要通过用户定义函数达到其他目的，如创建形状，用户定义函数在拉伸过程中交互式地被计算，无默认值
 	) ; end rodAssignHandleToParameter
 	=> t | nil
 
