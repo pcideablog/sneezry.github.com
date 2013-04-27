@@ -7,6 +7,7 @@
 我今天要说的亚马逊不是z.cn，而是Amazon.com。去年在复习考研二战的时候和母亲大人聊家常，聊到母亲大人买了很多二手期刊，每天睡前阅读，之后我就想到了要给母亲大人买一部Kindle。在之后的几周里我就开始在网上搜集Kindle的资料，最后在淘宝买了一部黑色广告版的Kindle non-touch，等了几天后Kindle邮到了，本来是想帮母亲大人刷上多看中文系统，没想到一上手我就先被迷上了，于是将这部Kindle交给母亲大人后自己也攒钱入了一款一样的，至此阅读成了我的乐趣，我承认之前不是很喜欢阅读的。最近Kindle入华的消息炒的可谓风生水起，于是最近我就又开始关注Kindle了。前些天看到一个网友“调戏”亚马逊客服最终成功将广告版免费升级到标准版的微博，于是自己也马上草拟一封邮件发给亚马逊，当时是在中午发出的，掐指一算米国应该还沉浸在梦乡之中，虽然心情忐忑，但想着结果肿么也要第二天才会看到，没想到中午吃完饭看了下邮箱就收到了回信。
 
 我发给亚马逊的原文邮件
+
 >Hi, Kindle is the best e-book device I've seen until now! I like it very much! My Kindle is Special Offers version, and those ads are really exquisite, however, I am in China now, and those ads make no sense to me, could you please change some ads available in China for me, or just remove them? Looking forward to your reply, thanks! Sneezry
 
 粗略看了下亚马逊的回复邮件，前面说`By unsubscribing, you'll be charged for the price difference between Kindle and Kindle with Special Offers if your device was originally purchased at a subsidized price. `心直接凉了一半，不好使啊，让自助取消广告，之后补广告版和标准版的差价，我的人品怎么向来这么衰呢……怀着往日对亚马逊无比崇敬的心情将剩下的邮件看完，当看到`To help you with this, I have disabled Special Offers on your Kindle device by waiving off the charges. You will not be charged any additional fees.`的时候我的心从谷底一下又回到了峰顶，擦，客服帮我取消了已经，而且不用我再花钱了！亚马逊不带这么闹的，玩人家啊！但是真心感激啊！这才是一家国际大公司的风范啊！就像鸟哥说的，人家觉得你说的make sense就会给你办。想想一个客服凭借自己的判断就能决定一件事如何帮客户处理，哪怕是涉及到钱的问题，这样的一家公司怎么可能没有效率，怎么可能不被青睐，怎么可能不会成功！
@@ -20,15 +21,15 @@
 
 其中for函数有4个参数，第一个是循环变量i，第二个是循环变量的初始值，第三个是循环变量的终值，第四个是函数体。再比如if函数：
 
-  if( (x > 5) printf('x is larger than five.') else printf('x is under five.') )
+	if( (x > 5) printf('x is larger than five.') else printf('x is under five.') )
 
 其中if函数也有4个参数，第一个是判断条件(x > 5)，要注意必须加括号，否则`>`会被系统误认为是第二个参数，SKILL使用空格隔开不同的参数，而不像C用逗号，第二个是条件成立时执行的语句，第三个参数是关键字then，第四个是条件不成立时执行的语句。这样讲解可能会清楚些，但如果你并不了解SKILL没有C那样的函数体时而看到下面的语句不知道你会不会被括号的层次逻辑搞蒙：
 
-  if( (x > 5)
-      printf('x is larger than five.')
-    else
-      printf('x is under five.')
-  )
+	if( (x > 5)
+		printf('x is larger than five.')
+	else
+		printf('x is under five.')
+	)
 
 我目前的工作就是用SKILL写Pcell，虽然SKILL的语法是看得差不多了，但是创建Pcell还会有很多问题。首先直接用SKILL创建Pcell会很麻烦，所以Cadence提供了一个帮助快速创建Pcell的库——ROD，通过这个库可以调用很多rod开头的函数，这些函数背后都包含有大量的基本SKILL语句，比如`rodCreatePath`函数就可以直接创建出一条路径，`rodCreateRect`函数就可以直接创建出一个方块矩阵等等。当我前些天翻Create Pcell with SKILL的文档顺藤摸瓜找到ROD用户手册后感觉就像找到了圣经，研究了几天文档，翻译了好多函数，当感觉基本的创建图像的函数研究得差不多了想画出个图形时，又发现不知道怎么和Library联系在一起。后来看网上一个例子查出是用pcDefinePCell函数建立联系，不过pc前缀的函数我还没有看，之后的例子中还有很多cdf前缀的函数，瞬间感觉没有我想象得那么容易。之后在网上找的很多例子在虚拟机中跑都抛出layer参数的值有问题，但我回头查看文档，感觉并没有错误，去网上搜索了下，完全没有结果，这方面的讨论太有限了，国内最大的相关论坛也只有六个帖子讨论这个领域问题的帖子，并且没有我遇到那个问题的讨论，而国外的很多相关论坛最新的帖子还发布于2010年，那些论坛已经四年没人光顾了。现在基本是感觉走入了死胡同，没有人和你交流，没有资料供你参考。有时觉得电子行业这么封闭真的很悲哀，这不是一个像IT领域那样崇尚自由崇尚开发的领域，这个领域每个人都小心翼翼地揣着自己领悟到的那一点点东西，生怕被别人知道——就连一个简单的demo都要故意写得那么晦涩。我觉得我不是一个笨得无可救药的人，因为PHP、html5、css3、javascript、mysql等等等等我都是在网上自学的，我不相信SKILL会比这些难上一个数量级，只是这个领域的资源太有限，交流太有限，老人不愿意带新人，不愿意回答新人提出的问题，这也是电子这个行业的小悲哀。当我将这方面自己摸爬滚打搞出些名堂，我会用心写好每一个例子，用心讲解每一处细节，最起码不让毫无方向的新人还没领悟到SKILL的思想就陷入了绝望。
 
