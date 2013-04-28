@@ -58,7 +58,7 @@
         var gtmp = xhr.responseText.split(";");
         var j=l;
         var k=m;
-        for(i=4; i<gtmp.length-1; i+=4){
+        for(i=4; i&lt;gtmp.length-1; i+=4){
             if("0" == gtmp[i+1]){
                 friends[j]=gtmp[i];
                 fgroup[j] = (Number(gtmp[i+2])&60)>>2;
@@ -90,7 +90,7 @@
         var gtmp = xhr.responseText.split(";");
         var j=0;
         var i;
-        for(i=0; i<gtmp.length-1; i+=5){
+        for(i=0; i&lt;gtmp.length-1; i+=5){
             if(gtmp[1] == "81"){
                 online[j] = gtmp[i+3];
                 j++;
@@ -111,7 +111,7 @@
         var gtmp = xhr.responseText.split(";");
         var j=l;
         var i;
-        for(i=4; i<gtmp.length-1; i+=6){
+        for(i=4; i&lt;gtmp.length-1; i+=6){
             nickqq[j] = gtmp[i];
             nickname[j] = gtmp[i+4];
             j++;
@@ -135,7 +135,7 @@
         if("3e"==gtmp[1]){
                var j=l;
                var i;
-               for(i=5; i<gtmp.length-1; i+=3){
+               for(i=5; i&lt;gtmp.length-1; i+=3){
                 markname[j] = gtmp[i+2];
                 markqq[j] = gtmp[i];
                 j++;
@@ -157,7 +157,7 @@
 }</pre><p><br>接下来我们开始获取群信息。向 http://web-proxya.qq.com/conn_s POST数据，数据为“u;30;0;web_session;72;q;0;”，其中q为群id，这个信息我们在获取好友信息时已经获取到，服务器返回诸如“545251277;30;0;72;2144613258;64613258;1;0;545251277;Snail活动计划;1月27日中午12点新千里烤肉不见不散（百度被pass了~）。聚会带好学生证，看电影凭学生证有优惠。;Sorry, this group is disallowed to be joined.;0;1851747632;87491030;20;0;0;117163304;20;0;1;124415910;20;0;0;174053188;20;0;0;273214505;20;0;0;290017418;20;0;0;304480723;20;0;0;331737201;20;0;0;378539454;20;0;0;408359572;20;0;0;493390039;20;0;0;545251277;20;0;0;740074342;20;0;1;741389790;20;0;1;805957574;20;0;0;1033471702;20;0;0;1364088792;20;0;0;1851747632;20;0;0;”的响应，其中第六个数据为群号，第10个数据为群名，第9个数据为创建者QQ号，第11个数据为群公告，第12个数据为群介绍，从第15个数据开始，每4个为一组，第一个为成员QQ号码。需要注意的是，服务器返回的响应有时和我们请求的数据不符，即我们请求的是id为A的群信息，而服务器返回的确实B的信息，因为这样，我们需要对信息进行验证。<br>CreQQ使用getquninfo()和quninfo()两个函数完成上述过程，完整代码如下。<br></p><pre>function getquninfo(){
     localStorage.webqqdetails = "正在获取群信息……";
     var k;
-    for(k=0;k<qun.length;k++){
+    for(k=0;k&lt;qun.length;k++){
         quninfo(qun[k].id,k);
     }
     step = 7;
@@ -180,7 +180,7 @@ function quninfo(q,k){
           }
           else{
               var i;
-              for(i=0;i<qun.length;i++){
+              for(i=0;i&lt;qun.length;i++){
                   if(qun[i].id==gtmp[4] && !qun[i].qn){
                       qun[i].qn = gtmp[5];
                       qun[i].nm = gtmp[9];
@@ -212,7 +212,7 @@ function quninfo(q,k){
               if(xhr.responseText){
                 var gtmpp = xhr.responseText.split(u+";");
                 var i;
-                for(i=1;i<gtmpp.length;i++){
+                for(i=1;i&lt;gtmpp.length;i++){
                     var gtmp = gtmpp[i].split(";");
                     if(gtmp[0]=="01"){
                         chrome.browserAction.setBadgeBackgroundColor({"color":[128,128,128,255]});
@@ -244,7 +244,7 @@ function quninfo(q,k){
                         callbackm(gtmp[1],gtmp[2],gtmp[3],qe,qr);
                         var g = localStorage.webqqg.split(";");
                         var j;
-                        for(j=0; j<g.length-1; j++){
+                        for(j=0; j&lt;g.length-1; j++){
                             if(g[j] == gtmp[1]){
                                 rep = 1;
                                 break;
@@ -265,7 +265,7 @@ function quninfo(q,k){
                                     var msgt = localStorage.webqqsettings.split(";")[2].split("%25r");
                                     var msgtt = msgt[0];
                                     var k;
-                                    for(k=1; k<msgt.length; k++){
+                                    for(k=1; k&lt;msgt.length; k++){
                                         msgtt += msg + msgt[k];
                                     }
                                     tim = Math.floor(t.getTime()/1000);
@@ -308,7 +308,7 @@ function callbackm(a,b,c,d,e){
 }</pre><p><br>上述代码中的pull()函数调用了showqunm()函数，此函数的作用是获取群消息的发送者昵称。这部分函数比较简单，我就不做详细分析了，大家看一下代码就能看懂。此函数的完整代码如下。<br></p><pre>function showqunm(qq,sq,msg,tim){
     var i;
     var sqp = sqa.split(";;");
-    for(i=0; i < sqp.length-1; i++){
+    for(i=0; i&lt;sqp.length-1; i++){
         var sqpp = sqp[i].split(";");
         if(sqpp[0]==sq){
             if(Number(localStorage.webqqsettings.split(";")[1])){
@@ -435,4 +435,3 @@ function callbackm(a,b,c,d,e){
         }
     }
 }</pre><p><br>零零散散说了这么多，希望大家能原谅我这么差的表达能力。如果大家想继续深入了解Web QQ的协议（迷你版），可以通过<a href="http://www.google.com.hk/url?sa=t&rct=j&q=webqq%E5%8D%8F%E8%AE%AE&source=web&cd=1&ved=0CCkQFjAA&url=http%3A%2F%2Fblog.csdn.net%2Fyjh4866%2Farticle%2Fdetails%2F5820699&ei=_cnTTonoLs6eiAf-k9zeDg&usg=AFQjCNG9TFgaG4pEh7oiMdZEiuFlq9Or4Q&sig2=w3KN5IyTBgel13Eg36fwMA">这个地址</a>进行学习，我开始也是从这个博客学习的，不过由于这个讲的是老版本的协议，所有个别地方会有些出入，不过讲得要比我好得多。最后要向大家推荐下Windows Live Writer，真的很好用，哈哈。没有详细讲解源码的程序不能算是真正的开源程序，大家说是不是啊 :D</p>
-
