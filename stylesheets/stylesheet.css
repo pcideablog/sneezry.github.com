@@ -89,6 +89,21 @@ header h2 {
   letter-spacing: 0;
 }
 
+.avatar .user img {
+  -webkit-border-radius: 18px!important;
+  -moz-border-radius: 18px!important;
+  border-radius: 18px!important;
+  -webkit-transition: -webkit-transform 0.4s ease-out;
+  transition: transform 0.4s ease-out;
+  -moz-transition: -moz-transform 0.4s ease-out;
+}
+
+.avatar .user img:hover {
+  -webkit-transform: rotate(360deg);
+  -moz-transform: rotate(360deg);
+  transform: rotate(360deg);
+}
+
 postlist {
   font-size: 18px;
   display: block;
