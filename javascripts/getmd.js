@@ -70,7 +70,7 @@ function loadXMLDoc(url){
 				backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
 					var converter = new Showdown.converter();
-					content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date">Posted at ' + pdate + '</div>';
+					content.innerHTML = converter.makeHtml(xmlhttp.responseText) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div>';
 					if(dis){
 						dis.style.display = 'block';
 					}

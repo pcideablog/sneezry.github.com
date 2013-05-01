@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Sneezry Blog';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Sneezry Blog'), url(sneezry_blog.ttf) format('ttf');
+}
+
 /* http://meyerweb.com/eric/tools/css/reset/ 
    v2.0 | 20110126
    License: none (public domain)
@@ -122,6 +129,11 @@ postlist {
   text-align: right;
   margin-bottom: 20px;
   font-style: italic;
+}
+
+.date span {
+  font-family: 'Sneezry Blog';
+  margin-right: 5px;
 }
 
 aside#sidebar {
