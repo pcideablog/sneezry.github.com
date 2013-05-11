@@ -76,8 +76,8 @@ function loadXMLDoc(url){
 					}
 				}
 				else if(xmlhttp.status==404) {
-					document.title = 'Not Fount - Sneezry';
-					content.innerHTML = '<img src="/images/404.jpg" />';
+					document.title = 'Not Found - Sneezry';
+					content.innerHTML = '<img src="/images/htf.png" />';
 				}
 				else {
 					document.title = 'Technology Problem - Sneezry';
