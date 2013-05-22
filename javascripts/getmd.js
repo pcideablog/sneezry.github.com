@@ -43,6 +43,7 @@ function main(){
 		}
 		else{
 			pending = true;
+			document.getElementById('takinglonger').style.display = 'none';
 			chktakinglonger();
 			var el = document.createElement('script');
 			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';
@@ -74,6 +75,7 @@ function loadXMLDoc(url){
 		xmlhttp.onreadystatechange = function (){
 			if (xmlhttp.readyState==4){// 4 = "loaded"
 				pending = false;
+				document.getElementById('takinglonger').style.display = 'none';
 				loading.style.display = 'none';
 				backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
@@ -116,6 +118,7 @@ function showpost(path){
 
 function showlist(list){
 	pending = false;
+	document.getElementById('takinglonger').style.display = 'none';
 	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
