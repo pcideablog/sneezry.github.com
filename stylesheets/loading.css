@@ -82,22 +82,27 @@
 	-webkit-animation-iteration-count: infinite;
 }
 
-.loading[index="1"] {
+.loading[index="0"] {
 	animation-delay: 0.15s;
 	-webkit-animation-delay: 0.15s;
 }
 
-.loading[index="2"] {
+.loading[index="1"] {
 	animation-delay: 0.3s;
 	-webkit-animation-delay: 0.3s;
 }
 
-.loading[index="3"] {
+.loading[index="2"] {
 	animation-delay: 0.45s;
 	-webkit-animation-delay: 0.45s;
 }
 
-.loading[index="4"] {
+.loading[index="3"] {
 	animation-delay: 0.6s;
 	-webkit-animation-delay: 0.6s;
+}
+
+.loading[index="4"] {
+	animation-delay: 0.75s;
+	-webkit-animation-delay: 0.75s;
 }
