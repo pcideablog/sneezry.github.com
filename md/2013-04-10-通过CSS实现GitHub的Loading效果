@@ -74,29 +74,34 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 
 但这只是一个方块，为了让多个方块同时显示，我们在创建多个元素的同时还要让其有个时间差才能错开显示，于是我们需要再涉及一个`animation-delay`，这个属性对于Firefox和Opera也不需要专门的伪类。这样我们就可以通过CSS选择器添加几个其他的样式表，如
 
-	.loading[index="1"] {
+	.loading[index="0"] {
 		animation-delay: 0.15s;
 		-webkit-animation-delay: 0.15s;
 	}
 
-	.loading[index="2"] {
+	.loading[index="1"] {
 		animation-delay: 0.3s;
 		-webkit-animation-delay: 0.3s;
 	}
 
-	.loading[index="3"] {
+	.loading[index="2"] {
 		animation-delay: 0.45s;
 		-webkit-animation-delay: 0.45s;
 	}
 
-	.loading[index="4"] {
+	.loading[index="3"] {
 		animation-delay: 0.6s;
 		-webkit-animation-delay: 0.6s;
+	}
+	
+	.loading[index="4"] {
+		animation-delay: 0.75s;
+		-webkit-animation-delay: 0.75s;
 	}
 
 同时html代码改为
 
-	<div class="loading"></div>
+	<div class="loading" index="0"></div>
 	<div class="loading" index="1"></div>
 	<div class="loading" index="2"></div>
 	<div class="loading" index="3"></div>
@@ -105,7 +110,7 @@ GitHub客户端中有个Loading动画非常漂亮，几个蓝色方块变速滑�
 最终的效果如下所示
 
 <div style="position:relative; padding: 5px; margin-bottom: 20px">
-<div class="loading"></div>
+<div class="loading" index="0"></div>
 <div class="loading" index="1"></div>
 <div class="loading" index="2"></div>
 <div class="loading" index="3"></div>
