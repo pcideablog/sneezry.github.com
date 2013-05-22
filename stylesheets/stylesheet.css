@@ -124,6 +124,10 @@ postlist {
   max-width: 100%;
 }
 
+#takinglonger {
+  display: none;
+}
+
 .date {
   color: gray;
   text-align: right;

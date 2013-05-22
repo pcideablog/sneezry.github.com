@@ -16,6 +16,8 @@ var hostbase = 'http://sneezry.com';
 var githubname = 'sneezry';
 var repos = 'sneezry.github.com';
 
+var pending;
+
 main();
 
 function main(){
@@ -40,6 +42,8 @@ function main(){
 			showlist(postList);
 		}
 		else{
+			pending = true;
+			chktakinglonger();
 			var el = document.createElement('script');
 			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist';
 			document.getElementsByTagName('head')[0].appendChild(el);
@@ -64,8 +68,12 @@ function loadXMLDoc(url){
 		xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
 	}
 	if (xmlhttp!=null){
+		pending = true;
+		document.getElementById('takinglonger').style.display = 'none';
+		chktakinglonger();
 		xmlhttp.onreadystatechange = function (){
 			if (xmlhttp.readyState==4){// 4 = "loaded"
+				pending = false;
 				loading.style.display = 'none';
 				backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
@@ -90,6 +98,14 @@ function loadXMLDoc(url){
 	}
 }
 
+function chktakinglonger(){
+	setTimeout(function(){
+		if(pending){
+			document.getElementById('takinglonger').style.display = 'block';
+		}
+	}, 5000);
+}
+
 function showpost(path){
 	//window.history.pushState(null, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
@@ -99,6 +115,7 @@ function showpost(path){
 }
 
 function showlist(list){
+	pending = false;
 	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
