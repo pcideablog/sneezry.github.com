@@ -105,7 +105,7 @@ function chktakinglonger(){
 		if(pending){
 			document.getElementById('takinglonger').style.display = 'block';
 		}
-	}, 5000);
+	}, 10000);
 }
 
 function showpost(path){
