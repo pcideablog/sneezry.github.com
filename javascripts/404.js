@@ -1,2 +1,7 @@
 var path = location.pathname;
-location.href = '/#!' + path;
+if(path == '/rss'){
+	location.href = 'http://feeds.feedburner.com/Sneezry';
+}
+else{
+	location.href = '/#!' + path;
+}
