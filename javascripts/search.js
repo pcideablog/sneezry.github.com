@@ -65,7 +65,7 @@ function searchLoadXMLDoc(url, pname){
 				backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
 					if(xmlhttp.responseText.toLowerCase().indexOf(kw.toLowerCase()) != -1){
-						content.innerHTML += '<h2><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></h2>';
+						content.innerHTML += '<postlist><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></postlist>';
 						searchResult = true;
 					}
 				}
