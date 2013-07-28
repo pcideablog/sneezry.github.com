@@ -68,8 +68,8 @@ function getText(canvas){
 	$(function() {
 		$('#canvas').mousedown(function(event) {
 			drawing = true;
-			x = event.pageX;
-			y = event.pageY;
+			x = event.pageX+10;
+			y = event.pageY+10;
 			lastx = x;
 			lasty = y;
 			currentInk = new Array();
@@ -97,8 +97,8 @@ function getText(canvas){
 			if(!drawing){
 				return;
 			}
-			x = event.pageX;
-			y = event.pageY;
+			x = event.pageX+10;
+			y = event.pageY+10;
 			ctx.lineTo(x,y);
 			ctx.stroke();
 			currentInk[0].push(x);
@@ -111,8 +111,8 @@ function getText(canvas){
 	$(function() {
 		$('#canvas').mouseup(function(event) {
 			drawing = false;
-			x = event.pageX;
-			y = event.pageY;
+			x = event.pageX+10;
+			y = event.pageY+10;
 			ctx.lineTo(x,y);
 			ctx.stroke();
 			currentInk[0].push(x);
