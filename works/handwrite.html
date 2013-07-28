@@ -7,6 +7,10 @@
 	padding: 0;
 }
 
+body {
+	margin: 10px;
+}
+
 #canvas {
 	border: gray 1px solid;
 }
@@ -161,6 +165,9 @@ function setSelector(options){
 		}
 		document.getElementById('selector').appendChild(el);
 	}
+	var el = document.createElement('div');
+	el.style.clear = 'both';
+	document.getElementById('selector').appendChild(el);
 }
 
 function reset(canvas){
