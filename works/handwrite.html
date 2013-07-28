@@ -1,0 +1,179 @@
+<html>
+<head>
+<title>Hand Write</title>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+}
+
+#canvas {
+	border: gray 1px solid;
+}
+
+#selector {
+	width: 500px;
+	min-height: 30px;
+	line-height: 30px;
+	font-size: 16px;
+	border: gray 1px solid;
+	margin-top: 10px;
+}
+
+.selector {
+	float: left;
+	height: 30px;
+	line-height: 30px;
+	padding: 0 5px;
+	font-size: 16px;
+	text-align: center;
+	cursor: default;
+}
+
+.selector:hover {
+	background: yellow;
+}
+
+#content {
+	width: 502px;
+	height: 100px;
+	border: gray 1px solid;
+	margin-top: 10px;
+}
+</style>
+<script src="jquery-1.10.1.min.js"></script>
+</head>
+<body>
+<canvas width="500" height="500" id="canvas"></canvas>
+<div id="selector"></div>
+<textarea id="content"></textarea>
+<script>
+var x, y, lastx, lasty, ink, currentInk, time, counter, drawing, request;
+ink = new Array();
+
+getText(document.getElementById('canvas'));
+
+function getText(canvas){
+	var width = canvas.width;
+	var height = canvas.height;
+	var ctx=canvas.getContext('2d');
+	ctx.fillStyle='#FFFFFF';
+	ctx.fillRect(0,0,width,height);
+	ctx.strokeStyle="#0000FF";
+	ctx.lineWidth = 3;
+	$(function() {
+		$('#canvas').mousedown(function(event) {
+			drawing = true;
+			x = event.pageX;
+			y = event.pageY;
+			lastx = x;
+			lasty = y;
+			currentInk = new Array();
+			currentInk[0] = new Array();
+			currentInk[1] = new Array();
+			currentInk[2] = new Array();
+			currentInk[0].push(x);
+			currentInk[1].push(y);
+			if(!counter){
+				time = 0;
+				currentInk[2].push(0);
+				counter = setInterval(function(){time++;},2);
+			}
+			else{
+				currentInk[2].push(time);
+			}
+			ctx.beginPath();
+			ctx.moveTo(x,y);
+			ctx.lineTo(x,y);
+			ctx.stroke();
+		});
+	});
+	$(function() {
+		$('#canvas').mousemove(function(event) {
+			if(!drawing){
+				return;
+			}
+			x = event.pageX;
+			y = event.pageY;
+			ctx.lineTo(x,y);
+			ctx.stroke();
+			currentInk[0].push(x);
+			currentInk[1].push(y);
+			currentInk[2].push(time);
+			lastx = x;
+			lasty = y;
+		});
+	});
+	$(function() {
+		$('#canvas').mouseup(function(event) {
+			drawing = false;
+			x = event.pageX;
+			y = event.pageY;
+			ctx.lineTo(x,y);
+			ctx.stroke();
+			currentInk[0].push(x);
+			currentInk[1].push(y);
+			currentInk[2].push(time);
+			ink.push(currentInk);
+			request = {
+				"api_level": "537.36",
+				"app_version": 0.4,
+				"device": "5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/28.0.1500.72 Safari/537.36",
+				"input_type": 0,
+				"options": "enable_pre_space",
+				"requests": [
+					{
+						"ink": ink,
+						"max_completions": 0,
+						"max_num_results": 10,
+						"pre_context": "",
+						"writing_guide": {
+							"writing_area_height": 500,
+							"writing_area_width": 500
+						}
+					}
+				]
+			}
+			$.ajax({
+				url: 'https://inputtools.google.com/request?cs=1&oe=UTF-8&app=translate&itc=zh-t-i0-handwrit',
+				type: 'POST',
+				contentType:'application/json; charset=UTF-8',
+				data: JSON.stringify(request),
+				dataType: 'json',
+				processData: false,
+				success: function (data) {
+					setSelector(data[1][0][1])
+				}
+			});
+		});
+	});
+}
+
+function setSelector(options){
+	document.getElementById('selector').innerHTML = '';
+	for(var i in options){
+		var el = document.createElement('div');
+		el.className = 'selector';
+		el.innerHTML = options[i];
+		el.onclick = function(){
+			document.getElementById('content').value += this.innerHTML;
+			reset(canvas);
+		}
+		document.getElementById('selector').appendChild(el);
+	}
+}
+
+function reset(canvas){
+	ink = new Array();
+	clearInterval(counter);
+	counter = null;
+	var width = canvas.width;
+	var height = canvas.height;
+	var ctx=canvas.getContext('2d');
+	ctx.fillStyle='#FFFFFF';
+	ctx.fillRect(0,0,width,height);
+	document.getElementById('selector').innerHTML = '';
+}
+</script>
+</body>
+</html>
