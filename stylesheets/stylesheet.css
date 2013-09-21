@@ -58,7 +58,7 @@ body {
   font-size: 15px;
   line-height: 1.5; 
   background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
-  font-family: 'Helvetica Neue', Helvetica, Arial, serif;
+  font-family: Arial, serif;
   font-weight: 400;
   color: #666;
 }
@@ -73,7 +73,7 @@ a:hover {
 header {
   padding-top: 40px;
   padding-bottom: 40px;
-  font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
+  font-family: Arial, serif; 
   background: #2e7bcf url(../images/header-bg.png) center repeat-x;
   border-bottom: solid 1px #275da1;
 }
@@ -99,7 +99,7 @@ header h2 {
 postlist {
   font-size: 18px;
   display: block;
-  font-family: 'Raleway', sans-serif;
+  font-family: Arial, sans-serif;
   padding: 5px 0;
 }
 
