@@ -1,0 +1,170 @@
+<html>
+<head>
+<title>Dots Clock</title>
+</head>
+<body>
+<canvas id="myCanvas"></canvas>
+<script>
+function clock(){
+	var canvas = document.getElementById('myCanvas');
+	width = 500;
+	height = 500;
+	canvas.width = width;
+	canvas.height = height;
+	radius = Math.floor(Math.min(width, height)/2);
+	ctx = canvas.getContext('2d');
+	dots = initDotsPos();
+	dotsMove = null;
+	clockDraw();
+	canvas.onclick = showTime;
+}
+
+function showTime(){
+	if(dotsMove){
+		clearTimeout(dotsMove);
+	}
+	moveDots(0, 25, nowDots());
+	setTimeout(function(){
+		moveDots(0, 25, initDotsPos());
+	}, 5000);
+}
+
+function initDotsPos(){
+	var dots = [
+		{"x": 0, "y": 0, "r": 5, "i": 0},
+		{"x": 0, "y": 0, "r": 5, "i": 1},
+		{"x": 0, "y": 0, "r": 5, "i": 2},
+		{"x": 0, "y": 0, "r": 5, "i": 3},
+		{"x": 0, "y": 0, "r": 2, "i": 4},
+		{"x": 0, "y": 0, "r": 2, "i": 5},
+		{"x": 0, "y": 0, "r": 2, "i": 6},
+		{"x": 0, "y": 0, "r": 2, "i": 7},
+		{"x": 0, "y": 0, "r": 2, "i": 8},
+		{"x": 0, "y": 0, "r": 2, "i": 9},
+		{"x": 0, "y": 0, "r": 2, "i": 10},
+		{"x": 0, "y": 0, "r": 2, "i": 11},
+		{"x": 0, "y": 0, "r": 2, "i": 12},
+		{"x": 0, "y": 0, "r": 2, "i": 13},
+		{"x": 0, "y": 0, "r": 2, "i": 14},
+		{"x": 0, "y": 0, "r": 2, "i": 15},
+		{"x": 0, "y": 0, "r": 3, "i": 16},
+		{"x": 0, "y": 0, "r": 3, "i": 17},
+		{"x": 0, "y": 0, "r": 3, "i": 18},
+		{"x": 0, "y": 0, "r": 3, "i": 19},
+		{"x": 0, "y": 0, "r": 3, "i": 20},
+		{"x": 0, "y": 0, "r": 3, "i": 21}
+	];
+	var dotradius = 0;
+	var dotdegree = 0;
+	var newDots = new Array();
+	var tempDots = new Array();
+	var tempDotsNum = 0;
+	var skey = Math.floor((Math.random()+1)*100);
+	var dotdegreeNum = new Array();
+	for(var i in dots){
+		tempDots.push(dots[i]);
+	}
+	for(var i=0; i<22; i++){
+		tempDotsNum = skey%tempDots.length;
+		newDots.push(tempDots[tempDotsNum].i);
+		tempDots.splice(tempDotsNum, 1);
+	}
+	for(var i=0; i<22; i++){
+		if(!dotdegreeNum[Math.ceil(Math.sqrt(Math.floor(25/22*(i+1))))]){
+			dotdegreeNum[Math.ceil(Math.sqrt(Math.floor(25/22*(i+1))))] = 0;
+		}
+		dotradius = radius*((Math.ceil(Math.sqrt(Math.floor(25/22*(i+1))))-1)*0.2+0.1);
+		dotdegree = Math.PI*2/Math.floor((Math.ceil(Math.sqrt(Math.floor(25/22*(i+1))))*2-1)*22/25+1)*(Math.random()*0.6+0.2+dotdegreeNum[Math.ceil(Math.sqrt(Math.floor(25/22*(i+1))))]++);
+		dots[newDots[i]].x = dotradius*Math.cos(dotdegree)+radius;
+		dots[newDots[i]].y = dotradius*Math.sin(dotdegree)+radius;
+	}
+	return dots;
+}
+
+function moveDots(currentTime, totalTime, endDots){
+	if(currentTime >= totalTime){
+		clearInterval(frame);
+		dots = endDots;
+	}
+	else{
+		if(currentTime == 0){
+			frame = setInterval(function(){clockDraw()}, 15);
+		}
+		for(var i in dots){
+			dots[i].x += (endDots[i].x-dots[i].x)/(totalTime-currentTime);
+			dots[i].y += (endDots[i].y-dots[i].y)/(totalTime-currentTime);
+		}
+		currentTime++;
+		dotsMove = setTimeout(function(){moveDots(currentTime, totalTime, endDots)}, 20);
+	}
+}
+
+function nowDots(){
+	var d = new Date();
+	var h = d.getHours()%12;
+	var hdgree = h/12*Math.PI*2-Math.PI/2;
+	var m = d.getMinutes();
+	var mdgree = m/60*Math.PI*2-Math.PI/2;
+	var dots = [
+		{"x": 0, "y": 0, "r": 5, "i": 0},
+		{"x": 0, "y": 0, "r": 5, "i": 1},
+		{"x": 0, "y": 0, "r": 5, "i": 2},
+		{"x": 0, "y": 0, "r": 5, "i": 3},
+		{"x": 0, "y": 0, "r": 2, "i": 4},
+		{"x": 0, "y": 0, "r": 2, "i": 5},
+		{"x": 0, "y": 0, "r": 2, "i": 6},
+		{"x": 0, "y": 0, "r": 2, "i": 7},
+		{"x": 0, "y": 0, "r": 2, "i": 8},
+		{"x": 0, "y": 0, "r": 2, "i": 9},
+		{"x": 0, "y": 0, "r": 2, "i": 10},
+		{"x": 0, "y": 0, "r": 2, "i": 11},
+		{"x": 0, "y": 0, "r": 2, "i": 12},
+		{"x": 0, "y": 0, "r": 2, "i": 13},
+		{"x": 0, "y": 0, "r": 2, "i": 14},
+		{"x": 0, "y": 0, "r": 2, "i": 15},
+		{"x": 0, "y": 0, "r": 3, "i": 16},
+		{"x": 0, "y": 0, "r": 3, "i": 17},
+		{"x": 0, "y": 0, "r": 3, "i": 18},
+		{"x": 0, "y": 0, "r": 3, "i": 19},
+		{"x": 0, "y": 0, "r": 3, "i": 20},
+		{"x": 0, "y": 0, "r": 3, "i": 21}
+	];
+	for(var i=0; i<4; i++){
+		dots[i].x = i*10*Math.cos(hdgree)*radius/50+radius;
+		dots[i].y = i*10*Math.sin(hdgree)*radius/50+radius;
+	}
+	for(var i=16; i<22; i++){
+		dots[i].x = ((i-16)*6+8)*Math.cos(mdgree)*radius/50+radius;
+		dots[i].y = ((i-16)*6+8)*Math.sin(mdgree)*radius/50+radius;
+	}
+	for(var i=4; i< 16; i++){
+		dots[i].x = 45*Math.cos((i-4)/12*Math.PI*2)/50*radius+radius;
+		dots[i].y = 45*Math.sin((i-4)/12*Math.PI*2)/50*radius+radius;
+	}
+	return dots;
+}
+
+function clockDraw(){
+	ctx.fillStyle = 'white';
+	ctx.fillRect(0, 0, width, height);
+	ctx.fillStyle = 'black';
+	ctx.beginPath();
+	ctx.arc(radius,radius,radius,0,Math.PI*2,true);
+	ctx.closePath();
+	ctx.fill();
+	ctx.fillStyle='white';
+	ctx.font="16px Arial";
+	ctx.fillText('SNEEZRY', (width-ctx.measureText('SNEEZRY').width)/2, height/4);
+	for(var i in dots){
+		ctx.fillStyle='white';
+		ctx.beginPath();
+		ctx.arc(dots[i].x,dots[i].y,dots[i].r*radius/50,0,Math.PI*2,true);
+		ctx.closePath();
+		ctx.fill();
+	}
+}
+
+clock();
+</script>
+</body>
+</html>
