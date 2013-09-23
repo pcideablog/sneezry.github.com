@@ -16,16 +16,20 @@ function clock(){
 	ctx = canvas.getContext('2d');
 	dots = initDotsPos();
 	dotsMove = null;
+	dotsTime = null;
 	clockDraw();
 	canvas.onmouseover = showTime;
 }
 
 function showTime(){
+	if(dotsTime){
+		clearTimeout(dotsTime);
+	}
 	if(dotsMove){
 		clearTimeout(dotsMove);
 	}
 	moveDots(0, 25, nowDots());
-	setTimeout(function(){
+	dotsTime = setTimeout(function(){
 		moveDots(0, 25, initDotsPos());
 	}, 5000);
 }
