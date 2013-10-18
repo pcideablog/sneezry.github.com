@@ -114,12 +114,6 @@ img {
 <div id="poker_4" class="poker"></div>
 </div>
 <script>
-//cache images
-for(var i=0; i<52; i++){
-	var img = document.createElement('img');
-	img.src = 'images/'+nums[i%13]+'_of_'+types[i%13]+'.png';
-}
-
 var types = ['clubs', 'diamonds', 'hearts', 'spades'];
 var nums = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace'];
 var rwds = ['Nothing', 'Royal Flush', 'Straight Flush', 'Four of a kind', 'Full House', 'Flush', 'Straight', 'Three of a kind', 'Two Pair', 'Jacks or Better'];
@@ -129,6 +123,12 @@ var bet = 1;
 var win = 0;
 
 var holds,holding,newcards,mycards;
+
+//cache images
+for(var i=0; i<52; i++){
+	var img = document.createElement('img');
+	img.src = 'images/'+nums[i%13]+'_of_'+types[i%13]+'.png';
+}
 
 function shuffle(){
 	var seed = Math.floor((Math.random()+1)*11437);
