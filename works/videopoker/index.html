@@ -99,9 +99,18 @@ body {
 img {
 	display: none;
 }
+
+#overlayer {
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	z-index: 10;
+	background: floralwhite;
+}
 </style>
 </head>
 <body>
+<div id="overlayer">Loading...</div>
 <div id="main">
 <div id="rwd">$100</div>
 <div id="win">Win: 0</div>
@@ -308,6 +317,10 @@ document.getElementById('deal').onclick = deal;
 document.getElementById('bet').onclick = chgbet;
 
 poker();
+
+window.onload = function(){
+	document.getElementById('overlayer').style.display = 'none';
+}
 </script>
 </body>
 </html>
