@@ -308,7 +308,7 @@ function deal(){
 			document.getElementById('poker_'+i).removeAttribute('hold');
 			if(holds[i] == 0){
 				mycards[i] = newcards.shift();
-				document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]]src+')';
+				document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]].src+')';
 			}
 		}
 	}
