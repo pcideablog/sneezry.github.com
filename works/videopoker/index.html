@@ -1,0 +1,300 @@
+<head>
+<style>
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-user-select: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	position: absolute;
+	background: floralwhite;
+}
+
+#main {
+	width: 700px;
+	height: 160px;
+	top: 50%;
+	margin: 0 auto;
+	margin-top: -80px;
+	position: relative;
+}
+
+#main .poker {
+	margin-right: 40px;
+	width: 100px;
+	height: 160px;
+	background-size: 100px;
+	background-repeat: no-repeat;
+	background-position: center;
+	position: relative;
+	display: inline-block;
+}
+
+#main .poker[hold='true']:before {
+	content: 'hold';
+	line-height: 160px;
+	text-align: center;
+	font-size: 24px;
+	width: 100%;
+	font-family: arial;
+	font-weight: bold;
+	color: black;
+	text-shadow: 0 0 10px white;
+	background: rgba(255,255,255,0.5);
+	position: absolute;
+}
+
+#main .poker:last-child {
+	margin: 0;
+}
+
+#deal {
+	position: absolute;
+	top: 200px;
+	right: 50px;
+	width: 100px;
+	height: 50px;
+}
+
+#bet {
+	position: absolute;
+	top: 200px;
+	right: 200px;
+	width: 50px;
+	height: 50px;
+}
+
+#rwd {
+	position: absolute;
+	top: -50px;
+	width: 100%;
+	line-height: 50px;
+	font-size: 36px;
+	font-family: arial;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+
+#win {
+	position: absolute;
+	top: 200px;
+	left: 50px;
+	height: 50px;
+	line-height: 50px;
+	font-family: arial;
+	font-weight: bold;
+	color: black;
+	font-size: 24px;
+}
+</style>
+</head>
+<body>
+<div id="main">
+<div id="rwd">$100</div>
+<div id="win">Win: 0</div>
+<input type="button" id="deal" value="Deal Draw" />
+<input type="button" id="bet" value="$1" />
+<div id="poker_0" class="poker"></div>
+<div id="poker_1" class="poker"></div>
+<div id="poker_2" class="poker"></div>
+<div id="poker_3" class="poker"></div>
+<div id="poker_4" class="poker"></div>
+</div>
+<script>
+var types = ['clubs', 'diamonds', 'hearts', 'spades'];
+var nums = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace'];
+var rwds = ['Nothing', 'Royal Flush', 'Straight Flush', 'Four of a kind', 'Full House', 'Flush', 'Straight', 'Three of a kind', 'Two Pair', 'Jacks or Better'];
+var bets = [250, 50, 25, 9, 6, 4, 3, 2, 1];
+var rwd = 100;
+var bet = 1;
+var win = 0;
+
+var holds,holding,newcards,mycards;
+
+function shuffle(){
+	var seed = Math.floor((Math.random()+1)*11437);
+	var cards = new Array();
+	var newcards = new Array();
+	for(var i=0; i<52; i++){
+		cards.push(i);
+	}
+	for(var i=0; i<10; i++){
+		var n = seed%cards.length;
+		newcards.push(cards[n]);
+		cards.splice(n, 1);
+	}
+	return newcards;
+}
+
+function check(cards){
+	var tmpcards = new Array();
+	for(var i in cards){
+		tmpcards.push(cards[i]%13);
+	}
+	var chg;
+
+	do{
+		chg = false;
+		for(var i=0; i<tmpcards.length-1; i++){
+			for(var j=i; j<tmpcards.length; j++){
+				if(tmpcards[i]>tmpcards[j]){
+					var tmp = tmpcards[i];
+					tmpcards[i] = tmpcards[j];
+					tmpcards[j] = tmp;
+					chg = true;
+				}
+			}
+		}
+	}while(chg);
+	
+	var types = new Array();
+	for(var i in cards){
+		types.push(Math.floor(cards[i]/13));
+	}
+
+	//Royal Flush
+	if(cards.toString() == '8,9,10,11,12' && types[0] == types[1] && types[0] == types[2] && types[0] == types[3] && types[0] == types[4]){
+		
+		return 1;
+	}
+
+	//Straight Flush
+	if(tmpcards[0] == tmpcards[1]-1 && tmpcards[0] == tmpcards[2]-2 && tmpcards[0] == tmpcards[3]-3 && tmpcards[0] == tmpcards[4]-4 && types[0] == types[1] && types[0] == types[2] && types[0] == types[3] && types[0] == types[4]){
+		
+		return 2;
+	}
+
+	//Four of a kind
+	if(tmpcards[0] == tmpcards[1] && tmpcards[0] == tmpcards[2] && tmpcards[0] == tmpcards[3] || tmpcards[1] == tmpcards[2] && tmpcards[1] == tmpcards[3] && tmpcards[1] == tmpcards[4]){
+		return 3;
+	}
+
+	//Full House
+	if(tmpcards[0] == tmpcards[1] && tmpcards[0] == tmpcards[2] && tmpcards[3] == tmpcards[4] || tmpcards[0] == tmpcards[1] && tmpcards[2] == tmpcards[3] && tmpcards[2] == tmpcards[4]){
+		return 4;
+	}
+
+	//Flush
+	if(types[0] == types[1] && types[0] == types[2] && types[0] == types[3] && types[0] == types[4]){
+		return 5;
+	}
+
+	//Straight
+	if(tmpcards[0] == tmpcards[1]-1 && tmpcards[0] == tmpcards[2]-2 && tmpcards[0] == tmpcards[3]-3 && tmpcards[0] == tmpcards[4]-4){
+		return 6;
+	}
+
+	//Three of a kind
+	if(tmpcards[0] == tmpcards[1] && tmpcards[0] == tmpcards[2] || tmpcards[1] == tmpcards[2] && tmpcards[1] == tmpcards[3] || tmpcards[2] == tmpcards[3] && tmpcards[2] == tmpcards[4]){
+		return 7;
+	}
+
+	//Two Pair
+	if(tmpcards[0] == tmpcards[1] && tmpcards[2] == tmpcards[3] || tmpcards[0] == tmpcards[1] && tmpcards[2] == tmpcards[4] || tmpcards[0] == tmpcards[1] && tmpcards[3] == tmpcards[4] || tmpcards[0] == tmpcards[2] && tmpcards[3] == tmpcards[4] || tmpcards[1] == tmpcards[2] && tmpcards[3] == tmpcards[4]){
+		return 8;
+	}
+
+	//Jacks or Berrer
+	if(tmpcards[2] >= 9 && tmpcards[3] >= 9 && tmpcards[4] >= 9){
+		return 9;
+	}
+
+	return 0;
+}
+
+function poker(){
+	newcards = shuffle();
+	mycards = new Array();
+	holds = [0, 0, 0, 0, 0];
+	holding = false;
+	for(var i=0; i<5; i++){
+		mycards.push(newcards.shift());
+		document.getElementById('poker_'+i).style.backgroundImage = 'url(images/'+nums[mycards[i]%13]+'_of_'+types[Math.floor(mycards[i]/13)]+'.png)';
+	}
+}
+
+function hold(){
+	if(holding){
+		return;
+	}
+	if(this.getAttribute('hold') == 'true'){
+		holds[Number(this.id.substr(6))] = 0;
+		this.removeAttribute('hold');
+	}
+	else{
+		holds[Number(this.id.substr(6))] = 1;
+		this.setAttribute('hold', 'true');
+	}
+}
+
+function deal(){
+	if(rwd == 0){
+		return;
+	}
+	if(holding){
+		var rt = check(mycards);
+		if(rt == 0){
+			rwd -= bet;
+			if(rwd - bet<0){
+				bet = 1;
+				document.getElementById('bet').value = '$1';
+			}
+		}
+		else if(rt==1 && bet==5){
+			rwd += 4000;
+			win++;
+		}
+		else{
+			rwd += bets[rt-1]*bet;
+			win++;
+		}
+		document.getElementById('rwd').innerHTML = '$'+rwd;
+		document.getElementById('win').innerHTML = 'win: '+win;
+		alert(rwds[rt]);
+		if(rwd == 0){
+			alert('You go bankrupt!');
+			return;
+		}
+		poker();
+		return;
+	}
+	else{
+		holding = true;
+		for(var i=0; i<5; i++){
+			document.getElementById('poker_'+i).removeAttribute('hold');
+			if(holds[i] == 0){
+				mycards[i] = newcards.shift();
+				document.getElementById('poker_'+i).style.backgroundImage = 'url(images/'+nums[mycards[i]%13]+'_of_'+types[Math.floor(mycards[i]/13)]+'.png)';
+			}
+		}
+	}
+}
+
+function chgbet(){
+	if(holding || rwd-bet<0){
+		return;
+	}
+	bet++;
+	if(bet > 5 || rwd-bet<0){
+		bet = 1;
+	}
+	document.getElementById('bet').value = '$'+bet;
+}
+
+for(var i=0; i<5; i++){
+	document.getElementById('poker_'+i).onclick = hold;
+}
+
+document.getElementById('deal').onclick = deal;
+document.getElementById('bet').onclick = chgbet;
+
+poker();
+</script>
+</body>
