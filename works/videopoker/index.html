@@ -146,7 +146,7 @@ var holds,holding,newcards,mycards;
 var cacheimg = new Array();
 for(var i=0; i<52; i++){
 	cacheimg[i] = new Image();
-	cacheimg[i].src = 'images/'+nums[i%13]+'_of_'+types[Math.floor(i/13)]+'.png';
+	cacheimg[i].src = 'http://sneezryworks-poker.stor.sinaapp.com/'+nums[i%13]+'_of_'+types[Math.floor(i/13)]+'.png';
 	cacheimg[i].onload = imgonload;
 }
 
