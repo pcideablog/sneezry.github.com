@@ -97,10 +97,6 @@ body {
 	font-size: 24px;
 }
 
-img {
-	display: none;
-}
-
 #overlayer {
 	position: absolute;
 	width: 100%;
@@ -147,10 +143,11 @@ var imgloaded = 0;
 var holds,holding,newcards,mycards;
 
 //cache images
+var cacheimg = new Array();
 for(var i=0; i<52; i++){
-	var img = document.createElement('img');
-	img.src = 'images/'+nums[i%13]+'_of_'+types[Math.floor(i/13)]+'.png';
-	img.onload = imgonload;
+	cacheimg[i] = new Image();
+	cacheimg[i].src = 'images/'+nums[i%13]+'_of_'+types[Math.floor(i/13)]+'.png';
+	cacheimg[i].onload = imgonload;
 }
 
 function imgonload(){
@@ -256,7 +253,7 @@ function poker(){
 	holding = false;
 	for(var i=0; i<5; i++){
 		mycards.push(newcards.shift());
-		document.getElementById('poker_'+i).style.backgroundImage = 'url(images/'+nums[mycards[i]%13]+'_of_'+types[Math.floor(mycards[i]/13)]+'.png)';
+		document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]].src+')';
 	}
 }
 
@@ -311,7 +308,7 @@ function deal(){
 			document.getElementById('poker_'+i).removeAttribute('hold');
 			if(holds[i] == 0){
 				mycards[i] = newcards.shift();
-				document.getElementById('poker_'+i).style.backgroundImage = 'url(images/'+nums[mycards[i]%13]+'_of_'+types[Math.floor(mycards[i]/13)]+'.png)';
+				document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]]src+')';
 			}
 		}
 	}
