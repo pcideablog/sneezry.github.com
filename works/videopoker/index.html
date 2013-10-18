@@ -113,10 +113,15 @@ img {
 	color: black;
 	text-align: center;
 }
+
+#overlayer div {
+	line-height: 50px;
+	font-size: 18px;
+}
 </style>
 </head>
 <body>
-<div id="overlayer">Loading...</div>
+<div id="overlayer">Loading...<div></div></div>
 <div id="main">
 <div id="rwd">$100</div>
 <div id="win">Win: 0</div>
@@ -136,6 +141,7 @@ var bets = [250, 50, 25, 9, 6, 4, 3, 2, 1];
 var rwd = 100;
 var bet = 1;
 var win = 0;
+var imgloaded = 0;
 
 var holds,holding,newcards,mycards;
 
@@ -143,6 +149,12 @@ var holds,holding,newcards,mycards;
 for(var i=0; i<52; i++){
 	var img = document.createElement('img');
 	img.src = 'images/'+nums[i%13]+'_of_'+types[Math.floor(i/13)]+'.png';
+	img.onload = imgonload;
+}
+
+function imgonload(){
+	imgloaded++;
+	document.getElementById('loading').innerHTML = Math.round(imgloaded/52*100)+'%';
 }
 
 function shuffle(){
