@@ -239,7 +239,7 @@ function check(cards){
 	}
 
 	//Jacks or Berrer
-	if(tmpcards[2] >= 9 && tmpcards[3] >= 9 && tmpcards[4] >= 9){
+	if(tmpcards.toString().indexOf('9,9')!=-1 || tmpcards.toString().indexOf('10,10')!=-1 || tmpcards.toString().indexOf('11,11')!=-1 || tmpcards.toString().indexOf('12,12')!=-1){
 		return 9;
 	}
 
