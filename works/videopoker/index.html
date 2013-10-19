@@ -287,13 +287,10 @@ function hold(){
 
 function deal(){
 	if(rwd == 0){
+		alert('You go bankrupt!');
 		return;
 	}
 	if(newround){
-		if(rwd == 0){
-			alert('You go bankrupt!');
-			return;
-		}
 		newround = false;
 		document.getElementById('rwds').innerHTML = '';
 		poker();
