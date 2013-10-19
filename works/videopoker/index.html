@@ -85,6 +85,18 @@ body {
 	text-align: center;
 }
 
+#rwds {
+	position: absolute;
+	top: -100px;
+	width: 100%;
+	line-height: 50px;
+	font-size: 36px;
+	font-family: arial;
+	font-weight: bold;
+	color: black;
+	text-align: center;
+}
+
 #win {
 	position: absolute;
 	top: 200px;
@@ -120,6 +132,7 @@ body {
 <body>
 <div id="overlayer">Loading...<div id="loading">0%</div></div>
 <div id="main">
+<div id="rwds"></div>
 <div id="rwd">$100</div>
 <div id="win">Win: 0</div>
 <input type="button" id="deal" value="Deal Draw" />
@@ -139,6 +152,7 @@ var rwd = 100;
 var bet = 1;
 var win = 0;
 var imgloaded = 0;
+var newround = false;
 
 var holds,holding,newcards,mycards;
 
@@ -275,6 +289,15 @@ function deal(){
 	if(rwd == 0){
 		return;
 	}
+	if(newround){
+		if(rwd == 0){
+			alert('You go bankrupt!');
+			return;
+		}
+		newround = false;
+		poker();
+		return;
+	}
 	if(holding){
 		var rt = check(mycards);
 		if(rt == 0){
@@ -294,12 +317,8 @@ function deal(){
 		}
 		document.getElementById('rwd').innerHTML = '$'+rwd;
 		document.getElementById('win').innerHTML = 'win: '+win;
-		alert(rwds[rt]);
-		if(rwd == 0){
-			alert('You go bankrupt!');
-			return;
-		}
-		poker();
+		document.getElementById('rwds').innerHTML = rwds[rt];
+		newround = true;
 		return;
 	}
 	else{
