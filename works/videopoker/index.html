@@ -170,13 +170,14 @@ function imgonload(){
 }
 
 function shuffle(){
-	var seed = Math.floor((Math.random()+1)*11437);
+	var seed;
 	var cards = new Array();
 	var newcards = new Array();
 	for(var i=0; i<52; i++){
 		cards.push(i);
 	}
 	for(var i=0; i<10; i++){
+		seed = Math.floor((Math.random()+1)*11437);
 		var n = seed%cards.length;
 		newcards.push(cards[n]);
 		cards.splice(n, 1);
