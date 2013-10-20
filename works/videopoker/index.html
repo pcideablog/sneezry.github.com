@@ -33,6 +33,7 @@ body {
 	width: 100px;
 	height: 160px;
 	background-size: 100px;
+	background-image: url(http://sneezryworks-poker.stor.sinaapp.com/card_bg.png);
 	background-repeat: no-repeat;
 	background-position: center;
 	position: relative;
@@ -40,7 +41,7 @@ body {
 }
 
 #main .poker[hold='true']:before {
-	content: 'hold';
+	content: 'Hold';
 	line-height: 160px;
 	text-align: center;
 	font-size: 24px;
@@ -152,9 +153,9 @@ var rwd = 100;
 var bet = 1;
 var win = 0;
 var imgloaded = 0;
-var newround = false;
+var newround = true;
 
-var holds,holding,newcards,mycards;
+var holds,holding=true,newcards,mycards;
 
 //cache images
 var cacheimg = new Array();
@@ -183,6 +184,79 @@ function shuffle(){
 		cards.splice(n, 1);
 	}
 	return newcards;
+}
+
+function autohold(cards){
+	var chkn = check(cards);
+	if([1,2,4,5,6].indexOf(chkn) != -1){
+		for(var i=0; i<5; i++){
+			document.getElementById('poker_'+i).setAttribute('hold', 'true');
+		}
+		holds = [1, 1, 1, 1, 1];
+	}
+	else if([7, 9].indexOf(chkn) != -1){
+		var si = -1;
+		for(var i=0; i<4; i++){
+			for(var j=i+1; j<5; j++){
+				if(cards[i]%13 == cards[j]%13){
+					si = cards[i]%13;
+					break;
+				}
+			}
+			if(si>=0){
+				break;
+			}
+		}
+		for(var i=0; i<5; i++){
+			if(cards[i]%13 == si){
+				document.getElementById('poker_'+i).setAttribute('hold', 'true');
+				holds[i] = 1;
+			}
+		}
+	}
+	else if(chkn == 3){
+		var ds;
+		var ss = new Array();
+		for(var i=0; i<5; i++){
+			document.getElementById('poker_'+i).setAttribute('hold', 'true');
+			holds[i] = 1;
+		}
+		for(var i=0; i<4; i++){
+			for(var j=i+1; j<5; j++){
+				if(cards[i]%13 != cards[j]%13){
+					ds = [i, j];
+				}
+				else{
+					ss.push(i);
+					ss.push(j);
+				}
+			}
+		}
+		if(ss.indexOf(ds[0])){
+			document.getElementById('poker_'+j).removeAttribute('hold');
+			holds[j] = 0;
+		}
+		else{
+			document.getElementById('poker_'+i).removeAttribute('hold');
+			holds[i] = 0;
+		}
+	}
+	else if(chkn == 8){
+		var si = new Array();
+		for(var i=0; i<4; i++){
+			for(var j=i+1; j<5; j++){
+				if(cards[i]%13 == cards[j]%13 && si.indexOf(cards[i]%13)==-1){
+					si.push(cards[i]%13);
+				}
+			}
+		}
+		for(var i=0; i<5; i++){
+			if(cards[i]%13 == si[0] || cards[i]%13 == si[1]){
+				document.getElementById('poker_'+i).setAttribute('hold', 'true');
+				holds[i] = 1;
+			}
+		}
+	}
 }
 
 function check(cards){
@@ -262,6 +336,7 @@ function check(cards){
 }
 
 function poker(){
+	document.getElementById('rwds').innerHTML = 'Hold';
 	newcards = shuffle();
 	mycards = new Array();
 	holds = [0, 0, 0, 0, 0];
@@ -270,6 +345,7 @@ function poker(){
 		mycards.push(newcards.shift());
 		document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]].src+')';
 	}
+	autohold(mycards);
 }
 
 function hold(){
@@ -293,10 +369,10 @@ function deal(){
 	}
 	if(newround){
 		newround = false;
-		document.getElementById('rwds').innerHTML = '';
 		poker();
 		return;
 	}
+	/*
 	if(holding){
 		var rt = check(mycards);
 		if(rt == 0){
@@ -320,6 +396,7 @@ function deal(){
 		newround = true;
 		return;
 	}
+	*/
 	else{
 		holding = true;
 		for(var i=0; i<5; i++){
@@ -329,11 +406,32 @@ function deal(){
 				document.getElementById('poker_'+i).style.backgroundImage = 'url('+cacheimg[mycards[i]].src+')';
 			}
 		}
+
+		var rt = check(mycards);
+		if(rt == 0){
+			rwd -= bet;
+			if(rwd - bet<0){
+				bet = 1;
+				document.getElementById('bet').value = '$1';
+			}
+		}
+		else if(rt==1 && bet==5){
+			rwd += 4000;
+			win++;
+		}
+		else{
+			rwd += bets[rt-1]*bet;
+			win++;
+		}
+		document.getElementById('rwd').innerHTML = '$'+rwd;
+		document.getElementById('win').innerHTML = 'win: '+win;
+		document.getElementById('rwds').innerHTML = rwds[rt];
+		newround = true;
 	}
 }
 
 function chgbet(){
-	if(holding || rwd-bet<0){
+	if(!holding || rwd-bet<0){
 		return;
 	}
 	bet++;
@@ -349,8 +447,6 @@ for(var i=0; i<5; i++){
 
 document.getElementById('deal').onclick = deal;
 document.getElementById('bet').onclick = chgbet;
-
-poker();
 
 window.onload = function(){
 	document.getElementById('overlayer').style.display = 'none';
