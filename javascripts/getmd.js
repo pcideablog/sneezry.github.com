@@ -2,8 +2,8 @@ var path = decodeURIComponent(location.hash.substr(2));
 if(location.search.substr(1,19)=='_escaped_fragment_='){
 	path = decodeURIComponent(location.search.substr(20));
 }
-if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
-else if(path){window.history.pushState(null, '', '/#!'+path);}
+if(path == '/'){path = ''; window.history.replacetate(null, '', '/');}
+else if(path && !location.search){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
