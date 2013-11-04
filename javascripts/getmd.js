@@ -1,4 +1,7 @@
 var path = decodeURIComponent(location.hash.substr(2));
+if(location.hash.search.substr(1,18)=='_escaped_fragment_'){
+	path = decodeURIComponent(location.hash.search.substr(19));
+}
 if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
 else if(path){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
