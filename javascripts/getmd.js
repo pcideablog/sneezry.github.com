@@ -130,8 +130,7 @@ function showlist(list){
 
 window.onhashchange = function(){
 	if(location.hash && location.hash.substr(1,1) != '!'){
-		//window.history.pushState(null, '', '/#!'+path);
-		window.history.go(-1);
+		window.history.pushState(null, '', '/#!'+path);
 		return;
 	}
 	dis.style.display = 'none';
