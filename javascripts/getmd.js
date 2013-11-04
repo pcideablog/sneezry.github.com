@@ -1,5 +1,5 @@
 var path = decodeURIComponent(location.hash.substr(2));
-if(location.hash.search.substr(1,19)=='_escaped_fragment_='){
+if(location.search.substr(1,19)=='_escaped_fragment_='){
 	path = decodeURIComponent(location.search.substr(20));
 }
 if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
