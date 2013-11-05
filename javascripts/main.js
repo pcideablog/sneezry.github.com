@@ -81,3 +81,13 @@ SmoothScroll.prototype = {
 }
 
 var ss = new SmoothScroll(document.getElementsByTagName('body')[0], {f:0.2});
+
+window.onkeydown = function(e){
+  e = e || window.event;
+  var kc = e.keyCode || e.which;
+  if(kc==36){
+    goToTop();
+    e.preventDefault();
+    e.returnValue = false;
+  }
+}
