@@ -92,3 +92,7 @@ window.onkeydown = function(e){
     e.returnValue = false;
   }
 }
+
+window.onmousedown = function(){
+  clearInterval(ss.intervalID);
+}
