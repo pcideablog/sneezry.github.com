@@ -577,6 +577,25 @@ footer a:hover {
 * html .clearfix {height: 1%;}
 .clearfix {display: block;}
 
+.disqus_count {
+  margin: 2px 10px;
+}
+
+.disqus_count a {
+  display: inline-block;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  height: 20px;
+  line-height: 20px;
+  font-size: 14px;
+  min-width: 20px;
+  text-align: center;
+  color: white;
+  background: #2e7bcf;
+  border: none;
+}
+
 /* #Media Queries
 ================================================== */
 
