@@ -596,6 +596,10 @@ footer a:hover {
   border: none;
 }
 
+.disqus_count a:hover {
+  border: none;
+}
+
 /* #Media Queries
 ================================================== */
 
