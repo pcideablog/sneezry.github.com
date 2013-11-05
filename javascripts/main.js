@@ -1,8 +1,5 @@
 function goToTop(acceleration, time) {
-	/*
-	window.scrollTo(0);
-	return;
-	*/
+	clearInterval(ss.intervalID);
 	
 	acceleration = acceleration || 0.1;
 	time = time || 16;
@@ -83,4 +80,4 @@ SmoothScroll.prototype = {
     }  
 }
 
-new SmoothScroll(document.getElementsByTagName('body')[0], {f:0.2});
+var ss = new SmoothScroll(document.getElementsByTagName('body')[0], {f:0.2});
