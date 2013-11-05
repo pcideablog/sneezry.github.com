@@ -129,7 +129,8 @@ function showlist(list){
 	}
 	console.log(txt);
 	loading.style.display = 'none';
-	content.innerHTML = converter.makeHtml(txt);
+	//content.innerHTML = converter.makeHtml(txt);
+	content.innerHTML = txt;
 	(function () {
         	var s = document.createElement('script'); s.async = true;
 		s.type = 'text/javascript';
