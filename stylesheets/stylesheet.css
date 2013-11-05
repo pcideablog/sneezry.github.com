@@ -579,6 +579,9 @@ footer a:hover {
 
 .disqus_count {
   margin: 2px 20px;
+  height: 16px;
+  line-height: 16px;
+  display: block;
 }
 
 .disqus_count a {
@@ -608,10 +611,12 @@ footer a:hover {
 }
 
 .post_date {
+  height: 20px;
   line-height: 20px;
   font-size: 14px;
   color: gray;
   font-style: italic;
+  display: block;
 }
 
 /* #Media Queries
