@@ -138,7 +138,7 @@ function showlist(list){
 }
 
 function encodePath(path){
-  path = encodeURIComponent(list.data[i-1].name).replace(/-/g, '/');
+  path = encodeURIComponent(path).replace(/-/g, '/');
   for(var i=0; i<path.length; i++){
     if(path.substr(i,1) == '%'){
       path = path.substr(0,i+1)+path.substr(i+1,2).toLowerCase()+path.substr(i+3);
