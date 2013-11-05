@@ -86,6 +86,7 @@ window.onkeydown = function(e){
   e = e || window.event;
   var kc = e.keyCode || e.which;
   if(kc==36){
+    clearInterval(ss.intervalID);
     goToTop();
     e.preventDefault();
     e.returnValue = false;
