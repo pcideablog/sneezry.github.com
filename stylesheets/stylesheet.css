@@ -593,12 +593,24 @@ footer a:hover {
   padding: 0 5px;
   text-align: center;
   color: white;
-  background: #2e7bcf;
+  background: gray;
   border: none;
 }
 
 .disqus_count a:hover {
   border: none;
+}
+
+.post_info {
+  height: 20px;
+  margin-top: 2px;
+}
+
+.post_date {
+  line-height: 20px;
+  font-size: 14px;
+  color: gray;
+  font-style: italic;
 }
 
 /* #Media Queries
