@@ -127,9 +127,7 @@ function showlist(list){
 	for(var i = list.data.length; i > 0; i--){
 		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></div></postlist>';
 	}
-	console.log(txt);
 	loading.style.display = 'none';
-	//content.innerHTML = converter.makeHtml(txt);
 	content.innerHTML = txt;
 	(function () {
         	var s = document.createElement('script'); s.async = true;
