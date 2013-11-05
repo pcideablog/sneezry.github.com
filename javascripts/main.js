@@ -1,6 +1,8 @@
 function goToTop(acceleration, time) {
+	/*
 	window.scrollTo(0);
 	return;
+	*/
 	
 	acceleration = acceleration || 0.1;
 	time = time || 16;
