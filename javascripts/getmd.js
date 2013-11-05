@@ -125,7 +125,7 @@ function showlist(list){
 	postList = list;
 	var txt = '';
 	for(var i = list.data.length; i > 0; i--){
-		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><span class="disqus_count"><a href="' + hostbase + '/' + encodeURIComponent(list.data[i-1].name).toLowerCase().replace(/-/g, '/') + '#disqus_thread"></a></span></postlist>';
+		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = converter.makeHtml(txt);
@@ -135,6 +135,17 @@ function showlist(list){
         	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
         	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
     	}());
+}
+
+function encodePath(path){
+  path = encodeURIComponent(list.data[i-1].name).replace(/-/g, '/');
+  for(var i=0; i<path.length; i++){
+    if(path.substr(i,1) == '%'){
+      path = path.substr(0,i+1)+path.substr(i+1,2).toLowerCase()+path.substr(i+3);
+      i+=2;
+    }
+  }
+  return path;
 }
 
 window.onhashchange = function(){
