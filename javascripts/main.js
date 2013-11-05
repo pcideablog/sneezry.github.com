@@ -73,7 +73,7 @@ SmoothScroll.prototype = {
         _this.intervalID = setInterval(function () {  
             //缓动  
             _this.win.scrollTop += (tar - _this.win.scrollTop) * _this.f;  
-            if (tar == _this.win.scrollTop) {  
+            if (Math.abs(tar - _this.win.scrollTop) <= 1) {  
                 clearInterval(_this.intervalID);  
             }  
         }, _this.interval);  
