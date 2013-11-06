@@ -543,6 +543,10 @@ ul li {
   padding-left: 20px;
 }
 
+#recent_comments ul li {
+  padding: 0;
+}
+
 ol li {
   list-style: decimal inside;
   padding-left: 3px;
