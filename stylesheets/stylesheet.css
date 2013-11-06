@@ -613,7 +613,7 @@ footer a:hover {
   height: 16px;
   line-height: 16px;
   display: inline-block;
-  float; right;
+  float: right;
 }
 
 .disqus_count a {
