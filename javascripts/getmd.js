@@ -14,11 +14,6 @@ var disqus_url;
 var kw;
 var postList;
 
-var disqus_shortname = 'sneezry';
-var hostbase = 'http://sneezry.com';
-var githubname = 'sneezry';
-var repos = 'sneezry.github.com';
-
 var pending;
 
 main();
