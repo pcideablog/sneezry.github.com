@@ -85,7 +85,7 @@ function loadXMLDoc(url){
 				}
 				else if(xmlhttp.status==404) {
 					document.title = 'Not Found - Sneezry';
-					content.innerHTML = '<iframe scrolling="no" frameborder="0" src="http://yibo.iyiyun.com/js/yibo404/key/1" width="640" height="462" style="display:block;"></iframe>';
+					content.innerHTML = '<img src="images/despicable_me.png" />';
 				}
 				else {
 					document.title = 'Technology Problem - Sneezry';
