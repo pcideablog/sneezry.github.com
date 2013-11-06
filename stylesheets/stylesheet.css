@@ -127,8 +127,8 @@ postlist a:hover {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 1px 2px 3px #888;
-  box-shadow: 1px 2px 3px #888;
+  -webkit-box-shadow: 1px 2px 3px #ddd;
+  box-shadow: 1px 2px 3px #ddd;
   background: white;
 }
 
@@ -176,8 +176,8 @@ aside#sidebar {
   -moz-border-radius: 3px;
   border-radius: 3px;
   line-height: 1.3;
-  -webkit-box-shadow: 1px 2px 3px #888;
-  box-shadow: 1px 2px 3px #888;
+  -webkit-box-shadow: 1px 2px 3px #ddd;
+  box-shadow: 1px 2px 3px #ddd;
 }
 
 aside#sidebar p.repo-owner,
