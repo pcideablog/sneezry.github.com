@@ -609,10 +609,11 @@ footer a:hover {
 .clearfix {display: block;}
 
 .disqus_count {
-  margin: 2px 20px;
+  margin: -10px 20px;
   height: 16px;
   line-height: 16px;
   display: inline-block;
+  float; right;
 }
 
 .disqus_count a {
