@@ -153,6 +153,11 @@ postlist a:hover {
   padding-top: 20px;
 }
 
+#no_results {
+  margin-top: 30px;
+  padding-left: 20px;
+}
+
 #takinglonger {
   margin-top: 30px;
   padding-left: 20px;
@@ -601,7 +606,7 @@ dl dd {
 }
 
 footer {
-  background: transparent url('../images/hr.png') 0 0 repeat-x;
+  border-top: 1px #e2e2e2 solid;
   margin: 40px 10px 0 10px;
   padding-top: 20px;
   padding-bottom: 30px;

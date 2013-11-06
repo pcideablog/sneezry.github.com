@@ -72,7 +72,7 @@ function searchLoadXMLDoc(url, pname){
 				if(currentTotal == listTotal){
 					loading.style.display = 'none';
 					if(!searchResult){
-						content.innerHTML = '<blockquote>No Results.</blockquote>';
+						content.innerHTML = '<blockquote id="no_results">No Results.</blockquote>';
 					}
 					searchResult = false;
 				}
