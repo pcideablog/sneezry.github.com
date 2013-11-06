@@ -405,10 +405,11 @@ form {
 
 #back_home {
   font-size: 0.75em;
+  color: #888;
 }
 
 #back_home a {
-  color: #666;
+  color: #888;
 }
 
 #post_title {
