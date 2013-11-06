@@ -624,6 +624,11 @@ footer a:hover {
   display: inline-block;
 }
 
+#recent_comments h1 {
+  font-size: 1.5em;
+  margin: 20px 0 0 10px;
+}
+
 /* #Media Queries
 ================================================== */
 
