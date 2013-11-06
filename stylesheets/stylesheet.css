@@ -129,7 +129,7 @@ postlist a:hover {
 }
 
 #content {
-  padding-left: 20px 20px 20px 40px;
+  padding: 20px 20px 20px 40px;
 }
 
 #disqus_thread {
@@ -401,6 +401,16 @@ form {
   margin-bottom: 10px;
   overflow: hidden;
   display: none;
+}
+
+#back_home {
+  font-size: 0.75em;
+}
+
+#post_title {
+  font-size: 1.5em;
+  border-bottom: 1px #e2e2e2 solid;
+  margin: 5px 0;
 }
 
 .backhome {
