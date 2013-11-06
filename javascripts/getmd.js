@@ -78,7 +78,7 @@ function loadXMLDoc(url){
 				//backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
 					var converter = new Showdown.converter();
-					content.innerHTML = '<div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a> &gt;</div><div id="post_title">' + path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ') + '</div>' + converter.makeHtml(xmlhttp.responseText) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div>';
+					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a> &gt;</div><div id="post_title">' + path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ') + '</div>' + converter.makeHtml(xmlhttp.responseText) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
 					if(dis){
 						dis.style.display = 'block';
 					}
