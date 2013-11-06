@@ -62,7 +62,7 @@ function searchLoadXMLDoc(url, pname){
 			if (xmlhttp.readyState==4){// 4 = "loaded"
 				currentTotal++;
 				loading.style.display = 'none';
-				backhome.style.display = 'block';
+				//backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
 					if(xmlhttp.responseText.toLowerCase().indexOf(kw.toLowerCase()) != -1){
 						content.innerHTML += '<postlist><a href="/#!/' + pname.replace(/-/g, '/') + '">' + pname.split('-')[pname.split('-').length-1] + '</a></postlist>';
