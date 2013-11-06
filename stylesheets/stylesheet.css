@@ -596,7 +596,7 @@ footer a:hover {
 }
 
 .disqus_count a {
-  display: inline-block;
+  display: block;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
