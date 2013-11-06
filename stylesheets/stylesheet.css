@@ -150,6 +150,7 @@ postlist a:hover {
 
 #takinglonger {
   margin-top: 30px;
+  padding-left: 20px;
   display: none;
 }
 
