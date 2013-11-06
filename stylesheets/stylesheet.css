@@ -100,7 +100,13 @@ postlist {
   font-size: 20px;
   display: block;
   font-family: Arial, sans-serif;
-  padding: 5px 0 10px 0;
+  padding: 10px;
+  background: url(../images/bg_item.png) bottom;
+  border-bottom: 1px #888 solid;
+}
+
+postlist:last-child {
+  border: none;
 }
 
 postlist a {
@@ -115,6 +121,14 @@ postlist a:hover {
   position: relative;
   width: 940px;
   margin: 0 auto;
+}
+
+#content {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  -webkit-box-shadow: 1px 2px 3px #888;
+  box-shadow: 1px 2px 3px #888;
 }
 
 #content-wrapper {
