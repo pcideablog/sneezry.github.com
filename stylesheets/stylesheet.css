@@ -134,6 +134,7 @@ postlist a:hover {
 
 #main-content {
   width: 690px;
+  min-height: 50px;
   float: left;
   position: relative;
   -webkit-border-radius: 3px;
