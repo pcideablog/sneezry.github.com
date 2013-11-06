@@ -313,10 +313,13 @@ form {
   -moz-border-radius: 40px;
   border-radius: 40px;
   background: white;
+  z-index: 10;
+  box-shadow: 0 0 10px #888;
 }
 
 .gotop:hover {
   border: #444 10px solid;
+  box-shadow: 0 0 10px #444;
 }
 
 .gotop:hover .gotopinner div {
