@@ -129,12 +129,15 @@ postlist a:hover {
 }
 
 #content {
-  padding-left: 20px;
+  padding-left: 20px 20px 20px 40px;
+}
+
+#disqus_thread {
+  padding: 20px;
 }
 
 #main-content {
   width: 690px;
-  padding: 20px;
   float: left;
   position: relative;
   -webkit-border-radius: 3px;
