@@ -57,7 +57,7 @@ table {
 body {
   font-size: 15px;
   line-height: 1.5; 
-  background: #fafafa url(../images/body-bg.jpg) 0 0 repeat;
+  background: #eee;
   font-family: Arial, serif;
   font-weight: 400;
   color: #666;
@@ -102,7 +102,7 @@ postlist {
   font-family: Arial, sans-serif;
   padding: 10px;
   background: url(../images/bg_item.png) bottom;
-  border-bottom: 1px #888 solid;
+  border-bottom: 1px #e2e2e2 solid;
 }
 
 postlist:last-child {
@@ -124,9 +124,9 @@ postlist a:hover {
 }
 
 #content {
-  -webkit-border-radius: 5px;
-  -moz-border-radius: 5px;
-  border-radius: 5px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   -webkit-box-shadow: 1px 2px 3px #888;
   box-shadow: 1px 2px 3px #888;
 }
@@ -165,13 +165,18 @@ postlist a:hover {
 
 aside#sidebar {
   width: 200px;
-  padding-left: 20px;
+  padding: 20px;
   min-height: 550px;
   float: right;
   position: relative;
-  background: transparent url(../images/sidebar-bg.png) 0 0 no-repeat;
+  background: white;
   font-size: 12px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
   line-height: 1.3;
+  -webkit-box-shadow: 1px 2px 3px #888;
+  box-shadow: 1px 2px 3px #888;
 }
 
 aside#sidebar p.repo-owner,
