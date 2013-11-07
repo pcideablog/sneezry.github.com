@@ -114,12 +114,16 @@ postlist a {
 }
 
 postlist a:hover {
-  border-bottom: 1px #2879d0 dashed
+  border-bottom: 1px #2879d0 dashed;
 }
 
 .prev_page, .next_page {
   color: gray;
   font-size: 12px;
+}
+
+.prev_page {
+  float: left;
 }
 
 .next_page {
