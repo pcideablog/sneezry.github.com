@@ -85,11 +85,13 @@ function loadXMLDoc(url){
 				//backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
 					var blog_text = xmlhttp.responseText;
+					var encoded = false;
 					if(blog_text.substr(0,2)=='::'){
 						blog_text = base62.decode(blog_text.substr(2));
+						encoded = true;
 					};
 					var converter = new Showdown.converter();
-					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ') + '</div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
+					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ') + (encoded?'<sup>&lt;!&gt;</sup>':'') + '</div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
 					if(dis){
 						dis.style.display = 'block';
 					}
