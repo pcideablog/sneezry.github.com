@@ -131,7 +131,7 @@ function showlist(list){
 		page = Math.ceil(list.data.length/20);
 		window.history.replaceState(null, '', '/#!/page/'+page);
 	}
-	for(var i = list.data.length-(page-1)*20; i > 0 && i > list.data.length-(page-2)*20; i--){
+	for(var i = list.data.length-(page-1)*20; i > 0; i--){
 		console.log(i);
 		console.log(txt);
 		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></div></postlist>';
