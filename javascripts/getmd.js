@@ -137,13 +137,13 @@ function showlist(list){
 		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></div></postlist>';
 	}
 	if(page==1 && page*20<list.data.length){
-		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><div style="clear:both"></div></postlist>';
+		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←较早的文章</a><div style="clear:both"></div></postlist>';
 	}
 	else if(page>1 && page*20>=list.data.length){
 		txt += '<postlist><a class="next_page" href="/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
 	}
 	else if(page>1 && page*20<list.data.length){
-		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><a class="next_page" href="/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
+		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←较早的文章</a><a class="next_page" href="/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = txt;
@@ -171,6 +171,7 @@ window.onhashchange = function(){
 		window.history.replaceState(null, '', '/#!'+path);
 		return;
 	}
+	goToTop();
 	dis.style.display = 'none';
 	dis.innerHTML = '';
 	path = location.hash.substr(2);
