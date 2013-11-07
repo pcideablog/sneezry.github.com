@@ -4,7 +4,7 @@ if(location.search.substr(1,19)=='_escaped_fragment_='){
 	path = decodeURIComponent(location.search.substr(20).split('&')[0]);
 }
 if(path == '/'){path = ''; window.history.replacetate(null, '', '/');page=1;}
-else if(path && !location.search){window.history.pushState(null, '', '/#!'+path);}
+else if(path && !location.search){window.history.replaceState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
 var dis = document.getElementById('disqus_thread');
@@ -187,6 +187,6 @@ window.onhashchange = function(){
 	dis.style.display = 'none';
 	dis.innerHTML = '';
 	path = location.hash.substr(2);
-	if(path == '/'){path = ''; window.history.pushState(null, '', '/');}
+	if(path == '/'){path = ''; window.history.replaceState(null, '', '/');}
 	main();
 }
