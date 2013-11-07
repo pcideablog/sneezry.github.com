@@ -1,8 +1,9 @@
 var path = decodeURIComponent(location.hash.substr(2));
+var page;
 if(location.search.substr(1,19)=='_escaped_fragment_='){
 	path = decodeURIComponent(location.search.substr(20).split('&')[0]);
 }
-if(path == '/'){path = ''; window.history.replacetate(null, '', '/');}
+if(path == '/'){path = ''; window.history.replacetate(null, '', '/');page=1;}
 else if(path && !location.search){window.history.pushState(null, '', '/#!'+path);}
 var converter = new Showdown.converter();
 var content = document.getElementById('content');
@@ -24,7 +25,7 @@ function main(){
 	if(path.split('/')[1] == 'search'){
 		search(path.split('/')[2]);
 	}
-	else if(path){
+	else if(path && path.split('/')[1] != 'page'){
 		disqus_url = hostbase + path;
 		showpost(path);
 		(function() {
@@ -115,21 +116,41 @@ function showpost(path){
 }
 
 function showlist(list){
+	if(path.split('/')[1] == 'page'){
+		page = Number(path.split('/')[2]);
+		if(isNaN(page)){
+			page = 1;
+			window.history.replaceState(null, '', '/');
+		}
+	}
 	pending = false;
 	document.getElementById('takinglonger').style.display = 'none';
 	postList = list;
 	var txt = '';
-	for(var i = list.data.length; i > 0; i--){
+	if(page*20>list.data.length){
+		page = Math.ceil(list.data.length/20);
+		window.history.replaceState(null, '', '/#!/page/'+page);
+	}
+	for(var i = list.data.length-(page-1)*20; i > 0 && i > list.data.length-(page-2)*20; i--){
 		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></div></postlist>';
+	}
+	if(page>1 && page*20>=list.data.length){
+		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a></postlist>';
+	}
+	else if(page==1 && page*20<list.data.length){
+		txt += '<postlist><a class="next_page" href="/#!/page/'+(page-1)+'">更新的文章→</a></postlist>';
+	}
+	else if(page>1 && page*20<list.data.length){
+		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><a class="next_page" href="/#!/page/'+(page-1)+'">更新的文章→</a></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = txt;
 	(function () {
-        	var s = document.createElement('script'); s.async = true;
+        var s = document.createElement('script'); s.async = true;
 		s.type = 'text/javascript';
-        	s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        	(document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    	}());
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
 }
 
 function encodePath(path){

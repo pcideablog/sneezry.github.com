@@ -117,6 +117,15 @@ postlist a:hover {
   border-bottom: 1px #2879d0 dashed
 }
 
+.prev_page, .next_page {
+  color: gray;
+  font-size: 12px;
+}
+
+.next_page {
+  float: right;
+}
+
 .inner {
   position: relative;
   width: 940px;
