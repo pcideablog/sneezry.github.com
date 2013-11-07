@@ -192,7 +192,6 @@ postlist a:hover {
 aside#sidebar {
   width: 200px;
   padding: 20px;
-  min-height: 550px;
   float: right;
   position: relative;
   background: white;
