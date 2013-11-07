@@ -87,7 +87,7 @@ function loadXMLDoc(url){
 					var blog_text = xmlhttp.responseText;
 					var encoded = false;
 					if(blog_text.substr(0,2)=='::'){
-						blog_text = base62.decode(blog_text.substr(2));
+						blog_text = Base64.decode(blog_text.substr(2));
 						encoded = true;
 					};
 					var converter = new Showdown.converter();
