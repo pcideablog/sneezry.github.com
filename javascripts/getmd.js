@@ -138,10 +138,10 @@ function showlist(list){
 		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><div style="clear:both"></div></postlist>';
 	}
 	else if(page>1 && page*20>=list.data.length){
-		txt += '<postlist><a class="next_page" href="/#!/page/'+(page-1)+'">更新的文章→</a><div style="clear:both"></div></postlist>';
+		txt += '<postlist><a class="next_page" href="/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
 	}
 	else if(page>1 && page*20<list.data.length){
-		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><a class="next_page" href="/#!/page/'+(page-1)+'">更新的文章→</a><div style="clear:both"></div></postlist>';
+		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←之前的文章</a><a class="next_page" href="/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
 	}
 	loading.style.display = 'none';
 	content.innerHTML = txt;
