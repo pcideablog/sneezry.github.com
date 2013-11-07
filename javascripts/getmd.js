@@ -55,7 +55,13 @@ function home(){
 	path = '';
 	dis.style.display = 'none';
 	dis.innerHTML = '';
-	window.history.pushState(null, '', '/');
+	if(page==1){
+		window.history.pushState(null, '', '/');
+	}
+	else{
+		path = '/page/'+page;
+		window.history.pushState(null, '', '/#!/page/'+page);
+	}
 	main();
 }
 
