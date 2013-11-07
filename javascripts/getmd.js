@@ -118,8 +118,10 @@ function showpost(path){
 function showlist(list){
 	if(path.split('/')[1] == 'page'){
 		page = Number(path.split('/')[2]);
-		if(isNaN(page)){
+		if(isNaN(page) || page < 1){
 			page = 1;
+		}
+		if(page == 1){
 			window.history.replaceState(null, '', '/');
 		}
 	}
