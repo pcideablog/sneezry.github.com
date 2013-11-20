@@ -68,7 +68,7 @@ function showCells(){
 	}
 }
 
-window.onsize = function (){
+window.onresize = function (){
 	cwidth = Math.ceil(document.getElementsByTagName('header').offsetWidth/5)*5;
 	cheight = Math.ceil(document.getElementsByTagName('header').offsetHeight/5)*5;
 	init();
