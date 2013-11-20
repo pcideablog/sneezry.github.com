@@ -39,7 +39,7 @@ function main(){
 		document.title = 'Sneezry';
 		var disqusCounts = document.getElementsByName('commentscount');
 		for(var i in disqusCounts){
-			commentscount[disqusCounts[i].id] = disqusCounts[i].innerText;
+			commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
 		}
 		if(postList){
 			showlist(postList);
