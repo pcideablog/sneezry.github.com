@@ -696,6 +696,11 @@ footer a:hover {
   margin: 20px 0 0 10px;
 }
 
+#gameoflife {
+  position: absolute;
+  top: -40px;
+}
+
 /* #Media Queries
 ================================================== */
 
