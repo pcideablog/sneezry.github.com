@@ -73,8 +73,8 @@ function showCells(){
 
 window.onresize = function (){
 	clearTimeout(scount);
-	cwidth = Math.ceil(document.getElementsByTagName('header').offsetWidth/5)*5;
-	cheight = Math.ceil(document.getElementsByTagName('header').offsetHeight/5)*5;
+	cwidth = Math.floor(document.getElementsByTagName('header')[0].offsetWidth/5)*5;
+	cheight = Math.floor(document.getElementsByTagName('header')[0].offsetHeight/5)*5;
 	canvas.width = cwidth;
 	canvas.height = cheight;
 	init();
