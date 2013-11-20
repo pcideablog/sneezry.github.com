@@ -1,5 +1,5 @@
-var cwidth = Math.ceil(document.getElementsByTagName('header').offsetWidth/5)*5;
-var cheight = Math.ceil(document.getElementsByTagName('header').offsetHeight/5)*5;
+var cwidth = Math.ceil(document.getElementsByTagName('header')[0].offsetWidth/5)*5;
+var cheight = Math.ceil(document.getElementsByTagName('header')[0].offsetHeight/5)*5;
 var csize = 5;
 var canvas = document.getElementById('gameoflife');
 canvas.width = cwidth;
