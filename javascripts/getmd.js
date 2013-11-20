@@ -38,8 +38,7 @@ function main(){
 		//backhome.style.display = 'none';
 		document.title = 'Sneezry';
 		var disqusCounts = document.getElementsByName('commentscount');
-		console.log(disqusCounts);
-		for(var i in disqusCounts){
+		for(var i=0; i<disqusCounts.length; i++){
 			commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
 		}
 		if(postList){
