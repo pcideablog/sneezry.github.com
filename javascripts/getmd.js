@@ -14,8 +14,8 @@ var xmlhttp;
 var disqus_url;
 var kw;
 var postList;
-
 var pending;
+var commentscount = new Array();
 
 main();
 
@@ -37,6 +37,10 @@ function main(){
 	else{
 		//backhome.style.display = 'none';
 		document.title = 'Sneezry';
+		var disqusCounts = document.getElementsByName('commentscount');
+		for(var i in disqusCounts){
+			commentscount[disqusCounts[i].id] = disqusCounts[i].innerText;
+		}
 		if(postList){
 			showlist(postList);
 		}
@@ -146,7 +150,7 @@ function showlist(list){
 		window.history.replaceState(null, '', '/#!/page/'+page);
 	}
 	for(var i = list.data.length-(page-1)*20; i > 0 && i > list.data.length-page*20; i--){
-		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + '#disqus_thread"></a></span></div></postlist>';
+		txt += '<postlist><a href="/#!/' + list.data[i-1].name.replace(/-/g, '/') + '">' + list.data[i-1].name.split('-')[list.data[i-1].name.split('-').length-1].replace(/_/g, ' ') + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + (commentscount[i]?'':'#disqus_thread') + '" name="commentscount" id="post-'+i+'">'+(commentscount[i]?commentscount[i]:'')+'</a></span></div></postlist>';
 	}
 	if(page==1 && page*20<list.data.length){
 		txt += '<postlist><a class="prev_page" href="/#!/page/'+(page+1)+'">←较早的文章</a><div style="clear:both"></div></postlist>';
