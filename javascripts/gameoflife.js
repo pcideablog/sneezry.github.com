@@ -6,6 +6,7 @@ canvas.width = cwidth;
 canvas.height = cheight;
 var ctx = canvas.getContext('2d');
 var cells = new Array();
+var scount;
 
 init();
 
@@ -29,7 +30,7 @@ function getNewL(){
 	}
 	cells = ncells;
 	showCells();
-	setTimeout(getNewL, 200);
+	scount = setTimeout(getNewL, 200);
 }
 
 function getState(x, y){
@@ -71,5 +72,6 @@ function showCells(){
 window.onresize = function (){
 	cwidth = Math.ceil(document.getElementsByTagName('header').offsetWidth/5)*5;
 	cheight = Math.ceil(document.getElementsByTagName('header').offsetHeight/5)*5;
+	clearTimeout(scount);
 	init();
 }
