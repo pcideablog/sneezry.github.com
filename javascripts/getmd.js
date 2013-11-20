@@ -20,6 +20,10 @@ var commentscount = new Array();
 main();
 
 function main(){
+	var disqusCounts = document.getElementsByName('commentscount');
+	for(var i=0; i<disqusCounts.length; i++){
+		commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
+	}
 	content.innerHTML = '';
 	loading.style.display = 'block';
 	if(path.split('/')[1] == 'search'){
@@ -37,14 +41,6 @@ function main(){
 	else{
 		//backhome.style.display = 'none';
 		document.title = 'Sneezry';
-		var disqusCounts = document.getElementsByName('commentscount');
-		console.log(disqusCounts.length);
-		for(var i=0; i<disqusCounts.length; i++){
-			commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
-			console.log(Number(disqusCounts[i].id.substr(5)));
-			console.log(disqusCounts[i].innerText);
-			console.log(commentscount);
-		}
 		if(postList){
 			showlist(postList);
 		}
