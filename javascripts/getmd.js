@@ -38,11 +38,12 @@ function main(){
 		//backhome.style.display = 'none';
 		document.title = 'Sneezry';
 		var disqusCounts = document.getElementsByName('commentscount');
-		console.log(disqusCounts);
 		for(var i=0; i<disqusCounts.length; i++){
 			commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
+			console.log(Number(disqusCounts[i].id.substr(5)));
+			console.log(disqusCounts[i].innerText);
+			console.log(commentscount);
 		}
-		console.log(commentscount);
 		if(postList){
 			showlist(postList);
 		}
