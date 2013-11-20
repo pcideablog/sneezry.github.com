@@ -11,6 +11,8 @@ var scount;
 init();
 
 function init(){
+	ctx.fillStyle="#2e7bcf";
+	ctx.fillRect(0,0,cwidth,cheight);
 	for(var y=0; y<cheight/csize; y++){
 		cells[y] = new Array();
 		for(var x=0; x<cwidth/csize; x++){
@@ -70,8 +72,10 @@ function showCells(){
 }
 
 window.onresize = function (){
+	clearTimeout(scount);
 	cwidth = Math.ceil(document.getElementsByTagName('header').offsetWidth/5)*5;
 	cheight = Math.ceil(document.getElementsByTagName('header').offsetHeight/5)*5;
-	clearTimeout(scount);
+	canvas.width = cwidth;
+	canvas.height = cheight;
 	init();
 }
