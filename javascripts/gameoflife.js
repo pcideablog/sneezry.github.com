@@ -16,7 +16,7 @@ function init(){
 	for(var y=0; y<cheight/csize; y++){
 		cells[y] = new Array();
 		for(var x=0; x<cwidth/csize; x++){
-			cells[y][x] = Math.round(Math.random()*0.6);
+			cells[y][x] = Math.round(Math.random()*0.55);
 		}
 	}
 	getNewL();
