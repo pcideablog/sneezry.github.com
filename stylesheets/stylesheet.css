@@ -76,6 +76,8 @@ header {
   font-family: Arial, serif; 
   background: #2e7bcf;
   border-bottom: solid 1px #275da1;
+  position: relative;
+  overflow: hidden;
 }
 
 header h1 {
