@@ -126,7 +126,7 @@ function chktakinglonger(){
 function showpost(path){
 	//window.history.pushState(null, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
-	document.title = path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ') + ' - Sneezry';
+	document.title = decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + ' - Sneezry';
 	pdate = path.substr(1).split('/')[0]+'-'+path.substr(1).split('/')[1]+'-'+path.substr(1).split('/')[2];
 	loadXMLDoc(url);
 }
