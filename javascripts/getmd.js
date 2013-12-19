@@ -106,7 +106,7 @@ function loadXMLDoc(url){
 				}
 				else {
 					document.title = 'Technology Problem - Sneezry';
-					content.innerHTML = '<blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote>';
+					content.innerHTML = '<div id="takinglonger"><blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote></div>';
 				}
 			}
 		}
