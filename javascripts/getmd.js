@@ -122,15 +122,9 @@ function shorturl(url){
 	}
 	else{
 		var hash = encodeURIComponent(decodeUtf8(location.hash));
-		if(document.getElementById('shorturlscript')){
-			document.getElementById('shorturlscript').src = 'http://sneezryworks.sinaapp.com/blogshorturl.php?url='+encodeURIComponent('http://sneezry.com/'+hash)+'&callback=shorturl';
-		}
-		else{
-			var el = document.createElement('script');
-			el.id = 'shorturlscript';
-			el.src = 'http://sneezryworks.sinaapp.com/blogshorturl.php?url='+encodeURIComponent('http://sneezry.com/'+hash)+'&callback=shorturl';
-			document.getElementsByTagName('head')[0].appendChild(el);
-		}
+		var el = document.createElement('script');
+		el.src = 'http://sneezryworks.sinaapp.com/blogshorturl.php?url='+encodeURIComponent('http://sneezry.com/'+hash)+'&callback=shorturl';
+		document.getElementsByTagName('head')[0].appendChild(el);
 	}
 }
 
