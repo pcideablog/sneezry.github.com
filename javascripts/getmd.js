@@ -95,7 +95,7 @@ function loadXMLDoc(url){
 						encoded = true;
 					};
 					var converter = new Showdown.converter();
-					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'') + '<div id="shorturl"></div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
+					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'') + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
 					if(dis){
 						dis.style.display = 'block';
 					}
@@ -118,7 +118,7 @@ function loadXMLDoc(url){
 
 function shorturl(url){
 	if(url && document.getElementById('shorturl')){
-		document.getElementById('shorturl').innerText = url;
+		document.getElementById('shorturl').innerText = 'Short URL for this post: '.url;
 	}
 	else{
 		var hash = encodeURIComponent(decodeUtf8(location.hash));

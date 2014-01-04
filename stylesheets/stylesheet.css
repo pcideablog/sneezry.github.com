@@ -440,7 +440,9 @@ form {
 }
 
 #shorturl {
-  font-size: 0.8em;
+  font-size: 0.4em;
+  height: 1.2em;
+  line-height: 1.2em;
   text-align: right;
 }
 
