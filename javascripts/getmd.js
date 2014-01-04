@@ -118,7 +118,7 @@ function loadXMLDoc(url){
 
 function shorturl(url){
 	if(url && document.getElementById('shorturl')){
-		document.getElementById('shorturl').innerText = 'Short URL for this post: '.url;
+		document.getElementById('shorturl').innerText = 'Short URL for this post: '+url;
 	}
 	else{
 		var hash = encodeURIComponent(decodeUtf8(location.hash));
