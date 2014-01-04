@@ -439,6 +439,11 @@ form {
   padding: 5px 0;
 }
 
+#shorturl {
+  font-size: 0.8em;
+  text-align: right;
+}
+
 .backhome {
   position: relative;
   top: -15px;
