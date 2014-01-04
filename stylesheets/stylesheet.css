@@ -446,6 +446,10 @@ form {
   text-align: right;
 }
 
+#shorturl span {
+  color: #2e7bcf;
+}
+
 .backhome {
   position: relative;
   top: -15px;
