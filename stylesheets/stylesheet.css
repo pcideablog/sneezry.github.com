@@ -439,6 +439,17 @@ form {
   padding: 5px 0;
 }
 
+#shorturl {
+  font-size: 0.4em;
+  height: 1.2em;
+  line-height: 1.2em;
+  text-align: right;
+}
+
+#shorturl span {
+  color: #2e7bcf;
+}
+
 .backhome {
   position: relative;
   top: -15px;
