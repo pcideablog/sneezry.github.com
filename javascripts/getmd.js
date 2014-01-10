@@ -31,6 +31,7 @@ function main(){
 	}
 	else if(path && path.split('/')[1] != 'page'){
 		disqus_url = hostbase + path;
+		disqus_url = disqus_url.toLowerCase();
 		showpost(path);
 		(function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
