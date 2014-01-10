@@ -30,8 +30,8 @@ function main(){
 		search(path.split('/')[2]);
 	}
 	else if(path && path.split('/')[1] != 'page'){
-		disqus_url = hostbase + path;
-		disqus_url = disqus_url.toLowerCase();
+		disqus_url = hostbase + lowerCase(path);
+		//disqus_url = disqus_url.toLowerCase();
 		showpost(path);
 		(function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
@@ -68,6 +68,15 @@ function home(){
 		window.history.pushState(null, '', '/#!/page/'+page);
 	}
 	main();
+}
+
+function lowerCase(path){
+	path = path.split('%');
+	newPath = path[0];
+	for(var i=1; i<path.length; i++){
+		newPath += '%'+path[i].substr(0,2).toLowerCase()+path[i].substr(2);
+	}
+	return newPath;
 }
 
 function loadXMLDoc(url){
