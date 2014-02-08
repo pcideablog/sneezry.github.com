@@ -2,7 +2,7 @@
   font-family: 'Sneezry Blog';
   font-style: normal;
   font-weight: 400;
-  src: local('Sneezry Blog'), url(http://sneezry.com/sneezry_blog.woff) format('woff');
+  src: local('Sneezry Blog'), url(sneezry_blog.woff) format('woff');
 }
 
 /* http://meyerweb.com/eric/tools/css/reset/ 

@@ -41,7 +41,7 @@ function main(){
 	}
 	else{
 		//backhome.style.display = 'none';
-		document.title = 'Sneezry';
+		document.title = sitetitle;
 		if(postList){
 			showlist(postList);
 		}
@@ -105,18 +105,18 @@ function loadXMLDoc(url){
 						encoded = true;
 					};
 					var converter = new Showdown.converter();
-					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">Sneezry</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'') + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
+					content.innerHTML = '<div style="padding: 20px 20px 20px 40px;"><div id="back_home"><a href="/" onclick="home();return false;">'+sitetitle+'</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'') + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
 					if(dis){
 						dis.style.display = 'block';
 					}
 					setTimeout(shorturl,200);
 				}
 				else if(xmlhttp.status==404) {
-					document.title = 'Not Found - Sneezry';
+					document.title = 'Not Found - '+sitetitle;
 					content.innerHTML = '<img src="images/despicable_me.png" />';
 				}
 				else {
-					document.title = 'Technology Problem - Sneezry';
+					document.title = 'Technology Problem - '+sitetitle;
 					content.innerHTML = '<div id="takinglonger"><blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote></div>';
 				}
 			}
@@ -147,9 +147,8 @@ function chktakinglonger(){
 }
 
 function showpost(path){
-	//window.history.pushState(null, path.substr(1).split('/')[path.substr(1).split('/').length-1] + ' - Sneezry', path);
 	var url = location.protocol + '//' + location.hostname + '/md/' + path.substr(1).replace(/\//g, '-');
-	document.title = decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + ' - Sneezry';
+	document.title = decodeUtf8(path.substr(1).split('/')[path.substr(1).split('/').length-1].replace(/_/g, ' ')) + ' - '++sitetitle;
 	pdate = path.substr(1).split('/')[0]+'-'+path.substr(1).split('/')[1]+'-'+path.substr(1).split('/')[2];
 	loadXMLDoc(url);
 }

@@ -19,7 +19,7 @@ function search(q){
 		loading.style.display = 'block';
 		dis.style.display = 'none';
 		dis.innerHTML = '';
-		document.title = 'Search:' + q + ' - Sneezry';
+		document.title = 'Search:' + q + ' - '+sitetitle;
 		kw = q;
 		if(postList){
 			searchlist(postList);
