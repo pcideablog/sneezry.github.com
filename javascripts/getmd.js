@@ -224,7 +224,15 @@ window.onhashchange = function(){
 		window.history.replaceState(null, '', '/#!'+path);
 		return;
 	}
-	goToTop();
+	//goToTop();
+	if (document.documentElement) {
+		document.documentElement.scrollLeft = 0;
+		document.documentElement.scrollTop = 0;
+	}
+	if (document.body) {
+		document.body.scrollLeft = 0;
+		document.body.scrollTop = 0;
+	}
 	dis.style.display = 'none';
 	dis.innerHTML = '';
 	path = location.hash.substr(2);
