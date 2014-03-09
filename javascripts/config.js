@@ -4,3 +4,5 @@ var githubname = 'sneezry';
 var repos = 'sneezry.github.com';
 var sitetitle = 'Sneezry';
 var rss = 'http://feeds.feedburner.com/Sneezry';
+var suffix = '';
+var branch = '';
