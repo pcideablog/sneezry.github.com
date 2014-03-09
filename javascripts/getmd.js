@@ -107,10 +107,11 @@ function loadXMLDoc(url){
 					};
 					blog_text = filterJekyllHeader(blog_text);
 					var converter = new Showdown.converter();
-					content.innerHTML = '<div id="content_inner"><div id="back_home"><a href="/" onclick="home();return false;">'+sitetitle+'</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(getPostName(path)) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'') + '</div>' + converter.makeHtml(blog_text) + '<div class="date">Posted at ' + pdate + '</div></div>';
+					content.innerHTML = '<div id="content_inner"><div id="back_home"><a href="/" onclick="home();return false;">'+sitetitle+'</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(getPostName(path)) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'')  + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date">Posted at ' + pdate + '</div></div>';
 					if(dis){
 						dis.style.display = 'block';
 					}
+					setTimeout(shorturl,200);
 				}
 				else if(xmlhttp.status==404) {
 					document.title = 'Not Found - '+sitetitle;
@@ -124,6 +125,18 @@ function loadXMLDoc(url){
 		}
 		xmlhttp.open("GET",url,true);
 		xmlhttp.send(null);
+	}
+}
+
+function shorturl(url){
+	if(url && document.getElementById('shorturl')){
+		document.getElementById('shorturl').innerHTML = 'Short URL for this post: <span>'+url+'</span>';
+	}
+	else{
+		var hash = encodeURIComponent(decodeUtf8(location.hash));
+		var el = document.createElement('script');
+		el.src = 'http://sneezryworks.sinaapp.com/blogshorturl.php?url='+encodeURIComponent('http://sneezry.com/'+hash)+'&callback=shorturl';
+		document.getElementsByTagName('head')[0].appendChild(el);
 	}
 }
 
@@ -164,7 +177,7 @@ function showlist(list){
 		if(suffix && list.data[i-1].name.substr(-suffix.length)==suffix){
 			list.data[i-1].name = list.data[i-1].name.substr(0, list.data[i-1].name.length-suffix.length);
 		}
-		txt += '<postlist><a href="'+(isroot?'':('/'+repos))+'/#!/' + encodePath(list.data[i-1].name, true) + '">' + getPostName(list.data[i-1].name) + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name, false) + (commentscount[i]?'':'#disqus_thread') + '" name="commentscount" id="post-'+i+'">'+(commentscount[i]?commentscount[i]:'')+'</a></span></div></postlist>';
+		txt += '<postlist><a href="'+(isroot?'':('/'+repos))+'/#!/' + encodePath(list.data[i-1].name, true) + '">' + getPostName(list.data[i-1].name) + '</a><div class="post_info"><span class="post_date"><span>S</span>Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name, false) + (commentscount[i]?'':'#disqus_thread') + '" name="commentscount" id="post-'+i+'">'+(commentscount[i]?commentscount[i]:'')+'</a></span></div></postlist>';
 	}
 	if(page==1 && page*20<list.data.length){
 		txt += '<postlist><a class="prev_page" href="'+(isroot?'':('/'+repos))+'/#!/page/'+(page+1)+'">←较早的文章</a><div style="clear:both"></div></postlist>';
