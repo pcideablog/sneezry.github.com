@@ -138,7 +138,7 @@ postlist a:hover {
   margin: 0 auto;
 }
 
-date span {
+.date span {
   font-family: 'Sneezry Blog';
   margin-right: 30px;
 }
