@@ -164,7 +164,7 @@ function showlist(list){
 		if(suffix && list.data[i-1].name.substr(-suffix.length)==suffix){
 			list.data[i-1].name = list.data[i-1].name.substr(0, list.data[i-1].name.length-suffix.length);
 		}
-		txt += '<postlist><a href="'+(isroot?'':('/'+repos))+'/#!/' + encodePath(list.data[i-1].name) + '">' + getPostName(list.data[i-1].name) + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name) + (commentscount[i]?'':'#disqus_thread') + '" name="commentscount" id="post-'+i+'">'+(commentscount[i]?commentscount[i]:'')+'</a></span></div></postlist>';
+		txt += '<postlist><a href="'+(isroot?'':('/'+repos))+'/#!/' + encodePath(list.data[i-1].name, true) + '">' + getPostName(list.data[i-1].name) + '</a><div class="post_info"><span class="post_date">Posted at '+list.data[i-1].name.split('-')[0]+'-'+list.data[i-1].name.split('-')[1]+'-'+list.data[i-1].name.split('-')[2]+'</span><span class="disqus_count"><a href="' + hostbase + '/' + encodePath(list.data[i-1].name, false) + (commentscount[i]?'':'#disqus_thread') + '" name="commentscount" id="post-'+i+'">'+(commentscount[i]?commentscount[i]:'')+'</a></span></div></postlist>';
 	}
 	if(page==1 && page*20<list.data.length){
 		txt += '<postlist><a class="prev_page" href="'+(isroot?'':('/'+repos))+'/#!/page/'+(page+1)+'">←较早的文章</a><div style="clear:both"></div></postlist>';
@@ -185,7 +185,7 @@ function showlist(list){
     }());
 }
 
-function encodePath(path){
+function encodePath(path, isdecode){
 	path = encodeURIComponent(path);
 	path = path.split('-');
 	var newPath = path[0]+'/'+path[1]+'/'+path[2]+'/'+path[3];
@@ -199,10 +199,10 @@ function encodePath(path){
 			i+=2;
 		}
 	}
-	return path;
+	return isdecode?decodeUtf8(path):path;
 }
 
-function decodeUtf8(str){
+fnction decodeUtf8(str){
 	try{
 		var tmp = decodeURIComponent(str);
 		if(tmp==str){
