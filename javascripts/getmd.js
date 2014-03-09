@@ -202,7 +202,7 @@ function encodePath(path, isdecode){
 	return isdecode?decodeUtf8(path):path;
 }
 
-fnction decodeUtf8(str){
+function decodeUtf8(str){
 	try{
 		var tmp = decodeURIComponent(str);
 		if(tmp==str){
