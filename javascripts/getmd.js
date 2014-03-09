@@ -218,6 +218,7 @@ function decodeUtf8(str){
 }
 
 function getPostName(name){
+	name = name.replace(/\//g, '-');
 	name = name.split('-');
 	var newName = name[3];
 	for(var i=4; i<name.length; i++){
