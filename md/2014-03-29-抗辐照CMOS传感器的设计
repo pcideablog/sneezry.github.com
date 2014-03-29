@@ -63,19 +63,19 @@ PPD是一个N区与P衬底形成的PN节，但是在N区上还会覆盖一层很
 
 由于环形管是特殊器件，不能使用正常的模型。考虑到环形管只在栅的几何结构与正常MOSFET不同，可以等效出环形管的有效宽度，然后使用相应参数的正常MOSFET参数。
 
-![enclosed gate](/postimg/cis_enclosed_gate_1.png =300x)
+<img src="/postimg/cis_enclosed_gate_1.png" alt="enclosed gate" width="300" />
 
 上图是环形管中栅的简单结构，我们可以将源和漏之间的最短距离定位管长L。而管宽W最直观的确定是使用Mid Line，如下图虚线所示。
 
-![enclosed gate](/postimg/cis_enclosed_gate_2.png =300x)
+<img src="/postimg/cis_enclosed_gate_2.png" alt="enclosed gate" width="300" />
 
 但是这种等效方法会与实际结构有较大误差，所以完全不可行。比较可用的方法是将环形栅分割成多个区域，然后分别对这些区域采用几何学上的共型转换，再根据流体力学的知识分析出等效的宽长比。下图给出了分割方法。
 
-![enclosed gate](/postimg/cis_enclosed_gate_3.png =300x)
+<img src="/postimg/cis_enclosed_gate_3.png" alt="enclosed gate" width="300" />
 
 经过计算机模拟，可用得出下面的公式：
 
-![enclosed gate](/postimg/cis_effective_width.png)
+![effective width](/postimg/cis_effective_width.png)
 
 公式上面的数字代表了栅的相应分割部分对有效宽长比的贡献。
 
@@ -83,6 +83,6 @@ PPD是一个N区与P衬底形成的PN节，但是在N区上还会覆盖一层很
 
 如果环形栅的拐角相比于四边长度可以忽略的话，可以近似有d=d'，再将α=0.05和K=4带入上式，就得出了有效管宽与管长的关系：
 
-![enclosed gate](/postimg/cis_effective_width_2.png =300x)
+<img src="/postimg/cis_effective_width_2.png" alt="effective width" width="300" />
 
 最后计算出W，采用对应参数即可。
