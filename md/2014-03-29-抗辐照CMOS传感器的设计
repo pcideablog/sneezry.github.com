@@ -1,0 +1,88 @@
+本文引用的图片均为我自己绘制，但个别图片根据以下论文内容重绘，图片本身以知识共享协议发布，但在引用时应提及图片所表达内容的依据来源。
+
+ Radiation Tolerant VLSI Circuits in Standard Deep Submicron CMOS Technologies for the LHC Experiments: Practical Design Aspects
+ Design of a Radiation Tolerant CMOS Image Sensor
+
+本文引用的有效宽长公式来自以下论文内容：
+
+ Radiation Tolerant VLSI Circuits in Standard Deep Submicron CMOS Technologies for the LHC Experiments: Practical Design Aspects
+
+简化后的公式来自以下论文内容：
+
+ Spice Macro Models for Annular Mosfets
+
+##CIS和CCD
+
+CIS，CMOS图像传感器因为成本低，体积小，功耗低等优点，已经在民用领域全面替代CCD，但目前为止CCD还在一个重要的领域占主导地位，这个领域就是航空航天。CIS在航天领域有一个致命的缺陷，就是会漏电。为什么漏电对图像传感器来说是一个致命的问题？首先让我们来看一下CMOS图像传感器的基本原理。CMOS图像传感器使用一个感光二极管探测光的强弱，最终转换成图像信号，而光电二极管所变现光强的形式就是电流的变化，过大的漏电流会严重影响实际信号的检测，最终就会形成较大的噪点（晚上用手机照相黑色部分很多小麻点就是漏电流产生的噪点）。目前所采用的解决方法大多是在工艺上改进，但这种工艺成本过高，下面对具体的原理给出解释。
+
+##MOSFET为什么怕辐照
+
+首先我们看一下MOSFET的基本结构：
+
+![MOSFET](/postimg/cis_mosfet_rad.png)
+
+上图绿色的部分是MOSFET的栅极，它是用多晶硅做成的，属于半导体；下面灰色部分是二氧化硅绝缘层，正常情况下它是不导电的；再下面的黄色部分是源级和漏级，都是重掺杂的硅（对于NMOS是P掺杂，PMOS是N掺杂）；紫色部分是形成反型层时的导电沟道。
+
+问题就出在灰色的二氧化硅部分。当MOSFET在辐照环境下，二氧化硅中原本被禁锢电子会发生电离，在外界电场的作用下电子被迅速抽走，而空穴则陷进氧空位中无法快速漂移，导致二氧化硅层整体带正电，这就相当于在Gate上附加了一个正电压。这个附带的正电压会产生阈值电压的漂移。
+
+下面我们来看一下MOSFET的3D结构：
+
+![MOSFET](/postimg/cis_mosfet_rad_3d.png)
+
+在上图的结构中，两侧场氧凸起的部分是STI，它的作用是隔开相邻的MOSFET，以不至由于集成度的增高，相邻两个过紧的MOSFET进行电子交换。但STI同样是二氧化硅，在辐照环境下它相当于在MOSFET两侧附加了两个MOSFET，对于NMOS来说阈值电压的漂移会导致附加MOSFET导通从而增大漏电流，而对于PMOS来说阈值电压正的漂移会使得MOSFET更难导通，所以不存在漏电流增加的问题。
+
+##4T CIS的基本结构
+
+那么4T图像传感器的结构如何，它的具体工作原理又如何呢？下面是传统的4T图像传感器结构图：
+
+![4T CIS](/postimg/cis_4t.png)
+
+其中有四个MOSFET，均为NMOS。TX的作用是增强器件敏感程度，RST的作用是重置，SF的作用是放大信号并将信号转换为电压信号，RSL是行选器，用于总线串行扫描。
+
+其中TX的源端同时也兼做感光二极管，称作PPD，实际版图中这部分会做得非常大，往往面积会占整个像素50%以上。当光照射到感光二极管上，在PN节的耗尽区开始积累电荷，积累到一定程度后TX开启，这些电荷开始通过FD节点传入SF，此时SF的输出信号会有一个阶跃的变化，最后RSL开启，总线读取像素采样数据。
+
+目前的问题就是PPD和RST两处在辐照环境下会漏电，再通过SF放大后所采集的数据将非常不可靠。
+
+##改进后的CIS
+
+下图是改进后的CIS结构图：
+
+![4T CIS](/postimg/cis_4t_rad.png)
+
+其中TX和RST使用了对辐照抗性良好的环形栅结构，同时将PPD完全用STI隔离，最后又将STI做在了PWELL中，防止N区与STI进行电子交换。
+
+PPD是一个N区与P衬底形成的PN节，但是在N区上还会覆盖一层很薄的重掺杂P+区，原因是防止PN节受表面态的影响，如下图所示。
+
+![PPD](/postimg/cis_ppd.png)
+
+红色虚线框所示的区域是耗尽层，在TX开启之前PPD产生的光生载流子就储存在这个区域。由于P+比N区掺杂浓度大得多，所以会在P+区域形成一个非常薄的耗尽区，就是这个耗尽区阻止了表面态对PN节的影响。同时左侧的耗尽层伸入PWELL内而没有与STI相连以保证N区与STI无电子交换。
+
+最后在整个像素四周做了一圈P+保护环，进一步避免漏电。而SF和RSL未使用环形管是因为SF的偏置电流比辐照产生的漏电流大几个量级，所以没有必要考虑二者的漏电问题。
+
+##环形管的参数模型
+
+由于环形管是特殊器件，不能使用正常的模型。考虑到环形管只在栅的几何结构与正常MOSFET不同，可以等效出环形管的有效宽度，然后使用相应参数的正常MOSFET参数。
+
+![enclosed gate](/postimg/cis_enclosed_gate_1.png)
+
+上图是环形管中栅的简单结构，我们可以将源和漏之间的最短距离定位管长L。而管宽W最直观的确定是使用Mid Line，如下图虚线所示。
+
+![enclosed gate](/postimg/cis_enclosed_gate_2.png)
+
+但是这种等效方法会与实际结构有较大误差，所以完全不可行。比较可用的方法是将环形栅分割成多个区域，然后分别对这些区域采用几何学上的共型转换，再根据流体力学的知识分析出等效的宽长比。下图给出了分割方法。
+
+![enclosed gate](/postimg/cis_enclosed_gate_3.png)
+
+经过计算机模拟，可用得出下面的公式：
+
+![enclosed gate](/postimg/cis_effective_width.png)
+
+公式上面的数字代表了栅的相应分割部分对有效宽长比的贡献。
+
+其中α和K都是经验参数，经过实验结果，α取0.05时结果最准确，K是与沟长相关的参数，对于短沟器件K取3.5，对于长沟器件K取4。
+
+如果环形栅的拐角相比于四边长度可以忽略的话，可以近似有d=d'，再将α=0.05和K=4带入上式，就得出了有效管宽与管长的关系：
+
+![enclosed gate](/postimg/cis_effective_width_2.png)
+
+最后计算出W，采用对应参数即可。
