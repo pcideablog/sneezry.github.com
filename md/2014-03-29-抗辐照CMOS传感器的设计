@@ -20,7 +20,7 @@ CIS，CMOS图像传感器因为成本低，体积小，功耗低等优点，已�
 
 首先我们看一下MOSFET的基本结构：
 
-![MOSFET](/postimg/cis_mosfet_rad.png)
+<img src="/postimg/cis_mosfet_rad.png" alt="MOSFET" width="400" />
 
 上图绿色的部分是MOSFET的栅极，它是用多晶硅做成的，属于半导体；下面灰色部分是二氧化硅绝缘层，正常情况下它是不导电的；再下面的黄色部分是源级和漏级，都是重掺杂的硅（对于NMOS是P掺杂，PMOS是N掺杂）；紫色部分是形成反型层时的导电沟道。
 
