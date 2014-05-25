@@ -7,16 +7,17 @@
 <style>
 #pro {
 	height: 10px;
+	width: 0;
 	background: gray;
 	-webkit-border-radius: 5px;
 	margin: 10px 0;
 }
 </style>
 </head>
-<body class="container">
+<body class="container" style="padding: 10px 0">
 <label for="list">输入文献标题，一行一个：</label>
 <textarea id="list" class="form-control" rows="10"></textarea>
-<button id="btn" type="button" class="btn btn-primary">生成引用列表</button>
+<button id="btn" type="button" class="btn btn-primary" style="margin-top: 10px">生成引用列表</button>
 <div id="pro"></div>
 <ul id="res"></ul>
 </body>
