@@ -1,3 +1,23 @@
-<textarea id="list"></textarea><br><input type="button" value="ok" id="btn" />
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>文献引用</title>
+<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+<style>
+#pro {
+	height: 10px;
+	background: gray;
+	-webkit-border-radius: 5px;
+	margin: 10px 0;
+}
+</style>
+</head>
+<body class="container">
+<label for="list">输入文献标题，一行一个：</label>
+<textarea id="list" class="form-control" rows="10"></textarea>
+<button id="btn" type="button" class="btn btn-primary">生成引用列表</button>
 <div id="pro"></div>
-<div id="res"></div>
+<ul id="res"></ul>
+</body>
+</html>
