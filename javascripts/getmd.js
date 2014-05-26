@@ -133,7 +133,7 @@ function shorturl(url){
 		document.getElementById('shorturl').innerHTML = 'Short URL for this post: <span>'+url+'</span>';
 	}
 	else{
-		var hash = encodeURIComponent(decodeUtf8(location.hash));
+		var hash = encodeURIComponent(decodeUtf8(location.hash.substr(3)));
 		var el = document.createElement('script');
 		el.src = 'http://sneezryworks.sinaapp.com/blogshorturl.php?url='+encodeURIComponent('http://sneezry.com/'+hash)+'&callback=shorturl';
 		document.getElementsByTagName('head')[0].appendChild(el);
