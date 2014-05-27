@@ -54,10 +54,10 @@
 
 + 多行注释使用Java风格的注释：
 
-    /*
-     * Sneezry有一只阿拉斯加雪橇犬
-     * 这只雪橇犬喜欢与Sneezry抢吃的
-     */
+        /*
+         * Sneezry有一只阿拉斯加雪橇犬
+         * 这只雪橇犬喜欢与Sneezry抢吃的
+         */
 
 + 不添加无意义的注释。
 
@@ -65,13 +65,13 @@
 
 + 文档注释：
 
-    /**
-    这个方法用来寻找Sneezry的阿拉斯加
-    在寻找Sneezry的时候这个方法不适用
-    @method findSneezrysAlaska
-    @param {Object} Sneezry的阿拉斯加的特点
-    @return {Object} 一个阿拉斯加对象
-    **/
+        /**
+        这个方法用来寻找Sneezry的阿拉斯加
+        在寻找Sneezry的时候这个方法不适用
+        @method findSneezrysAlaska
+        @param {Object} Sneezry的阿拉斯加的特点
+        @return {Object} 一个阿拉斯加对象
+        **/
 
 + if和for等语句永远使用花括号包含子语句。
 
@@ -97,16 +97,16 @@
 
 + 立即调用的函数，用括号将函数体包围：
 
-    var getAlaskasFriend = (function() {
-        return 'Sneezry';
-    })();
+        var getAlaskasFriend = (function() {
+            return 'Sneezry';
+        })();
 
 + 只在局部使用严格模式，禁止全局使用严格模式：
 
-    function doSomethingStrictly (){
-        "use strict";
-        //some code
-    }
+        function doSomethingStrictly (){
+            "use strict";
+            //some code
+        }
 
 + 禁止使用==，使用===判断相等。
 
