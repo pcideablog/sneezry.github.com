@@ -96,28 +96,32 @@ function loadXMLDoc(url){
 			if (xmlhttp.readyState==4){// 4 = "loaded"
 				pending = false;
 				document.getElementById('takinglonger').style.display = 'none';
-				loading.style.display = 'none';
 				//backhome.style.display = 'block';
 				if (xmlhttp.status==200){// 200 = "OK"
-					var blog_text = xmlhttp.responseText;
-					var encoded = false;
-					if(blog_text.substr(0,2)=='::'){
-						blog_text = Base64.decode(blog_text.substr(2));
-						encoded = true;
-					};
-					blog_text = filterJekyllHeader(blog_text);
-					var converter = new Showdown.converter();
-					content.innerHTML = '<div id="content_inner"><div id="back_home"><a href="/" onclick="home();return false;">'+sitetitle+'</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(getPostName(path)) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'')  + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
-					if(dis){
-						dis.style.display = 'block';
-					}
-					setTimeout(shorturl,200);
+					setTimeout(function(){
+						loading.style.display = 'none';
+						var blog_text = xmlhttp.responseText;
+						var encoded = false;
+						if(blog_text.substr(0,2)=='::'){
+							blog_text = Base64.decode(blog_text.substr(2));
+							encoded = true;
+						};
+						blog_text = filterJekyllHeader(blog_text);
+						var converter = new Showdown.converter();
+						content.innerHTML = '<div id="content_inner"><div id="back_home"><a href="/" onclick="home();return false;">'+sitetitle+'</a><span>&nbsp;›&nbsp;</span></div><div id="post_title">' + decodeUtf8(getPostName(path)) + (encoded?Base64.decode('PHN1cCBzdHlsZT0iZm9udC1zaXplOjAuNWVtO3ZlcnRpY2FsLWFsaWduOiBzdXBlcjsiIHRpdGxlPSLmraTmlofnq6Dlt7Looqvph43mlrDnvJbnoIHku6XourLpgb/lrqHmn6UiPuKYmuiiq+e8lueggeeahOWGheWuuTwvc3VwPg=='):'')  + '<div id="shorturl">Checking short URL for this post...</div></div>' + converter.makeHtml(blog_text) + '<div class="date"><span>S</span>Posted at ' + pdate + '</div></div>';
+						if(dis){
+							dis.style.display = 'block';
+						}
+						setTimeout(shorturl,200);
+					}, 1000);
 				}
 				else if(xmlhttp.status==404) {
+					loading.style.display = 'none';
 					document.title = 'Not Found - '+sitetitle;
 					content.innerHTML = '<img src="images/despicable_me.png" />';
 				}
 				else {
+					loading.style.display = 'none';
 					document.title = 'Technology Problem - '+sitetitle;
 					content.innerHTML = '<div id="takinglonger"><blockquote>We meet a problem when try to handle ' + path + ' (Err: ' + xmlhttp.status + ').</blockquote></div>';
 				}
