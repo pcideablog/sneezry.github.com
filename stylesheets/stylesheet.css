@@ -164,6 +164,10 @@ postlist a:hover {
   -moz-border-radius: 3px;
   border-radius: 3px;
   background: rgba(255,255,255,0.5);
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
 }
 
 #main-content:hover {
