@@ -60,7 +60,7 @@ body {
   background: url(../images/new-york-city.jpg) no-repeat center fixed;
   font-family: Arial, serif;
   font-weight: 400;
-  color: #666;
+  color: #222;
 }
 
 a {
@@ -82,7 +82,7 @@ header {
 header h1 {
   letter-spacing: -1px;
   font-size: 72px;
-  color: #fff;
+  color: #222;
   line-height: 1;
   margin-bottom: 0.2em;
   width: 540px;
@@ -756,6 +756,7 @@ footer a:hover {
   }
   body {
     background: #eee;
+    color: #666;
   }
   header {
     padding: 20px 0;
@@ -770,6 +771,7 @@ footer a:hover {
   }
   header h1 {
     font-size: 48px;
+    color: white;
   }
   header h2 {
     font-size: 24px;
