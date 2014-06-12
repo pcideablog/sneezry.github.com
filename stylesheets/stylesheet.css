@@ -162,7 +162,7 @@ postlist a:hover {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.5);
 }
 
 #main-content img {
@@ -196,7 +196,7 @@ aside#sidebar {
   padding: 20px;
   float: right;
   position: relative;
-  background: rgba(255,255,255,0.75);
+  background: rgba(255,255,255,0.5);
   font-size: 12px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
