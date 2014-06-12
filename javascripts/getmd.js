@@ -192,14 +192,16 @@ function showlist(list){
 	else if(page>1 && page*20<list.data.length){
 		txt += '<postlist><a class="prev_page" href="'+(isroot?'':('/'+repos))+'/#!/page/'+(page+1)+'">←较早的文章</a><a class="next_page" href="'+(isroot?'':('/'+repos))+'/#!/page/'+(page-1)+'">较新的文章→</a><div style="clear:both"></div></postlist>';
 	}
-	loading.style.display = 'none';
-	content.innerHTML = txt;
-	(function () {
-        var s = document.createElement('script'); s.async = true;
-		s.type = 'text/javascript';
-        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
-        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
-    }());
+	setTimeout(function(){
+		loading.style.display = 'none';
+		content.innerHTML = txt;
+		(function () {
+	        var s = document.createElement('script'); s.async = true;
+			s.type = 'text/javascript';
+	        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+	        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+	    }());
+	}, 1000);
 }
 
 function encodePath(path, isdecode){
