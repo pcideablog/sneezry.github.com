@@ -57,7 +57,7 @@ table {
 body {
   font-size: 15px;
   line-height: 1.5; 
-  background: url(images/new-york-city.jpg) no-repeat center fixed;
+  background: url(../images/new-york-city.jpg) no-repeat center fixed;
   font-family: Arial, serif;
   font-weight: 400;
   color: #666;
