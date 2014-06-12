@@ -27,34 +27,36 @@ function main(){
 	}
 	content.innerHTML = '';
 	loading.style.display = 'block';
-	if(path.split('/')[1] == 'search'){
-		search(path.split('/')[2]);
-	}
-	else if(path && path.split('/')[1] != 'page'){
-		disqus_url = hostbase + lowerCase(path);
-		//disqus_url = disqus_url.toLowerCase();
-		showpost(path);
-		(function() {
-            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-        })();
-	}
-	else{
-		//backhome.style.display = 'none';
-		document.title = sitetitle;
-		if(postList){
-			showlist(postList);
+	setTimeout(function(){
+		if(path.split('/')[1] == 'search'){
+			search(path.split('/')[2]);
+		}
+		else if(path && path.split('/')[1] != 'page'){
+			disqus_url = hostbase + lowerCase(path);
+			//disqus_url = disqus_url.toLowerCase();
+			showpost(path);
+			(function() {
+	            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+	            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+	            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+	        })();
 		}
 		else{
-			pending = true;
-			document.getElementById('takinglonger').style.display = 'none';
-			chktakinglonger();
-			var el = document.createElement('script');
-			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist'+(branch?('&ref='+branch):'');
-			document.getElementsByTagName('head')[0].appendChild(el);
+			//backhome.style.display = 'none';
+			document.title = sitetitle;
+			if(postList){
+				showlist(postList);
+			}
+			else{
+				pending = true;
+				document.getElementById('takinglonger').style.display = 'none';
+				chktakinglonger();
+				var el = document.createElement('script');
+				el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=showlist'+(branch?('&ref='+branch):'');
+				document.getElementsByTagName('head')[0].appendChild(el);
+			}
 		}
-	}
+	}, 1000);
 }
 
 function home(){
