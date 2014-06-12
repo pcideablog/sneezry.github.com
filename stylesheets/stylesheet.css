@@ -36,6 +36,7 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+  background: url(images/new-york-city.jpg) no-repeat center fixed;
 }
 ol, ul {
 	list-style: none;
@@ -74,8 +75,7 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: Arial, serif; 
-  background: #2e7bcf;
-  border-bottom: solid 1px #275da1;
+  background: rgba(255,255,255,0.5);
   position: relative;
   overflow: hidden;
 }
@@ -246,7 +246,6 @@ a.button small {
 header span.searchbar {
   position: absolute;
   padding: 10px;
-  background: #e1e1e1;
   right: 0;
   bottom: -40px;
   -webkit-border-radius: 8px;
@@ -265,6 +264,7 @@ header span.searchbar {
   border-radius: 4px;
   background: url(../images/search-icon.png) no-repeat left center white;
   border: #CCCCCC 2px solid;
+  outline: none;
 }
 
 .cse .gsc-control-cse, .gsc-control-cse {
@@ -759,8 +759,13 @@ footer a:hover {
   .inner {
     width: 93%;
   }
+  body {
+    background: #eee;
+  }
   header {
     padding: 20px 0;
+    background: #2e7bcf;
+    border-bottom: solid 1px #275da1;
   }
   header .inner {
     position: relative;
