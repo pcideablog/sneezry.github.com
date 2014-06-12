@@ -74,7 +74,7 @@ header {
   padding-top: 40px;
   padding-bottom: 40px;
   font-family: Arial, serif; 
-  background: rgba(255,255,255,0.5);
+  background: rgba(255,255,255,0.3);
   position: relative;
   overflow: hidden;
 }
@@ -102,7 +102,7 @@ postlist {
   display: block;
   font-family: Arial, sans-serif;
   padding: 10px;
-  border-bottom: 1px #e2e2e2 solid;
+  border-bottom: 1px rgba(226,226,226,0.5) solid;
 }
 
 postlist:last-child {
@@ -162,9 +162,7 @@ postlist a:hover {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
-  -webkit-box-shadow: 1px 2px 3px #ddd;
-  box-shadow: 1px 2px 3px #ddd;
-  background: white;
+  background: rgba(255,255,255,0.5);
 }
 
 #main-content img {
@@ -198,14 +196,12 @@ aside#sidebar {
   padding: 20px;
   float: right;
   position: relative;
-  background: white;
+  background: rgba(255,255,255,0.5);
   font-size: 12px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
   line-height: 1.3;
-  -webkit-box-shadow: 1px 2px 3px #ddd;
-  box-shadow: 1px 2px 3px #ddd;
 }
 
 aside#sidebar p.repo-owner,
@@ -633,12 +629,12 @@ dl dd {
 }
 
 footer {
-  border-top: 1px #e2e2e2 solid;
+  border-top: 1px rgba(255,255,255,0.5) solid;
   margin: 40px 10px 0 10px;
   padding-top: 20px;
   padding-bottom: 30px;
   font-size: 13px;
-  color: #aaa;
+  color: rgba(255,255,255,0.75);
   text-align: center;
 }
 
@@ -816,6 +812,9 @@ footer a:hover {
     border-top: solid 1px #ddd;
     padding: 20px 0;
     min-height: 0;
+    background: white;
+    -webkit-box-shadow: 1px 2px 3px #ddd;
+    box-shadow: 1px 2px 3px #ddd;
   }
   aside#sidebar a.button {
     display: none;
@@ -830,8 +829,20 @@ footer a:hover {
     padding-right: 0;
     margin-left: 0;
   }
+  #main-content {
+    background: white;
+    -webkit-box-shadow: 1px 2px 3px #ddd;
+    box-shadow: 1px 2px 3px #ddd;
+  }
   #content_inner {
     padding: 20px;
+  }
+  postlist {
+    border-bottom: 1px #e2e2e2 solid;
+  }
+  footer {
+    border-top: 1px #e2e2e2 solid;
+    color: #aaa;
   }
 }
 
