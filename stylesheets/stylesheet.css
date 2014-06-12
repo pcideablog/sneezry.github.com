@@ -36,7 +36,6 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
-  background: url(images/new-york-city.jpg) no-repeat center fixed;
 }
 ol, ul {
 	list-style: none;
@@ -58,7 +57,7 @@ table {
 body {
   font-size: 15px;
   line-height: 1.5; 
-  background: #eee;
+  background: url(images/new-york-city.jpg) no-repeat center fixed;
   font-family: Arial, serif;
   font-weight: 400;
   color: #666;
