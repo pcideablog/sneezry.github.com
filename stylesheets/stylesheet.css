@@ -874,6 +874,9 @@ footer a:hover {
   postlist {
     border-bottom: 1px #e2e2e2 solid;
   }
+  #main-content postlist > a {
+    color: #2879d0;
+  }
   .post_date {
     color: gray;
   }
