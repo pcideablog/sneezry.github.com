@@ -17,7 +17,6 @@ function search(q){
 	}
 	else{
 		content.innerHTML = '';
-		loading.style.display = 'block';
 		dis.style.display = 'none';
 		dis.innerHTML = '';
 		document.title = 'Search:' + q + ' - '+sitetitle;
@@ -26,6 +25,7 @@ function search(q){
 			searchlist(postList);
 		}
 		else{
+			loading.style.display = 'block';
 			var el = document.createElement('script');
 			el.src = 'https://api.github.com/repos/' + githubname + '/' + repos + '/contents/md?callback=searchlist'+(branch?('&ref='+branch):'');
 			document.getElementsByTagName('head')[0].appendChild(el);
