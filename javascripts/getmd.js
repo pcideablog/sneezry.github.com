@@ -58,7 +58,7 @@ function main(instant){
 				document.getElementsByTagName('head')[0].appendChild(el);
 			}
 		}
-	}, instant?0:10000);
+	}, instant?0:1000);
 }
 
 function home(instant){
