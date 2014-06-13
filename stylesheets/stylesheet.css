@@ -118,7 +118,7 @@ postlist a:hover {
   border-bottom: 1px #2879d0 dashed;
 }
 
-#main-content postlist a:not(.disqus_count a) {
+#main-content postlist > a {
   color: #222;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
@@ -126,7 +126,7 @@ postlist a:hover {
   transition: all 0.2s ease-in-out;
 }
 
-#main-content:hover postlist a:not(.disqus_count a) {
+#main-content:hover postlist > a {
   color: #2879d0;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
