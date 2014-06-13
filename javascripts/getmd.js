@@ -56,10 +56,10 @@ function main(){
 				document.getElementsByTagName('head')[0].appendChild(el);
 			}
 		}
-	}, 1000);
+	}, instant?1000:0);
 }
 
-function home(){
+function home(instant){
 	path = '';
 	dis.style.display = 'none';
 	dis.innerHTML = '';
@@ -70,7 +70,7 @@ function home(){
 		path = '/page/'+page;
 		window.history.pushState(null, '', (isroot?'':('/'+repos))+'/#!/page/'+page);
 	}
-	main();
+	main(instant);
 }
 
 function lowerCase(path){

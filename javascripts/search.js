@@ -13,7 +13,7 @@ function doSearch(q){
 
 function search(q){
 	if(!q){
-		home();
+		home(true);
 	}
 	else{
 		content.innerHTML = '';
