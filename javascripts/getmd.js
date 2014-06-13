@@ -20,7 +20,7 @@ var isroot=((repos.indexOf('github.com')==-1 && repos.indexOf('github.io')==-1)?
 
 main();
 
-function main(){
+function main(instant){
 	var disqusCounts = document.getElementsByName('commentscount');
 	for(var i=0; i<disqusCounts.length; i++){
 		commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
