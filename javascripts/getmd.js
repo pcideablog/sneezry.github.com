@@ -26,7 +26,9 @@ function main(instant){
 		commentscount[Number(disqusCounts[i].id.substr(5))] = disqusCounts[i].innerText;
 	}
 	content.innerHTML = '';
-	loading.style.display = 'block';
+	if(!instant){
+		loading.style.display = 'block';
+	}
 	setTimeout(function(){
 		if(path.split('/')[1] == 'search'){
 			search(path.split('/')[2]);
@@ -56,7 +58,7 @@ function main(instant){
 				document.getElementsByTagName('head')[0].appendChild(el);
 			}
 		}
-	}, instant?1000:0);
+	}, instant?0:10000);
 }
 
 function home(instant){
