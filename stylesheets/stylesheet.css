@@ -118,6 +118,22 @@ postlist a:hover {
   border-bottom: 1px #2879d0 dashed;
 }
 
+#main-content postlist a {
+  color: #222;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
+#main-content:hover postlist a {
+  color: #2879d0;
+  -webkit-transition: all 0.2s ease-in-out;
+  -moz-transition: all 0.2s ease-in-out;
+  -o-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+}
+
 .prev_page, .next_page {
   color: gray;
   font-size: 12px;
@@ -851,6 +867,9 @@ footer a:hover {
   }
   #main-content:hover {
     background: white;
+  }
+  #main-content postlist a {
+    color: #222;
   }
   #content_inner {
     padding: 20px;
