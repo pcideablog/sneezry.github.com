@@ -86,7 +86,7 @@ header h1 {
   color: #222;
   line-height: 1;
   margin-bottom: 0.2em;
-  width: 540px;
+  display: inline-block;
 }
 
 header h2 {
