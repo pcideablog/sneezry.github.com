@@ -1,0 +1,73 @@
+<canvas id="c" style="border:gray 1px solid"></canvas> <canvas id="c2" style="border:gray 1px solid"></canvas><br /><br />
+<input type="file" id="f" />
+<script src="fft.js"></script>
+<script src="fft2.js"></script>
+<script>
+var c=document.getElementById('c');
+var f=document.getElementById('f');
+f.onchange = function(event){
+	var selectedFile = event.target.files[0];
+	var reader = new FileReader();
+
+	reader.onload = function(event) {
+		var img = new Image();
+		img.src = event.target.result;
+		img.onload = function(){
+			c.width = img.width+20;
+			c.height = img.height+20;
+			c2.width = img.width+20;
+			c2.height = img.height+20;
+			ctx=c.getContext('2d');
+			ctx.drawImage(img,10,10);
+			I = ctx.getImageData(10, 10, img.width, img.height);
+			var dataArray = [];
+			for(var i=0; i<I.data.length; i+=4) {
+				dataArray.push(I.data[i]);
+			}
+			dataArray = fft2(dataArray, img.width, img.width);
+			var dataLen = Math.sqrt(dataArray.length);
+			I = ctx.createImageData(dataLen,dataLen);
+			var power = [];
+			var maxPower = 0;
+			for(var i=0; i<dataLen; i++) {
+				for(var j=0; j<dataLen; j++) {
+					var tempPower = Math.sqrt(dataArray[i*dataLen+j].real*dataArray[i*dataLen+j].real + dataArray[i*dataLen+j].imag*dataArray[i*dataLen+j].imag);
+					power.push(tempPower);
+					if(maxPower<tempPower) {
+						maxPower = tempPower;
+					}
+				}
+			}
+			for(var i=0; i<dataLen; i++) {
+				for(var j=0; j<dataLen; j++) {
+					var imgpx = Math.round(power[i*dataLen+j]/100);
+					imgpx = Math.min(imgpx,255);
+					I.data[(i*dataLen+j)*4] = I.data[(i*dataLen+j)*4+1] = I.data[(i*dataLen+j)*4+2] = imgpx;
+					I.data[(i*dataLen+j)*4+3] = 255;
+				}
+			}
+			c2.width = dataLen;
+			c2.height = dataLen;
+			ctx2=c2.getContext('2d');
+			ctx2.putImageData(I,0,0);
+			var img2 = new Image();
+			img2.src = c2.toDataURL();
+			img2.onload = function() {
+				c2.width = img.width+20;
+				c2.height = img.height+20;
+				ctx2.drawImage(img2,10,10,img.width,img.height);
+				I1 = ctx2.getImageData(10, 10, img.width/2, img.height/2);
+				I2 = ctx2.getImageData(10+img.width/2, 10, img.width/2, img.height/2);
+				I3 = ctx2.getImageData(10, 10+img.height/2, img.width/2, img.height/2);
+				I4 = ctx2.getImageData(10+img.width/2, 10+img.height/2, img.width/2, img.height/2);
+				ctx2.putImageData(I1,10+img.width/2,10+img.height/2);
+				ctx2.putImageData(I2,10,10+img.height/2);
+				ctx2.putImageData(I3,10+img.width/2,10);
+				ctx2.putImageData(I4,10,10);
+			}
+		}
+	};
+
+	reader.readAsDataURL(selectedFile);
+}
+</script>
