@@ -5,6 +5,44 @@
 <body>
 <canvas id="myCanvas"></canvas>
 <script>
+if (navigator.userAgent.indexOf('iPhone') > -1) {
+	var SHAKE_THRESHOLD = 2000;
+} else {
+	if (navigator.userAgent.indexOf('QQ') > -1) {
+		var SHAKE_THRESHOLD = 1000;
+	} else {
+		var SHAKE_THRESHOLD = 4000;
+	}
+
+}
+var last_update = 0;
+var x, y, z, last_x = 0,
+last_y = 0,
+last_z = 0;
+
+function deviceMotionHandler(eventData) {
+
+	var acceleration = eventData.accelerationIncludingGravity;
+	var curTime = new Date().getTime();
+
+	if ((curTime - last_update) > 100) {
+		var diffTime = parseInt(curTime - last_update);
+		last_update = curTime;
+		x = acceleration.x;
+		y = acceleration.y;
+		z = acceleration.z;
+		var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+
+		if (speed > SHAKE_THRESHOLD) {
+			showTime();
+
+		}
+		last_x = x;
+		last_y = y;
+		last_z = z;
+	}
+}
+
 function clock(){
 	var canvas = document.getElementById('myCanvas');
 	width = 500;
@@ -17,18 +55,9 @@ function clock(){
 	dotsMove = null;
 	dotsTime = null;
 	clockDraw();
-	var speed = 105;
-  var x = y = z = lastX = lastY = lastZ = 0;
-  window.addEventListener('devicemotion', function(){
-    var acceleration =event.accelerationIncludingGravity;
-    x = acceleration.x;
-    y = acceleration.y;
-    if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) {
-      showTime();
-    }
-    lastX = x;
-    lastY = y;
-  }, false);
+	if (window.DeviceMotionEvent) {
+		window.addEventListener('devicemotion', deviceMotionHandler, false);
+	}
 }
 
 function showTime(){
