@@ -1,0 +1,20 @@
+<script type="text/javascript">
+if(window.DeviceMotionEvent) {
+    var speed = 105;
+    var x = y = z = lastX = lastY = lastZ = 0;
+     
+     
+    var ys=1;
+    window.addEventListener('devicemotion', function(){
+        var acceleration =event.accelerationIncludingGravity;
+        x = acceleration.x;
+        y = acceleration.y;
+        if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) {
+            ys+=1;
+            alert("你摇一摇换了桌面哦"+ys);
+        }
+        lastX = x;
+        lastY = y;
+    }, false);
+}
+</script>
