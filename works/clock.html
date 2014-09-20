@@ -66,6 +66,7 @@ function clock(){
 	dotsMove = null;
 	dotsTime = null;
 	clockDraw();
+	window.scrollTo(0, 1);
 	if (window.DeviceMotionEvent) {
 		window.addEventListener('devicemotion', deviceMotionHandler, false);
 	}
