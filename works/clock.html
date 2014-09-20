@@ -2,6 +2,16 @@
 <head>
 <meta http-equiv="Content-Type" name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" charset="UTF-8" />
 <title>Dots Clock</title>
+<style>
+* {
+	margin: 0;
+}
+
+canvas {
+	width: 100%;
+	max-width: 500px;
+}
+</style>
 </head>
 <body>
 <canvas id="myCanvas"></canvas>
@@ -46,8 +56,8 @@ function deviceMotionHandler(eventData) {
 
 function clock(){
 	var canvas = document.getElementById('myCanvas');
-	width = 250;
-	height = 250;
+	width = 500;
+	height = 500;
 	canvas.width = width;
 	canvas.height = height;
 	radius = Math.floor(Math.min(width, height)/2);
@@ -198,7 +208,7 @@ function clockDraw(){
 	ctx.closePath();
 	ctx.fill();
 	ctx.fillStyle='white';
-	ctx.font="8px Arial";
+	ctx.font="16px Arial";
 	ctx.fillText('SNEEZRY', (width-ctx.measureText('SNEEZRY').width)/2, height/4);
 	for(var i in dots){
 		ctx.fillStyle='white';
