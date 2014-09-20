@@ -1,6 +1,6 @@
 <script type="text/javascript">
 if(window.DeviceMotionEvent) {
-    var speed = 105;
+    var speed = 50;
     var x = y = z = lastX = lastY = lastZ = 0;
      
      
@@ -9,7 +9,6 @@ if(window.DeviceMotionEvent) {
         var acceleration =event.accelerationIncludingGravity;
         x = acceleration.x;
         y = acceleration.y;
-        alert('ok-'+x+':'+y);
         if(Math.abs(x-lastX) > speed || Math.abs(y-lastY) > speed) {
             ys+=1;
             alert("你摇一摇换了桌面哦"+ys);
