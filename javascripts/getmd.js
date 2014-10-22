@@ -116,7 +116,10 @@ function loadXMLDoc(url){
 						if(dis){
 							dis.style.display = 'block';
 						}
-						setTimeout(shorturl,200);
+						setTimeout(function(){
+							shorturl();
+							LatexIT.render('*', false);
+						},200);
 					}, 1000);
 				}
 				else if(xmlhttp.status==404) {
