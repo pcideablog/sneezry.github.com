@@ -17,7 +17,7 @@
 */
 
 var LatexIT = {
-	mode : 'gif',
+	mode : 'svg',
 	imgnum : 0,
 	isFirefox:false,
 	init : function() {
