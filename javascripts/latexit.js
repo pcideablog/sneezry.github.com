@@ -107,4 +107,4 @@ var LatexIT = {
 };
 
 LatexIT.init();
-LatexIT.add('*');
+//LatexIT.add('*');
