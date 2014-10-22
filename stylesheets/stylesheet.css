@@ -114,16 +114,16 @@ postlist a {
   border-bottom: 1px transparent solid;
 }
 
-postlist a:hover {
-  border-bottom: 1px #2879d0 dashed;
-}
-
 #main-content postlist > a {
   color: #222;
   -webkit-transition: all 0.2s ease-in-out;
   -moz-transition: all 0.2s ease-in-out;
   -o-transition: all 0.2s ease-in-out;
   transition: all 0.2s ease-in-out;
+}
+
+#main-content postlist > a:hover {
+  color: #2879d0;
 }
 
 .prev_page, .next_page {
@@ -210,7 +210,6 @@ aside#sidebar {
   float: right;
   position: relative;
   font-size: 12px;
-  background: #eee;
 }
 
 aside#sidebar p.repo-owner,
@@ -518,10 +517,6 @@ form {
 
 
 /* GENERAL ELEMENT TYPE STYLES */
-
-#main-content postlist:hover {
-  color: #2879d0;
-}
 
 #main-content h1 {
   font-family: 'Architects Daughter', 'Helvetica Neue', Helvetica, Arial, serif; 
