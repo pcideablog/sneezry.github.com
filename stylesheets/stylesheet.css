@@ -639,11 +639,10 @@ dl dd {
 
 footer {
   border-top: 1px rgba(255,255,255,0.5) solid;
-  margin: 40px 10px 0 10px;
-  padding-top: 20px;
-  padding-bottom: 30px;
+  margin-top: 40px;
+  padding: 20px 0;
   font-size: 13px;
-  color: #aaa;
+  color: #555;
   text-align: center;
 }
 
