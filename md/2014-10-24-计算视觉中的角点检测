@@ -59,7 +59,9 @@ Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I
 其中：
 
 <span lang="latex">A=X^2*w</span>
+
 <span lang="latex">B=Y^2*w</span>
+
 <span lang="latex">C=(XY)*w</span>
 
 “*”为卷积符号。
