@@ -46,7 +46,7 @@
 
 1988年Harris在Moravec算法的基础上做了优化，这就是后来近30年计算机视觉编程中一直被广泛使用的Harris角点检测算法。
 
-Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</span>继续推导，将<span lang="latex">(I_{u+x,v+y}-I_{u,v})^2</span>进行Taylor一阶展开，就有了如下结果：
+Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</span>继续推导，将<span lang="latex">(I_{u+a,v+b}-I_{u,v})^2</span>进行Taylor一阶展开，就有了如下结果：
 
 <span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(aX+bY+O(a^2,b^2))^2</span>
 
