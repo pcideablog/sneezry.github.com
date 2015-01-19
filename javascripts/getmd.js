@@ -261,7 +261,7 @@ function getPostName(name){
 	for(var i=4; i<name.length; i++){
 		newName += '-'+name[i];
 	}
-	return newName.replace(/_/g, ' ');
+	return newName?newName.replace(/_/g, ' '):'404';
 }
 
 function filterJekyllHeader(post){
