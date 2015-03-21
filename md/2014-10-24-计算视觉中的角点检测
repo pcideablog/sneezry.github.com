@@ -16,13 +16,13 @@
 
 三原色被单独提取为三个通道，每个通道记录相应颜色的明度，取值范围为0到255，0代表最暗，255代表最亮。颜色的种类对角点的提取没有帮助，所以处理三个通道是没有意义的，为此我们提出彩色空间转换到灰度空间的转换公式：
 
-<span lang="latex">I = R*0.299 + G*0.587 + B*0.114</span>
+<script type="math/tex">I = R*0.299 + G*0.587 + B*0.114</script>
 
 于是一幅图像就变成了一个记录像素点明度的二维矩阵。下面来把这个二维矩阵继续扩展一下——我们把二维矩阵转换为一个三维图像，即将明度值作为第三个坐标轴，那么就得到了如下的结果：
 
 ![](http://sneezry.com/postimg/pic2f.png)
 
-这是一个二维函数<span lang="latex">I=f(x, y)</span>的图像，就这样一幅图像被抽象成了一个离散的二维函数。虽然这个思想并不复杂，但如果没有这一思想，在现有的计算机架构下计算机将很难“读懂”一幅图像。
+这是一个二维函数<script type="math/tex">I=f(x, y)</script>的图像，就这样一幅图像被抽象成了一个离散的二维函数。虽然这个思想并不复杂，但如果没有这一思想，在现有的计算机架构下计算机将很难“读懂”一幅图像。
 
 预备知识到此为止，现在对图像处理这一过程已经转换为了对一个函数的处理——这是计算机的强项，它就是这么善于纯粹的计算。
 
@@ -40,21 +40,21 @@
 
 一幅图像的信息是由一个区域中相邻的若干像素点表达的，那么离散函数中也应该将一个区域多个相邻数值结合起来分析。让我们设定一个新的窗口，这个窗口包含了我们想一起分析的相邻数值。对这个窗口中所有的数值，都使用上图中的方法计算8个方向上的梯度，然后根据此数值与窗口中心的距离，将窗口中数值梯度做加权平均，所得结果作为窗口中心数值的最终梯度。为了抵消梯度符号，实际操作中以梯度的平方代替梯度本身，这个过程可用如下方程表示：
 
-<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</span>
+<script type="math/tex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</script>
 
 方程中的a和b为方向矢量坐标，u和v为相对窗口中心的坐标，w为权重函数。最后取E的最小值作为窗口中心数值的梯度，梯度大的点即为角点。这就是Moravec的算法。
 
 1988年Harris在Moravec算法的基础上做了优化，这就是后来近30年计算机视觉编程中一直被广泛使用的Harris角点检测算法。
 
-Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</span>继续推导，将<span lang="latex">(I_{u+a,v+b}-I_{u,v})^2</span>进行Taylor一阶展开，就有了如下结果：
+Harris根据Moravec所得的方程<script type="math/tex">E_{a,b}=\sum_{u,v}w_{u,v}(I_{u+a,v+b}-I_{u,v})^2</script>继续推导，将<script type="math/tex">(I_{u+a,v+b}-I_{u,v})^2</script>进行Taylor一阶展开，就有了如下结果：
 
-<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(aX+bY+O(a^2,b^2))^2</span>
+<script type="math/tex">E_{a,b}=\sum_{u,v}w_{u,v}(aX+bY+O(a^2,b^2))^2</script>
 
 其中X为I对x的一阶偏导，Y为I对y的一阶偏导。
 
 进一步整理有：
 
-<span lang="latex">E(a,b)=Aa^2+Cab+Bb^2</span>
+<script type="math/tex">E(a,b)=Aa^2+Cab+Bb^2</script>
 
 其中：
 
@@ -64,7 +64,7 @@ Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I
 
 “*”为卷积符号。
 
-<span lang="latex">\begin{align*}E(a,b)&=\left[\begin{array}{cc}a&b\end{array}\right]\left[\begin{array}{cc}A&C\\C&B\end{array}\right]\left[\begin{array}{c}a\\b\end{array}\right]\\&=\left[\begin{array}{cc}a&b\end{array}\right]M\left[\begin{array}{c}a\\b\end{array}\right]\end{align*}</span>
+<script type="math/tex">\begin{align*}E(a,b)&=\left[\begin{array}{cc}a&b\end{array}\right]\left[\begin{array}{cc}A&C\\C&B\end{array}\right]\left[\begin{array}{c}a\\b\end{array}\right]\\&=\left[\begin{array}{cc}a&b\end{array}\right]M\left[\begin{array}{c}a\\b\end{array}\right]\end{align*}</script>
 
 现在来注意这个矩阵M，它是一个结构张量（Structure Tensor），结构张量的两个特征值分别是一个函数在某点最大梯度和最小梯度，对应的特征向量是取最大梯度和最小梯度的方向。
 
@@ -72,17 +72,17 @@ Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I
 
 那么如何才能判断两个特征值都比较大呢？回忆一下初中物理中我们接触的并联电阻，当两个电阻并联时，只有两个电阻都比较大时，其并联后的电阻才能也比较大，这个并联电阻公式为：
 
-<span lang="latex">R=\frac{R_1R_2}{R_1+R_2}</span>
+<script type="math/tex">R=\frac{R_1R_2}{R_1+R_2}</script>
 
 所以，可以使用指示因子K作为评判标准：
 
-<span lang="latex">K=\frac{\lambda_1\lambda_2}{\lambda_1+\lambda_2}</span>
+<script type="math/tex">K=\frac{\lambda_1\lambda_2}{\lambda_1+\lambda_2}</script>
 
-求解特征值不是一个令人喜欢的工作，好在我们并不需要真的去解出两个特征值是多少，我们只需要知道两个特征值的积和和就好了。特征值的积等于矩阵的值，特征值的和等于矩阵迹的和，即<span lang="latex">\lambda_1\lambda_2=AB-C^2</span>，<span lang="latex">\lambda_1+\lambda_2=A+B</span>。
+求解特征值不是一个令人喜欢的工作，好在我们并不需要真的去解出两个特征值是多少，我们只需要知道两个特征值的积和和就好了。特征值的积等于矩阵的值，特征值的和等于矩阵迹的和，即<script type="math/tex">\lambda_1\lambda_2=AB-C^2</script>，<script type="math/tex">\lambda_1+\lambda_2=A+B</script>。
 
 我们似乎忘记了加权函数w，在Moravec算法中w是一个方形的加权域，即在同一个方形边界上的数值权重相同。Harris指出，方形加权域会引入误差，影响结果的判断，采用圆形的加权域可避免误差。熟知的圆形加权域就是高斯模糊：
 
-<span lang="latex">w_{u,v}=e^{-\frac{u^2+v^2}{2\sigma^2}}</span>
+<script type="math/tex">w_{u,v}=e^{-\frac{u^2+v^2}{2\sigma^2}}</script>
 
 一切似乎都愉快地解决了，让我们来看看运行结果吧：
 
@@ -92,6 +92,6 @@ Harris根据Moravec所得的方程<span lang="latex">E_{a,b}=\sum_{u,v}w_{u,v}(I
 
 你也许会问，这个算法有什么缺点吗？答案是肯定的，计算量太大了，上图我是用JavaScript实现的，花费了1056ms，尽管可能我的代码还有优化空间，但Harris角点检测耗费时间是公认的。
 
-为了提高速度，有越来越多像我一样的电子人在努力研究计算机视觉的硬件实现方法，比如我们讨论的Harris角点检测就有很多人探讨过FPGA实现的优化。其中谈论比较多的话题就是对加权函数w的优化——高斯模糊太难计算了，既然我们指需要一个圆形的模糊域，为什么不重新构造一个<span lang="latex">2^n</span>的加权窗口呢，这样只需要通过移位就能得到结果，而无需结构复杂计算缓慢的乘法器了。台湾的学者则把优化重点放在了多次卷积的时序控制上，他们不再等待第一次卷积完全计算完毕后才计算第二次卷积，而是第一次卷积结果足够计算第二次卷积第一个数据就开始计算第二次卷积的结果，以此类推可以推广到N次卷积的计算过程，将时长几乎压缩了N倍！
+为了提高速度，有越来越多像我一样的电子人在努力研究计算机视觉的硬件实现方法，比如我们讨论的Harris角点检测就有很多人探讨过FPGA实现的优化。其中谈论比较多的话题就是对加权函数w的优化——高斯模糊太难计算了，既然我们指需要一个圆形的模糊域，为什么不重新构造一个<script type="math/tex">2^n</script>的加权窗口呢，这样只需要通过移位就能得到结果，而无需结构复杂计算缓慢的乘法器了。台湾的学者则把优化重点放在了多次卷积的时序控制上，他们不再等待第一次卷积完全计算完毕后才计算第二次卷积，而是第一次卷积结果足够计算第二次卷积第一个数据就开始计算第二次卷积的结果，以此类推可以推广到N次卷积的计算过程，将时长几乎压缩了N倍！
 
 如果你发现本文中有错误请提出来，就像我在开头说的，写博客本来就是一个与他人共同进步的过程 :-)
