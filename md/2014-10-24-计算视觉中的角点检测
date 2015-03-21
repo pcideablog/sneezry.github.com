@@ -8,11 +8,11 @@
 
 了解这些之后，来回顾一下计算机是如何描述一幅图像的。一幅彩色图像是三种原色的叠加——红、绿、蓝，如下图。
 
-![](http://sneezry.com/postimg/rgb.png)
+![](/postimg/rgb.png)
 
 图像在屏幕上显示时三原色也是分别显示的，截取一幅iMac 5K宣传视频中的一幅图片：
 
-![](http://sneezry.com/postimg/pixel.png)
+![](/postimg/pixel.png)
 
 三原色被单独提取为三个通道，每个通道记录相应颜色的明度，取值范围为0到255，0代表最暗，255代表最亮。颜色的种类对角点的提取没有帮助，所以处理三个通道是没有意义的，为此我们提出彩色空间转换到灰度空间的转换公式：
 
@@ -20,7 +20,7 @@
 
 于是一幅图像就变成了一个记录像素点明度的二维矩阵。下面来把这个二维矩阵继续扩展一下——我们把二维矩阵转换为一个三维图像，即将明度值作为第三个坐标轴，那么就得到了如下的结果：
 
-![](http://sneezry.com/postimg/pic2f.png)
+![](/postimg/pic2f.png)
 
 这是一个二维函数<script type="math/tex">I=f(x, y)</script>的图像，就这样一幅图像被抽象成了一个离散的二维函数。虽然这个思想并不复杂，但如果没有这一思想，在现有的计算机架构下计算机将很难“读懂”一幅图像。
 
@@ -28,13 +28,13 @@
 
 角有什么特点？回答这一问题前先来看下面的图：
 
-![](http://sneezry.com/postimg/regiontype.png)
+![](/postimg/regiontype.png)
 
 显然图中C标注的一个角。进一步分析，A处函数的梯度为0，B出函数纵向梯度非0横向梯度为0，C处函数横向和纵向梯度均不为0。从这幅图中我们似乎找到了寻找角点的方法，但这幅图毕竟太过理想，于是我们需要进一步细化模型。
 
 不过总体思想是判断函数在几个方向上梯度比较大，如果只有一个方向上比较大，那么这一定是一个边界，如果在两个以上的方向上梯度都比较大，那么这个点就是我们要寻找的角点。于是有下面的细化结果：
 
-![](http://sneezry.com/postimg/shift.png)
+![](/postimg/shift.png)
 
 上图计算了函数中一点在8个方向上梯度的变化，如果这4个方向上梯度的最小值依然比较大，那么就可以认为这一点是角点。遗憾的是这个思想局限于3*3的窗口里，所得的结果也并不理想。
 
@@ -58,9 +58,11 @@ Harris根据Moravec所得的方程<script type="math/tex">E_{a,b}=\sum_{u,v}w_{u
 
 其中：
 
-<div lang="latex">A=X^2*w</div>
-<div lang="latex">B=Y^2*w</div>
-<div lang="latex">C=(XY)*w</div>
+<script type="math/tex">A=X^2*w</script>
+
+<script type="math/tex">B=Y^2*w</script>
+
+<script type="math/tex">C=(XY)*w</script>
 
 “*”为卷积符号。
 
@@ -86,7 +88,7 @@ Harris根据Moravec所得的方程<script type="math/tex">E_{a,b}=\sum_{u,v}w_{u
 
 一切似乎都愉快地解决了，让我们来看看运行结果吧：
 
-![](http://sneezry.com/postimg/block.png)
+![](/postimg/block.png)
 
 虽然漏掉了一些点，但总体上效果还不错！
 
