@@ -38,7 +38,7 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 用数学公式描述，有<script type="math/tex">x=(M*2^{-23}+1)*2^{E-127}</script>。
 
-通常我们把<script type="math/tex">M*2^{-23}</script>重新定于为<script type="math/tex">m_x</script>，把<script type="math/tex">E-127</script>重新定于为<script type="math/tex">e_x</script>。那么有<script type="math/tex">x=(m_x+1)*2^{e_x}</script>。这里的127是由指数位位数`b`决定的，由于我们这里的指数位是8，所以<script type="math/tex">2^{b-1}-1=2^{8-1}-1=127</script>，如果定义<script type="math/tex">B=2^{b-1}-1</script>，则又有<script type="math/tex">e_x=E-B</script>。而<script type="math/tex">M*2^{-23}</script>中的23也显而易见是由基数位位数``l决定的，如果定义<script type="math/tex">L=2^{-l}</script>，则<script type="math/tex">m_x=\frac{M}{L}</script>。
+通常我们把<script type="math/tex">M*2^{-23}</script>重新定于为<script type="math/tex">m_x</script>，把<script type="math/tex">E-127</script>重新定于为<script type="math/tex">e_x</script>。那么有<script type="math/tex">x=(m_x+1)*2^{e_x}</script>。这里的127是由指数位位数`b`决定的，由于我们这里的指数位是8，所以<script type="math/tex">2^{b-1}-1=2^{8-1}-1=127</script>，如果定义<script type="math/tex">B=2^{b-1}-1</script>，则又有<script type="math/tex">e_x=E-B</script>。而<script type="math/tex">M*2^{-23}</script>中的23也显而易见是由基数位位数`l`决定的，如果定义<script type="math/tex">L=2^{-l}</script>，则<script type="math/tex">m_x=\frac{M}{L}</script>。
 
 由上面的定义我们可知，<script type="math/tex">0 \leq m_x \leq1</script>。
 
