@@ -50,7 +50,7 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 <script type="math/tex">log_2 (m_y+1)+e_y=-\frac{1}{2}log_2 (m_x+1)-\frac{1}{2}e_x</script>
 
-由于script type="math/tex">0 \leq m_x \leq1</script>，有<script type="math/tex">log_2 (m_x+1) \approx m_x</script>。为了减少误差，定义一个常数<script type="math/tex">\sigma</script>，令<script type="math/tex">log_2 (m_x+1) = m_x+\sigma</script>。同理<script type="math/tex">log_2 (m_y+1) = m_y+\sigma</script>。
+由于<script type="math/tex">0 \leq m_x \leq1</script>，有<script type="math/tex">log_2 (m_x+1) \approx m_x</script>。为了减少误差，定义一个常数<script type="math/tex">\sigma</script>，令<script type="math/tex">log_2 (m_x+1) = m_x+\sigma</script>。同理<script type="math/tex">log_2 (m_y+1) = m_y+\sigma</script>。
 
 为区分<script type="math/tex">x</script>与<script type="math/tex">y</script>的基数与指数，重新定义变量<script type="math/tex">M_x</script>、<script type="math/tex">E_x</script>与<script type="math/tex">M_y</script>、<script type="math/tex">E_y</script>。再将<script type="math/tex">m_x=\frac{M_x}{L}</script>、<script type="math/tex">e_x=E_x-B</script>和<script type="math/tex">m_y=\frac{M_y}{L}</script>、<script type="math/tex">e_y=E_y-B</script>带入上式，有
 
