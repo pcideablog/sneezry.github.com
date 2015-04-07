@@ -42,27 +42,27 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 由上面的定义我们可知，<script type="math/tex">0 \leq m_x \leq1</script>。
 
-接下来我们来推导<script type="math/tex">y=\frac{1}{\sqrt[2]{x}}=x^{-frac{1}{2}}</script>。为了消除根号，我们对等号两边同时以2为底取对数
+接下来我们来推导<script type="math/tex">y=\frac{1}{\sqrt{x}}=x^{-\frac{1}{2}}</script>。为了消除根号，我们对等号两边同时以2为底取对数
 
-<script type="math/tex">$$log_2 y=-\frac{1}{2}log_2 x$$</script>
+<script type="math/tex">log_2 y=-\frac{1}{2}log_2 x</script>
 
 将<script type="math/tex">x=(m_x+1)*2^{e_x}</script>与<script type="math/tex">y=(m_y+1)*2^{e_y}</script>带入，有
 
-<script type="math/tex">$$log_2 (m_y+1)+e_y=-\frac{1}{2}log_2 (m_x+1)-\frac{1}{2}e_x$$</script>
+<script type="math/tex">log_2 (m_y+1)+e_y=-\frac{1}{2}log_2 (m_x+1)-\frac{1}{2}e_x</script>
 
 由于script type="math/tex">0 \leq m_x \leq1</script>，有<script type="math/tex">log_2 (m_x+1) \approx m_x</script>。为了减少误差，定义一个常数<script type="math/tex">\sigma</script>，令<script type="math/tex">log_2 (m_x+1) = m_x+\sigma</script>。同理<script type="math/tex">log_2 (m_y+1) = m_y+\sigma</script>。
 
 为区分<script type="math/tex">x</script>与<script type="math/tex">y</script>的基数与指数，重新定义变量<script type="math/tex">M_x</script>、<script type="math/tex">E_x</script>与<script type="math/tex">M_y</script>、<script type="math/tex">E_y</script>。再将<script type="math/tex">m_x=\frac{M_x}{L}</script>、<script type="math/tex">e_x=E_x-B</script>和<script type="math/tex">m_y=\frac{M_y}{L}</script>、<script type="math/tex">e_y=E_y-B</script>带入上式，有
 
-<script type="math/tex">$$\frac{M_y}{L}+\sigma+E_y-B=-\frac{1}{2}(\frac{M_x}{L}+\sigma)-\frac{1}{2}(E_y-B)$$</script>
+<script type="math/tex">\frac{M_y}{L}+\sigma+E_y-B=-\frac{1}{2}(\frac{M_x}{L}+\sigma)-\frac{1}{2}(E_y-B)</script>
 
 整理得
 
-<script type="math/tex">$$M_y+E_yL=\frac{3}{2}(B-\sigma)L-\frac{1}{2}(M_x+E_xL)$$</script>
+<script type="math/tex">M_y+E_yL=\frac{3}{2}(B-\sigma)L-\frac{1}{2}(M_x+E_xL)</script>
 
 注意，<script type="math/tex">M_x+E_xL</script>就是保持浮点数<script type="math/tex">x</script>在内存中二进制数据不变，以整型方式读取得到的数值<script type="math/tex">I_x</script>，同理<script type="math/tex">M_y+E_yL</script>就是<script type="math/tex">I_y</script>。注意到<script type="math/tex">\frac{3}{2}(B-\sigma)L</script>是个常数<script type="math/tex">R</script>，即有
 
-<script type="math/tex">$$I_y=R-\frac{I_x}{2}$$</script>
+<script type="math/tex">I_y=R-\frac{I_x}{2}</script>
 
 这与前面给出的代码
 
@@ -72,11 +72,11 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 清楚了整个数学过程，我们来试着计算一个数的平方根。根据前面的推导，我们容易有
 
-<script type="math/tex">$$log_2 (m_y+1)+e_y=\frac{1}{2}log_2 (m_x+1)+\frac{1}{2}e_x$$</script>
+<script type="math/tex">log_2 (m_y+1)+e_y=\frac{1}{2}log_2 (m_x+1)+\frac{1}{2}e_x</script>
 
-<script type="math/tex">$$M_y+E_yL=\frac{1}{2}(B-\sigma)L+\frac{1}{2}(M_x+E_xL)$$</script>
+<script type="math/tex">M_y+E_yL=\frac{1}{2}(B-\sigma)L+\frac{1}{2}(M_x+E_xL)</script>
 
-<script type="math/tex">$$I_y=\frac{R}{3}+\frac{I_x}{2}$$</script>
+<script type="math/tex">I_y=\frac{R}{3}+\frac{I_x}{2}</script>
 
 于是有
 
