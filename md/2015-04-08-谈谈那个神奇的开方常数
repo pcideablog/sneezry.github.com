@@ -36,9 +36,9 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 这是一个32比特表示的浮点型数据在内存中存放的格式，最高位`S`是符号位，0代表正数，1代表负数。最后的23位`M`是基数位，中间的8位`E`是指数位，最后浮点数的真实值是在基数`M`的基础上，左右移位得到的，具体如何移位有指数`E`描述。
 
-用数学公式描述，有<script type="math/tex">x=(M*2^{-23}+1)*2^{E-127}</script>。
+用数学公式描述，有<script type="math/tex">x=(M \times 2^{-23}+1) \times 2^{E-127}</script>。
 
-通常我们把<script type="math/tex">M*2^{-23}</script>重新定于为<script type="math/tex">m_x</script>，把<script type="math/tex">E-127</script>重新定于为<script type="math/tex">e_x</script>。那么有<script type="math/tex">x=(m_x+1)*2^{e_x}</script>。这里的127是由指数位位数`b`决定的，由于我们这里的指数位是8，所以<script type="math/tex">2^{b-1}-1=2^{8-1}-1=127</script>，如果定义<script type="math/tex">B=2^{b-1}-1</script>，则又有<script type="math/tex">e_x=E-B</script>。而<script type="math/tex">M*2^{-23}</script>中的23也显而易见是由基数位位数`l`决定的，如果定义<script type="math/tex">L=2^{-l}</script>，则<script type="math/tex">m_x=\frac{M}{L}</script>。
+通常我们把<script type="math/tex">M \times 2^{-23}</script>重新定于为<script type="math/tex">m_x</script>，把<script type="math/tex">E-127</script>重新定于为<script type="math/tex">e_x</script>。那么有<script type="math/tex">x=(m_x+1) \times 2^{e_x}</script>。这里的127是由指数位位数`b`决定的，由于我们这里的指数位是8，所以<script type="math/tex">2^{b-1}-1=2^{8-1}-1=127</script>，如果定义<script type="math/tex">B=2^{b-1}-1</script>，则又有<script type="math/tex">e_x=E-B</script>。而<script type="math/tex">M \times 2^{-23}</script>中的23也显而易见是由基数位位数`l`决定的，如果定义<script type="math/tex">L=2^{-l}</script>，则<script type="math/tex">m_x=\frac{M}{L}</script>。
 
 由上面的定义我们可知，<script type="math/tex">0 \leq m_x \leq1</script>。
 
@@ -46,7 +46,7 @@ Quake III的源码中有一个神奇的开方常数`0x5f3759df`家喻户晓，�
 
 <script type="math/tex">log_2 y=-\frac{1}{2}log_2 x</script>
 
-将<script type="math/tex">x=(m_x+1)*2^{e_x}</script>与<script type="math/tex">y=(m_y+1)*2^{e_y}</script>带入，有
+将<script type="math/tex">x=(m_x+1) \times 2^{e_x}</script>与<script type="math/tex">y=(m_y+1) \times 2^{e_y}</script>带入，有
 
 <script type="math/tex">log_2 (m_y+1)+e_y=-\frac{1}{2}log_2 (m_x+1)-\frac{1}{2}e_x</script>
 
