@@ -1,0 +1,164 @@
+<style>
+#bars {
+    width: 100%;
+}
+
+#bars div {
+    float: left;
+    width: 1px;
+    margin-right: 1px;
+    background: black;
+}
+
+#bars div.sort {
+    background: red;
+}
+</style>
+<div id="bars"></div>
+<script>
+function quitesort(p) {
+    var left = p+1;
+    var right = array.length-1;
+
+    while (left < right) {
+        if (array[left] < array[p]) {
+            left++;
+        } else if (array[right] >= array[p]) {
+            right--;
+        } else {
+            sortArray.push([left, right]);
+            var tmp = array[left];
+            array[left] = array[right];
+            array[right] = tmp;
+        }
+    }
+
+    if (array[left] < array[p]) {
+        sortArray.push([left, p]);
+        var tmp = array[left];
+        array[left] = array[p];
+        array[p] = tmp;
+    } else if (array[right-1] < array[p]) {
+        sortArray.push([p, right-1]);
+        var tmp = array[right-1];
+        array[right-1] = array[p];
+        array[p] = tmp;
+    }
+
+    if (p === array.length-2) {
+        p = 0;
+        var restart = true;
+    } else {
+        var restart = false;
+    }
+
+    while (p+1 < array.length-1 && array[p+1] >= array[p]) {
+        p++;
+    }
+
+    if (restart && p === array.length-2) {
+        draw(0);
+    } else {
+        quitesort(p);
+    }
+}
+
+function init() {
+    var html = '';
+    for(var i=0; i<array.length; i++) {
+        html += '<div style="height:'+array[i]+'px"></div>';
+    }
+    document.getElementById('bars').innerHTML = html;
+    //quitesort(0);
+    twoDiv(0, array.length);
+}
+
+function draw(i) {
+    sort(sortArray[i][0], sortArray[i][1]);
+    if(i === sortArray.length-1) {
+        done(0);
+    }
+    setTimeout(function(){
+        draw(i+1);
+    }, 20);
+}
+
+function sort(a, b) {
+    var tmp = array2[a];
+    array2[a] = array2[b];
+    array2[b] = tmp;
+    var bars =  document.getElementById('bars').getElementsByTagName('div');
+    bars[a].style.height = array2[a]+'px';
+    bars[b].style.height = array2[b]+'px';
+    bars[a].className = 'sort';
+    bars[b].className = 'sort';
+    setTimeout(function(){
+        bars[a].className = '';
+        bars[b].className = '';
+    }, 20);
+}
+
+function done(i) {
+    var bars =  document.getElementById('bars').getElementsByTagName('div');
+    if(i===bars.length){
+        bars[i-1].className = '';
+        return;
+    }
+    setTimeout(function(){
+        bars[i].className = 'sort';
+        if(i>0) {
+            bars[i-1].className = '';
+        }
+        done(i+1);
+    }, 10);
+}
+
+function twoDiv(start, len) {
+    if(len > 2) {
+        twoDiv(start, Math.floor(len/2));
+        twoDiv(start+Math.floor(len/2), Math.ceil(len/2));
+        var start2 = start;
+        for(var j=start+Math.floor(len/2); j<start+len; j++) {
+            for(var i=start2; i<j; i++) {
+                if(array[j] < array[i]) {
+                    start2 = i;
+                    for(var k=j; k>i; k--) {
+                        var tmp = array[k];
+                        array[k] = array[k-1];
+                        array[k-1] = tmp
+                        sortArray.push([k, k-1]);
+                    }
+                    break;
+                }
+            }
+        }
+    } else if (len === 2) {
+        if(array[start] > array[start+1]) {
+            var tmp = array[start];
+            array[start] = array[start+1];
+            array[start+1] = tmp;
+            sortArray.push([start, start+1]);
+        }
+    }
+
+    if(len === array.length) {
+        draw(0);
+    }
+}
+
+var array2 = [];
+var array = [];
+var sortArray = [];
+
+for(var i=0; i<500; i++){
+    array2.push(i/2+200);
+}
+
+for(var i=0; i<500; i++){
+    array.push(array2.splice(Math.round(Math.random()*10000)%array2.length,1)[0]);
+}
+
+array2 = array.join(',').split(',');
+
+init();
+</script>
