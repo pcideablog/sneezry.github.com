@@ -1,6 +1,6 @@
 <html>
 <head>
-<title>Quite Sort</title>
+<title>Quick Sort</title>
 </head>
 <body>
 <style>
@@ -21,7 +21,7 @@
 </style>
 <div id="bars"></div>
 <script>
-function quitesort(p) {
+function quicksort(p) {
     var left = p+1;
     var right = array.length-1;
 
@@ -64,7 +64,7 @@ function quitesort(p) {
     if (restart && p === array.length-2) {
         draw(0);
     } else {
-        quitesort(p);
+        quicksort(p);
     }
 }
 
@@ -74,7 +74,7 @@ function init() {
         html += '<div style="height:'+array[i]+'px"></div>';
     }
     document.getElementById('bars').innerHTML = html;
-    quitesort(0);
+    quicksort(0);
 }
 
 function draw(i) {
