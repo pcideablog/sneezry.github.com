@@ -12,10 +12,17 @@
     float: left;
     width: 1px;
     margin-right: 1px;
-    background: black;
+    height: 500px;
+    position: relative;
 }
 
-#bars div.sort {
+#bars div.sort:after {
+    content: "";
+    position: absolute;
+    bottom: -4px;
+    left: -1px;
+    width: 3px;
+    height: 3px;
     background: red;
 }
 </style>
@@ -67,8 +74,11 @@ function quicksort(p) {
 
 function init() {
     var html = '';
+    var r, g;
     for(var i=0; i<array.length; i++) {
-        html += '<div style="height:'+array[i]+'px"></div>';
+        r = Math.min(array[i], 250);
+        g = Math.max(array[i] - 250, 0);
+        html += '<div style="background: rgba('+r+','+g+',255,1)"></div>';
     }
     document.getElementById('bars').innerHTML = html;
     quicksort(0);
@@ -78,6 +88,7 @@ function draw(i) {
     sort(sortArray[i][0], sortArray[i][1]);
     if(i === sortArray.length-1) {
         done(0);
+        return;
     }
     setTimeout(function(){
         draw(i+1);
@@ -86,13 +97,20 @@ function draw(i) {
 
 function sort(a, b) {
     var tmp = array2[a];
+    var r, g, r2, g2;
     array2[a] = array2[b];
     array2[b] = tmp;
     var bars =  document.getElementById('bars').getElementsByTagName('div');
-    bars[a].style.height = array2[a]+'px';
-    bars[b].style.height = array2[b]+'px';
+    r = Math.min(array2[a], 250);
+    g = Math.max(array2[a] - 250, 0);
+    r2 = Math.min(array2[b], 250);
+    g2 = Math.max(array2[b] - 250, 0);
+    bars[a].style.background = 'rgba('+r+','+g+',255,1)';
+    bars[b].style.background = 'rgba('+r2+','+g2+',255,1)';
     bars[a].className = 'sort';
     bars[b].className = 'sort';
+    bars[a].setAttribute('v', array2[a]);
+    bars[b].setAttribute('v', array2[b]);
     setTimeout(function(){
         bars[a].className = '';
         bars[b].className = '';
@@ -111,7 +129,7 @@ function done(i) {
             bars[i-1].className = '';
         }
         done(i+1);
-    }, 10);
+    }, 0);
 }
 
 var array2 = [];
@@ -119,11 +137,11 @@ var array = [];
 var sortArray = [];
 
 for(var i=0; i<500; i++){
-    array2.push(i/2+200);
+    array2.push(i);
 }
 
 for(var i=0; i<500; i++){
-    array.push(array2.splice(Math.round(Math.random()*10000)%array2.length,1));
+    array.push(array2.splice(Math.round(Math.random()*10000)%array2.length,1)[0]);
 }
 
 array2 = array.join(',').split(',');
