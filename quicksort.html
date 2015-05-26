@@ -29,6 +29,11 @@
 <div id="bars"></div>
 <script>
 function quicksort(p) {
+    if (p === array.length-1) {
+        draw(0);
+        return;
+    }
+
     var left = p+1;
     var right = array.length-1;
     var sorted = false;
@@ -65,11 +70,7 @@ function quicksort(p) {
         p++;
     }
 
-    if (p === array.length-2) {
-        draw(0);
-    } else {
-        quicksort(p);
-    }
+    quicksort(p);
 }
 
 function init() {
@@ -109,8 +110,6 @@ function sort(a, b) {
     bars[b].style.background = 'rgba('+r2+','+g2+',255,1)';
     bars[a].className = 'sort';
     bars[b].className = 'sort';
-    bars[a].setAttribute('v', array2[a]);
-    bars[b].setAttribute('v', array2[b]);
     setTimeout(function(){
         bars[a].className = '';
         bars[b].className = '';
