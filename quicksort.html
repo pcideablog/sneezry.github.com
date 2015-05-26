@@ -24,6 +24,7 @@
 function quicksort(p) {
     var left = p+1;
     var right = array.length-1;
+    var sorted = false;
 
     while (left < right) {
         if (array[left] < array[p]) {
@@ -35,6 +36,7 @@ function quicksort(p) {
             var tmp = array[left];
             array[left] = array[right];
             array[right] = tmp;
+            sorted = true;
         }
     }
 
@@ -43,25 +45,20 @@ function quicksort(p) {
         var tmp = array[left];
         array[left] = array[p];
         array[p] = tmp;
+        sorted = true;
     } else if (array[right-1] < array[p]) {
         sortArray.push([p, right-1]);
         var tmp = array[right-1];
         array[right-1] = array[p];
         array[p] = tmp;
+        sorted = true;
     }
 
-    if (p === array.length-2) {
-        p = 0;
-        var restart = true;
-    } else {
-        var restart = false;
-    }
-
-    while (p+1 < array.length-1 && array[p+1] >= array[p]) {
+    if (!sorted) {
         p++;
     }
 
-    if (restart && p === array.length-2) {
+    if (p === array.length-2) {
         draw(0);
     } else {
         quicksort(p);
