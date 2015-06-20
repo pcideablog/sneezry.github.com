@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>AVL Tree</title>
+</head>
+<body>
+<img id="img"><br>
+<input type="text" id="data"> <button id="btn">Add</button>
+<script src="gridjs.dev.min.js"></script>
+<script>
+var tree,
+    img = document.getElementById('img'),
+    g = gridjs;
+
+function TreeNode(val) {
+  this.val = val;
+  this.left = null;
+  this.right = null;
+}
+
+function treeDeep(node) {
+  if (node === null) {
+    return 0;
+  } else if (node.left === null && node.right === null) {
+    return 1;
+  } else if (node.left === null) {
+    return treeDeep(node.right) + 1;
+  } else if (node.right === null) {
+    return treeDeep(node.left) + 1;
+  } else {
+    return Math.max(treeDeep(node.left), treeDeep(node.right)) + 1;
+  }
+}
+
+function branch(deep, level, rootx, root) {
+  if (root === null) {
+    return;
+  }
+  var w = 15 << (deep - level), h = 50;
+  if (root.left) {
+    im.plot([[rootx, level * h], [rootx - w, level * h + h]], 'k--');
+    branch(deep, level + 1, rootx - w, root.left);
+  }
+  if (root.right) {
+    im.plot([[rootx, level * h], [rootx + w, level * h + h]], 'k--');
+    branch(deep, level + 1, rootx + w, root.right);
+  }
+}
+
+function circle(deep, level, rootx, root) {
+  if (root === null) {
+    return;
+  }
+  var w = 15 << (deep - level), h = 50;
+  if (root.left) {
+    circle(deep, level + 1, rootx - w, root.left);
+  }
+  if (root.right) {
+    circle(deep, level + 1, rootx + w, root.right);
+  }
+  im.circle(rootx, level * h, 10, [255, 255, 255, 1], [0, 0, 0, 1, 1]);
+  im.text(rootx, level * h, root.val, ['center', 'middle', '12px']);
+}
+
+function draw(root) {
+  var deep = treeDeep(root);
+  im = g.blank(1000, 500);
+  im.hold();
+  branch(deep, 1, 500, root);
+  circle(deep, 1, 500, root);
+  im.flush();
+  im.show(img);
+}
+
+function push(val, root) {
+  if (!root) {
+    root = new TreeNode(val);
+  }else if (root.val > val) {
+    root.left = push(val, root.left);
+  } else if (root.val < val) {
+    root.right = push(val, root.right);
+  }
+
+  return balance(root);
+}
+
+function balance(root) {
+  if (root === null) {
+    return;
+  }
+  var BH = treeDeep(root.left) - treeDeep(root.right);
+  if (BH === 2) {
+    var BHL = treeDeep(root.left.left) - treeDeep(root.left.right);
+    if (BHL === 1) {
+      root = balanceLL(root);
+    } else if (BHL === -1) {
+      root = balanceLR(root);
+    } else {
+      root.left = balance(root.left);
+    }
+  } else if (BH === -2) {
+    var BHR = treeDeep(root.right.left) - treeDeep(root.right.right);
+    if (BHR === 1) {
+      root = balanceRL(root);
+    } else if (BHR === -1) {
+      root = balanceRR(root);
+    } else {
+      root.right = balance(root.right);
+    }
+  }
+  return root;
+}
+
+function balanceLL(root) {
+  var a = root.left.left.left,
+      b = root.left.left.right,
+      c = root.left.right,
+      d = root.right,
+      r = root;
+
+  root = root.left;
+  r.left = c;
+  root.right = r;
+
+  return root;
+}
+
+function balanceRR(root) {
+  var a = root.left,
+      b = root.right.left,
+      c = root.right.right.left,
+      d = root.right.right.right,
+      r = root;
+
+  root = root.right;
+  r.right = b;
+  root.left = r;
+
+  return root;
+}
+
+function balanceLR(root) {
+  var a = root.left.left,
+      b = root.left.right.left,
+      c = root.left.right.right,
+      d = root.right,
+      r = root;
+
+  root = root.left.right;
+  root.left = r.left;
+  root.right = r;
+  r.left.right = b;
+  r.left = c;
+
+  return root;
+}
+
+function balanceRL(root) {
+  var a = root.left,
+      b = root.right.left.left,
+      c = root.right.left.right,
+      d = root.right.right,
+      r = root;
+
+  root = root.right.left;
+  root.right = r.right;
+  root.left = r;
+  r.right.left = c;
+  r.right = b;
+
+  return root;
+}
+
+document.getElementById('btn').onclick = function() {
+  var val = document.getElementById('data').value;
+  document.getElementById('data').value = '';
+  if (!isNaN(val)) {
+    tree = push(Number(val), tree);
+    draw(tree);
+  }
+}
+</script>
+</body>
+</html>
