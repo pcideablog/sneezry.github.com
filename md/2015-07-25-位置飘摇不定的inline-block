@@ -18,10 +18,8 @@
 
 考虑如下的代码：
 
-```
-<div style="display: inline-block; background: #ff7234; color: white;">北京</div>
-<div style="display: inline-block; background: #48bcff; color: white;">广州</div>
-```
+    <div style="display: inline-block; background: #ff7234; color: white;">北京</div>
+    <div style="display: inline-block; background: #48bcff; color: white;">广州</div>
 
 我们心中想象的样子是这样的：
 
@@ -35,37 +33,29 @@
 
 其实您可以这么搞：
 
-```
-<div style="display: inline-block; background: #ff7234; color: white;">北京</div><
-div style="display: inline-block; background: #48bcff; color: white;">广州</div>
-```
+    <div style="display: inline-block; background: #ff7234; color: white;">北京</div><
+    div style="display: inline-block; background: #48bcff; color: white;">广州</div>
 
 啥？把下个元素标签的左括号丢到上一行去？嗯，没错，浏览器他会自己出来好的（浏览器：你大爷）。您可能又不高兴了：玩呢！爷是处女座的！噢噢，这种写法好像会给处女座同学造成更大的伤害……或者要不您这么改？
 
-```
-<div style="display: inline-block; background: #ff7234; color: white;">北京</div><!--
---><div style="display: inline-block; background: #48bcff; color: white;">广州</div>
-```
+    <div style="display: inline-block; background: #ff7234; color: white;">北京</div><!--
+    --><div style="display: inline-block; background: #48bcff; color: white;">广州</div>
 
 您看，是不是好点，咱们机智地把换行符注释掉了！（处女座：这特喵的也没好哪里去吧！）
 
 好吧，既然您是一个傲娇，啊不，是严谨的处女座，还有一个终极大招供您使用：将父系元素字号改成0：
 
-```
-<div style="font-size: 0">
-  <div style="display: inline-block; background: #ff7234; color: white;">北京</div>
-  <div style="display: inline-block; background: #48bcff; color: white;">广州</div>
-</div>
-```
+    <div style="font-size: 0">
+      <div style="display: inline-block; background: #ff7234; color: white;">北京</div>
+      <div style="display: inline-block; background: #48bcff; color: white;">广州</div>
+    </div>
 
 等等！客官莫急！这样测试就是啥都没了！为啥？因为您把父系元素字号改成0了，子元素默认继承啊，您得再重新挨个指定子元素的字号。嫌麻烦？不，您是处女座的，为了洁癖这样的付出是值得的！
 
-```
-<div style="font-size: 0">
-  <div style="font-size: 16px; display: inline-block; background: #ff7234; color: white;">北京</div>
-  <div style="font-size: 16px; display: inline-block; background: #48bcff; color: white;">广州</div>
-</div>
-```
+    <div style="font-size: 0">
+      <div style="font-size: 16px; display: inline-block; background: #ff7234; color: white;">北京</div>
+      <div style="font-size: 16px; display: inline-block; background: #48bcff; color: white;">广州</div>
+    </div>
 
 您看，是不是这样就好了？或许您在我沉浸在完美解决问题的自我陶醉中突然醒悟：你特喵的逗我，webkit内核的浏览器限制最小字号是12px，哪来的0啊！您别着急质疑，试试就知道了 ;-)
 
@@ -73,9 +63,8 @@ div style="display: inline-block; background: #48bcff; color: white;">广州</di
 
 接下来就是诡异的垂直位置问题，话不多说，请看例子：
 
-```
-北京：<div style="display: inline-block; background: #ff7234; width: 200px; height: 20px;"></div>
-```
+
+    北京：<div style="display: inline-block; background: #ff7234; width: 200px; height: 20px;"></div>
 
 显示的结果如下：
 
@@ -89,10 +78,9 @@ div style="display: inline-block; background: #48bcff; color: white;">广州</di
 
 但是在上面的例子中我们并不关心基线啊，我们想把右侧的统计条居中，居中，只想居中！好吧，看来我们不得不研究下一个新的东西了：`vertical-align`。您眼中闪烁着希望的泪光：这个看起来好熟悉啊，我用过`text-align`，相当好用啊！您……您别高兴得这么早，来看看伟大的`vertical-align`都支持哪些值：
 
-```
-Values  baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit
-Initial value baseline
-```
+> Values  baseline | sub | super | top | text-top | middle | bottom | text-bottom | <percentage> | <length> | inherit
+> Initial value baseline
+
 我此刻仿佛听到了您心中千万匹草泥马奔驰而过的声音。是，太多了，所以我体贴地为您做了下面这幅图：
 
 ![](https://dn-sneezry.qbox.me/baseline.png)
@@ -117,9 +105,7 @@ Initial value baseline
 
 我们关心的是统计条与文字边缘的位置关系，所以根据您的喜好可以选择`text-top`或者`text-bottom`，比如我选择了`text-top`，那么根据上面的代码，可以知道字高默认`16px`，统计条高`20px`，统计条比文字高了4像素，应该再上移2像素做到中心对齐，此时我们可以配合`position: relative`对定位进行调整，所以最后的代码为：
 
-```
-北京：<div style="display: inline-block; background: #ff7234; width: 200px; height: 20px; vertical-align: text-top; position: relative; top: -2px"></div>
-```
+    北京：<div style="display: inline-block; background: #ff7234; width: 200px; height: 20px; vertical-align: text-top; position: relative; top: -2px"></div>
 
 最后的显示结果为：
 
