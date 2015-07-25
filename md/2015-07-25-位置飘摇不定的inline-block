@@ -78,7 +78,7 @@
 
 但是在上面的例子中我们并不关心基线啊，我们想把右侧的统计条居中，居中，只想居中！好吧，看来我们不得不研究下一个新的东西了：`vertical-align`。您眼中闪烁着希望的泪光：这个看起来好熟悉啊，我用过`text-align`，相当好用啊！您……您别高兴得这么早，来看看伟大的`vertical-align`都支持哪些值：
 
-> Values  baseline | sub | super | top | text-top | middle | bottom | text-bottom | &lt;percentage&gt; | &lt;length&gt; | inherit
+> Values  baseline | sub | super | top | text-top | middle | bottom | text-bottom | &amp;lt;percentage&amp;gt; | &amp;lt;length&amp;gt; | inherit
 > Initial value baseline
 
 我此刻仿佛听到了您心中千万匹草泥马奔驰而过的声音。是，太多了，所以我体贴地为您做了下面这幅图：
