@@ -2,7 +2,7 @@
 
 那么多了不说，直接上博主第一版的代码（仅做实例使用，与博主所负责项目的真实代码与外观不同）：
 
-<p data-height="268" data-theme-id="0" data-slug-hash="aOrOjZ" data-default-tab="result" data-user="Sneezry" class='codepen'>See the Pen <a href='http://codepen.io/Sneezry/pen/aOrOjZ/'>aOrOjZ</a> by Li Zhe (<a href='http://codepen.io/Sneezry'>@Sneezry</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="192" data-theme-id="0" data-slug-hash="aOrOjZ" data-default-tab="result" data-user="Sneezry" class='codepen'>See the Pen <a href='http://codepen.io/Sneezry/pen/aOrOjZ/'>aOrOjZ</a> by Li Zhe (<a href='http://codepen.io/Sneezry'>@Sneezry</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 
 是不是很难用！那个滑块根本不跟着鼠标走啊，十分地卡顿！这不是一个有情怀的公司应该做出来的东西！为了避免有些初入前端的同学看不太懂上面的代码，我来简单带着大家分析一下。HTML和CSS就不说了，我们直接来看看JS的逻辑。
 
@@ -24,6 +24,6 @@ DOM Events中有个属性叫bubbles，翻译过来叫冒泡。这个属性名看
 
 下面是改后的Demo，用起来是不是舒爽多了！
 
-<p data-height="268" data-theme-id="0" data-slug-hash="Pqvqvy" data-default-tab="result" data-user="Sneezry" class='codepen'>See the Pen <a href='http://codepen.io/Sneezry/pen/Pqvqvy/'>Pqvqvy</a> by Li Zhe (<a href='http://codepen.io/Sneezry'>@Sneezry</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<p data-height="192" data-theme-id="0" data-slug-hash="Pqvqvy" data-default-tab="result" data-user="Sneezry" class='codepen'>See the Pen <a href='http://codepen.io/Sneezry/pen/Pqvqvy/'>Pqvqvy</a> by Li Zhe (<a href='http://codepen.io/Sneezry'>@Sneezry</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
 
 <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
