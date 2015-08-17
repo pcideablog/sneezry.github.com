@@ -25,5 +25,3 @@ DOM Events中有个属性叫bubbles，翻译过来叫冒泡。这个属性名看
 下面是改后的Demo，用起来是不是舒爽多了！
 
 <p data-height="192" data-theme-id="0" data-slug-hash="Pqvqvy" data-default-tab="result" data-user="Sneezry" class='codepen'>See the Pen <a href='http://codepen.io/Sneezry/pen/Pqvqvy/'>Pqvqvy</a> by Li Zhe (<a href='http://codepen.io/Sneezry'>@Sneezry</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
-
-<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
