@@ -20,9 +20,9 @@
 
 下面是我优化前后的 Smartisan 官网首页加载效果的对比，需要注意的时，我在 Chrome 开启了模拟网络环境，导致加载速度被刻意放慢，这是为了更加显著地体现差别，实际上不会这么慢。
 
-<video src="https://dn-sneezry.qbox.me/jianguo/1.mp4"></video>
+<video src="https://dn-sneezry.qbox.me/jianguo/1.mp4" controls></video>
 
-<video src="https://dn-sneezry.qbox.me/jianguo/2.mp4"></video>
+<video src="https://dn-sneezry.qbox.me/jianguo/2.mp4" controls></video>
 
 上面的视频是优化前的加载过程，下面的视频是优化后的加载过程，是不是看起来顺滑多了？有心的你一定发现了其他的不同——优化前页面 loading 时前面转圈的加载图没有显示出来，优化后的显示正常。这是因为浏览器会在 DOM 渲染完毕后才去加载图片资源，如果你使用了 AngularJS 的 `ngView` 配合路由异步请求模板，这个 loading 的图很可能是在你请求到模板后才能显示出来，这样这个 loading 图基本就永远不会被看到了。我解决的方法是用 base64 URL 代替外部地址，这样图片是随 DOM 下载好的，自然也会在第一时间被显示出来。
 
