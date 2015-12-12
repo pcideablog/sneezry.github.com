@@ -1,0 +1,7 @@
+name: "Sneezry"
+description: "I write code"
+author: "Sneezry"
+
+exclude: [README.md, Rakefile]
+paginate: 16
+permalink: /:year/:month/:day/:title

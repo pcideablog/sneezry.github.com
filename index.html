@@ -1,7 +1,11 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta http-equiv="refresh" content="0;url=https://sneezry.com">
-    <title>Sneezry</title>
-  </head>
-</html>
+---
+layout: default
+---
+
+{% for post in site.posts %}
+<article class="post">
+  <h1><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
+  {{ post.excerpt }}
+  <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">Read More &raquo;</a>
+</article>
+{% endfor %}
