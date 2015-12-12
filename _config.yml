@@ -5,4 +5,4 @@ author: "Sneezry"
 exclude: [README.md, Rakefile]
 paginate: 16
 paginate_path: "page:num"
-gems : - jekyll-paginate
+gems: [jekyll-paginate]
