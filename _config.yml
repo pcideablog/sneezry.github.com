@@ -4,4 +4,4 @@ author: "Sneezry"
 
 exclude: [README.md, Rakefile]
 paginate: 16
-permalink: /:year/:month/:day/:title
+paginate_path: "page:num"
