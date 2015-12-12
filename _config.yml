@@ -3,6 +3,6 @@ description: "I write code"
 author: "Sneezry"
 
 exclude: [README.md, Rakefile]
-paginate: 16
-paginate_path: "page:num"
+paginate: 5
+paginate_path: "/page:num/"
 gems: [jekyll-paginate]
