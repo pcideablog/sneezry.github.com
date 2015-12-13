@@ -6,7 +6,7 @@ layout: default
 <postlist>
     <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
     <div class="post_info">
-        <span class="post_date">Posted at {{ post.date | date_to_long_string }}</span>
+        <span class="post_date">Posted at {{ post.date | date: "%Y-%m-%d" }}</span>
         <span class="disqus_count">
             <a href="{{ site.url }}{{ post.url }}#disqus_thread" name="commentscount"></a>
         </span>

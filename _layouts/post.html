@@ -6,7 +6,7 @@
                 <div id="content">
                     <div id="post_title">{{ page.title }}</div>
                     {{ content }}
-                    <div class="date"><span>S</span>Posted at {{ page.date | date_to_long_string }}</div>
+                    <div class="date"><span>S</span>Posted at {{ page.date | date: "%Y-%m-%d" }}</div>
                 </div>
                 <div id="disqus_thread"></div>
                 <script>
