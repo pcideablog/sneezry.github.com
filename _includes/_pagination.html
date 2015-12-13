@@ -2,14 +2,14 @@
 <postlist>
   {% if paginator.previous_page %}
     {% if paginator.previous_page == 1 %}
-      <a class="prev_page" href="/">←较早的文章</a>
+      <a class="prev_page" href="/">←较新的文章</a>
     {% else %}
-      <a class="prev_page" href="{{ paginator.previous_page_path }}">←较早的文章</a>
+      <a class="prev_page" href="{{ paginator.previous_page_path }}">←较新的文章</a>
     {% endif %}
   {% endif %}
 
   {% if paginator.next_page %}
-    <a class="next_page" href="{{ paginator.next_page_path }}">较新的文章→</a>
+    <a class="next_page" href="{{ paginator.next_page_path }}">较早的文章→</a>
   {% endif %}
   <div style="clear:both"></div>
 </postlist>
