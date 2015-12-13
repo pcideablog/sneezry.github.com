@@ -3,10 +3,14 @@ layout: default
 ---
 
 {% for post in paginator.posts %}
-<article class="post">
-  <h1><a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a></h1>
-  {{ post.excerpt }}
-  <a href="{{ site.url }}{{ post.url }}" title="{{ post.title }}">Read More &raquo;</a>
-</article>
+<postlist>
+    <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+    <div class="post_info">
+        <span class="post_date">Posted at {{ post.date | date_to_long_string }}</span>
+        <span class="disqus_count">
+            <a href="{{ site.url }}{{ post.url }}#disqus_thread" name="commentscount"></a>
+        </span>
+    </div>
+</postlist>
 {% endfor %}
 {% include _pagination.html %}

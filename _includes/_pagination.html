@@ -1,21 +1,16 @@
 {% if paginator.total_pages > 1 %}
-<div class="center">
+<postlist>
   {% if paginator.previous_page %}
-   {% if paginator.previous_page == 1 %}
-      <a href="/" class="fl">Previous</a>
+    {% if paginator.previous_page == 1 %}
+      <a class="prev_page" href="/">←较早的文章</a>
     {% else %}
-      <a href="{{ paginator.previous_page_path }}" class="fl">Previous</a>
+      <a class="prev_page" href="{{ paginator.previous_page_path }}">←较早的文章</a>
     {% endif %}
-  {% else %}
-    <span class="fl gray">Previous</span>
   {% endif %}
-
-  {{ paginator.page }} / {{ paginator.total_pages }}
 
   {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path }}" class="fr">Next</a>
-  {% else %}
-    <span class="fr gray">Next</span>
+    <a class="next_page" href="{{ paginator.next_page_path }}">较新的文章→</a>
   {% endif %}
-</div>
+  <div style="clear:both"></div>
+</postlist>
 {% endif %}

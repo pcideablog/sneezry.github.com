@@ -1,7 +1,9 @@
 name: "Sneezry"
-description: "I write code"
-author: "Sneezry"
+description: "I write code."
 url: https://sneezry.com
+author:
+    name: Sneezry
+    email: lizhe@lizhe.org
 
 exclude: [README.md, Rakefile]
 paginate: 5
