@@ -8,6 +8,5 @@ author:
 exclude: [README.md, Rakefile]
 paginate: 5
 paginate_path: "/page/:num/"
-permalink: /:year/:month/:day/:title
-post_dirs: false
+permalink: /:year/:month/:day/:title/
 gems: [jekyll-paginate]
