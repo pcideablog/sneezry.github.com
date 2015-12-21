@@ -1,9 +1,8 @@
 ---
 title: 向Hooloo道别
-tags:
-  - Hooloo
-  - MoteDown
+tags: 'Hooloo, MoteDown'
 layout: post
+categories: MoteDown
 ---
 去年我发布Hooloo以来，Sneezry.com一直使用它作为博客系统，Sneezry.cn作为Sneezry.com国内镜像，使用的也是Hooloo，但Hooloo功能的简化让我觉得用起来还是有些不舒服，尤其是无法被Google正常索引，一直让我很困扰。
 
