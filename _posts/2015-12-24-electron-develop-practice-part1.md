@@ -2,6 +2,7 @@
 title: Electron开发实践I
 tags: 'Electron, NodeJS, JavaScript, Angular'
 categories: Programming
+layout: post
 ---
 # Electron是什么
 
