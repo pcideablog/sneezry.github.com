@@ -26,7 +26,9 @@ Node.js安装完毕之后运行
      
 来查看安装是否成功，如果安装成功，你会看到node的版本号。网络上很多教程的截图中会显示版本号是0开头的，而你所安装的node很可能是4开头的，不必担心，由于历史问题，node从0这个大版本直接飞跃到了4这个大版本，你看到这个诡异的版本号并不是你做错了什么。
 
-![node-v](https://dn-sneezry.qbox.me/JekyllWriter/node-v.png)如果你的网络环境比较复杂，无法正常使用npm包管理器（大陆的网络环境通常都比较复杂），可以使用淘宝提供的[npm镜像](http://npm.taobao.org/)，之后将所有`npm`指令都替换为`cnpm`指令即可。
+![node-v](https://dn-sneezry.qbox.me/JekyllWriter/node-v.png)
+
+如果你的网络环境比较复杂，无法正常使用npm包管理器（大陆的网络环境通常都比较复杂），可以使用淘宝提供的[npm镜像](http://npm.taobao.org/)，之后将所有`npm`指令都替换为`cnpm`指令即可。
 
 ## 安装Electron
 
