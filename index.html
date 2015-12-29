@@ -4,7 +4,7 @@ layout: default
 
 {% for post in paginator.posts %}
 <postlist>
-    <a href="{{ site.url }}{{ post.url }}">{{ post.title }}</a>
+    <a href="{{ post.url }}">{{ post.title }}</a>
     <div class="post_info">
         <span class="post_date">Posted at {{ post.date | date: "%Y-%m-%d" }}</span>
         <span class="disqus_count">
